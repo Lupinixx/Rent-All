@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Rent_All_Certificate.Controllers
 {
+    //.....Comment!
     public class HomeController : Controller
     {
         public ActionResult Index() {
