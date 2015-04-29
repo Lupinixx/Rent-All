@@ -11,6 +11,6 @@ namespace Rent_All_Certificate.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-       
+       // changes
     }
 }
