@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Rent_All_Certificate.Controllers
 {
@@ -23,6 +19,11 @@ namespace Rent_All_Certificate.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult LogOff() {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
