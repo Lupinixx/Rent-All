@@ -36,7 +36,7 @@ namespace Rent_All_Certificate.Models
     {
         [Required(ErrorMessage = "{0} is required.")]
         [StringLength(50, ErrorMessage = "{0} has a maximum length of {1}")]
-        [DataType(DataType.Text)]
+        [DataType(DataType.EmailAddress)]
         [EmailAddress]
         [Display(Name = "Email address")]
         public string Email { get; set; }

@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Rent_All_Certificate.Models
 {
     using System;
@@ -26,6 +28,21 @@ namespace Rent_All_Certificate.Models
     
         public virtual ICollection<Category> Category1 { get; set; }
         public virtual Category Category2 { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
+    }
+
+    [MetadataType(typeof(CategoryMetaData))]
+    public partial class Category
+    {
+        
+    }
+
+    public class CategoryMetaData
+    {
+        [Display(Name = "Category")]
+        public string CategoryName { get; set; }
+
+        [Display(Name = "Products")]
         public virtual ICollection<Product> Product { get; set; }
     }
 }

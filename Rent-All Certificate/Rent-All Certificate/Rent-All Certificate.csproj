@@ -161,6 +161,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attributes\Authorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -263,6 +264,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

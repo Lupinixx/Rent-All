@@ -1,0 +1,67 @@
+﻿@using Rent_All_Certificate.Models
+@model IEnumerable<Rent_All_Certificate.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    string inspring = " - ";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Where(m => m.ParentID == null)) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Count)
+            </td>
+        </tr>
+        if (Model.Count(m => m.ParentID == item.CategoryID) > 0) {
+            @GetSubCategoryList(Model.Where(m => m.ParentID == item.CategoryID));
+        }
+    }
+
+</table>
+@helper  GetSubCategoryList(IEnumerable<Category> SubList, string inspring = "  |") {
+    foreach (var item in SubList) {
+        <tr>
+            <td>
+                &nbsp;@inspring @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Count)
+            </td>
+        </tr>
+        if (Model.Count(m => m.ParentID == item.CategoryID) > 0) {
+            @GetSubCategoryList(Model.Where(m => m.ParentID == item.CategoryID), inspring + "-");
+        }
+    }
+}
