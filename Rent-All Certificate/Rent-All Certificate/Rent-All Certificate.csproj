@@ -180,6 +180,7 @@
     <Compile Include="Models\Phase.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PhasesController.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
@@ -263,6 +264,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
+    <Content Include="Views\Phases\Create.cshtml" />
+    <Content Include="Views\Phases\Delete.cshtml" />
+    <Content Include="Views\Phases\Details.cshtml" />
+    <Content Include="Views\Phases\Edit.cshtml" />
+    <Content Include="Views\Phases\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

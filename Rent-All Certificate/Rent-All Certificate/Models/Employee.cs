@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace Rent_All_Certificate.Models
 {
     using System;
@@ -25,25 +23,5 @@ namespace Rent_All_Certificate.Models
         public string PasswordSalt { get; set; }
     
         public virtual Role Role { get; set; }
-    }
-
-    [MetadataType(typeof(EmployeeMetaData))]
-    public partial class Employee
-    {
-    }
-
-    public class EmployeeMetaData
-    {
-        [Required(ErrorMessage = "{0} is required.")]
-        [StringLength(50, ErrorMessage = "{0} has a maximum length of {1}")]
-        [DataType(DataType.Text)]
-        [EmailAddress]
-        [Display(Name = "Email address")]
-        public string Email { get; set; }
-
-        [Required(ErrorMessage = "{0} is required.")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string PasswordHash { get; set; }
     }
 }
