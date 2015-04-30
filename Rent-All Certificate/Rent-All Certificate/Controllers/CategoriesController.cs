@@ -2,10 +2,13 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Rent_All_Certificate.Attributes;
 using Rent_All_Certificate.Models;
+using Helpers;
 
 namespace Rent_All_Certificate.Controllers
 {
+    [LoginValidRole(ValidRoleId = new[]{Roles.TechnicalStaff, Roles.TechnicalAdministrator})]
     public class CategoriesController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
@@ -115,6 +118,12 @@ namespace Rent_All_Certificate.Controllers
             db.Category.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public PartialViewResult UpdateCategoryList()
+        {
+
+            return View();
         }
 
         protected override void Dispose(bool disposing)
