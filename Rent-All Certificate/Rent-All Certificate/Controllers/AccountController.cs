@@ -36,7 +36,7 @@ namespace Rent_All_Certificate.Controllers
                     {
                         Session["EmployeeID"] = employee.EmployeeID;
                         Session["RoleID"] = employee.RoleID;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Dashboard");
                     }
                 }
                 ModelState.AddModelError("", "Your email address and/or password are incorrect.");

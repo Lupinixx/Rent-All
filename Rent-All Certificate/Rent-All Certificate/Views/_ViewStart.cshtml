@@ -1,8 +1,9 @@
-﻿@{
-    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
-    string cLayout = "";
-    
-    if (controller == "Home" || controller == "Account"){
+﻿@using Rent_All_Certificate.Models
+@{
+    String cLayout;
+
+    if (Session["RoleID"] == null)
+    {
         cLayout = "~/Views/Shared/_Layout.cshtml";
     }
     else{
