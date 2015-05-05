@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Rent_All_Certificate.Models.Manufacturer>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Rent_All_Certificate.Models.Manufacturer>
 
 @{
     ViewBag.Title = "Manufacturers";
@@ -39,7 +41,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ManufacturerName)
+            @Html.DisplayNameFor(model => model.First().ManufacturerName)
         </th>
         <th></th>
         <th>Aantal producten</th>
@@ -68,3 +70,5 @@ else {
 }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })

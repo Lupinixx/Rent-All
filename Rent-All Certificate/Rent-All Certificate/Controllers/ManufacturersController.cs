@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Rent_All_Certificate.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Rent_All_Certificate.Controllers
 {
@@ -15,16 +17,18 @@ namespace Rent_All_Certificate.Controllers
         private RentAllEntities db = new RentAllEntities();
 
         // GET: Manufacturers
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, int? page)
         {
             var query = "SELECT M.ManufacturerID, M.ManufacturerName, COUNT(p.ProductKey) AS nProducts FROM Manufacturer M LEFT OUTER JOIN Product P ON M.ManufacturerID = P.ManufacturerID GROUP BY M.ManufacturerID, M.ManufacturerName";
 
             if (search == null)
             {
-                return View(db.Manufacturer.SqlQuery(query).ToList());
+                return View(db.Manufacturer.SqlQuery(query)
+                    .ToList().ToPagedList(page ?? 1, 20));
             }
             else {
-                return View(db.Manufacturer.SqlQuery(query).Where(x => x.ManufacturerName.StartsWith(search)).ToList());
+                return View(db.Manufacturer.SqlQuery(query).Where(x => x.ManufacturerName.StartsWith(search))
+                    .ToList().ToPagedList(page ?? 1, 3));
             }
         }
 

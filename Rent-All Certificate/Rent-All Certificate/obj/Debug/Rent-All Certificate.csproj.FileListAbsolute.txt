@@ -29,3 +29,7 @@ C:\Users\LuukMaters\Source\Repos\Rent-AllCertificates\Rent-All Certificate\Rent-
 C:\Users\LuukMaters\Source\Repos\Rent-AllCertificates\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.csprojResolveAssemblyReference.cache
 C:\Users\LuukMaters\Source\Repos\Rent-AllCertificates\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.dll
 C:\Users\LuukMaters\Source\Repos\Rent-AllCertificates\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.pdb
+C:\Users\LuukMaters\Source\Repos\Rent-AllCertificates\Rent-All Certificate\Rent-All Certificate\bin\PagedList.dll
+C:\Users\LuukMaters\Source\Repos\Rent-AllCertificates\Rent-All Certificate\Rent-All Certificate\bin\PagedList.Mvc.dll
+C:\Users\LuukMaters\Source\Repos\Rent-AllCertificates\Rent-All Certificate\Rent-All Certificate\bin\PagedList.xml
+C:\Users\LuukMaters\Source\Repos\Rent-AllCertificates\Rent-All Certificate\Rent-All Certificate\bin\PagedList.Mvc.xml
