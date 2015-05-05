@@ -15,9 +15,17 @@ namespace Rent_All_Certificate.Controllers
         private RentAllEntities db = new RentAllEntities();
 
         // GET: Manufacturers
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            return View(db.Manufacturer.ToList());
+            var query = "SELECT M.ManufacturerID, M.ManufacturerName, COUNT(p.ProductKey) AS nProducts FROM Manufacturer M LEFT OUTER JOIN Product P ON M.ManufacturerID = P.ManufacturerID GROUP BY M.ManufacturerID, M.ManufacturerName";
+
+            if (search == null)
+            {
+                return View(db.Manufacturer.SqlQuery(query).ToList());
+            }
+            else {
+                return View(db.Manufacturer.SqlQuery(query).Where(x => x.ManufacturerName.StartsWith(search)).ToList());
+            }
         }
 
         // GET: Manufacturers/Details/5

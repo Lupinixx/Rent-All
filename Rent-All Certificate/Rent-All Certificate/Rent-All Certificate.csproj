@@ -1075,7 +1075,6 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Manufacturers\Create.cshtml" />
     <Content Include="Views\Manufacturers\Delete.cshtml" />
-    <Content Include="Views\Manufacturers\Details.cshtml" />
     <Content Include="Views\Manufacturers\Edit.cshtml" />
     <Content Include="Views\Manufacturers\Index.cshtml" />
   </ItemGroup>
