@@ -28,7 +28,7 @@ namespace Rent_All_Certificate.Controllers
             }
             else {
                 return View(db.Manufacturer.SqlQuery(query).Where(x => x.ManufacturerName.StartsWith(search))
-                    .ToList().ToPagedList(page ?? 1, 3));
+                    .ToList().ToPagedList(page ?? 1, 20));
             }
         }
 
