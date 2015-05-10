@@ -645,3 +645,9 @@ dt {
 #acyarchiveview .contentheading {
 	display: none;
 }
+.dropdownSpacing{
+    margin-bottom: 10px;
+}
+.dropdownSpacing:last-child{
+    margin-bottom: 0;
+}

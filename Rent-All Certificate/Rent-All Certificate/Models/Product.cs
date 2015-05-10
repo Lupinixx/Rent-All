@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Rent_All_Certificate.Models
 {
     using System;
@@ -24,5 +26,29 @@ namespace Rent_All_Certificate.Models
         public virtual Hoist Hoist { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
         public virtual Phase Phase { get; set; }
+    }
+
+    [MetadataType(typeof(ProductMetaData))]
+    public partial class Product
+    {
+
+    }
+
+    public class ProductMetaData
+    {
+        [Display(Name = "Category")]
+        public int CategoryID { get; set; }
+
+        [Display(Name = "Manufacturer")]
+        public int ManufacturerID { get; set; }
+
+        [Display(Name = "Phase")]
+        public int PhaseID { get; set; }
+
+        [Display(Name = "Product")]
+        public string ProductName { get; set; }
+
+        [Display(Name = "Key")]
+        public string ProductKey { get; set; }
     }
 }

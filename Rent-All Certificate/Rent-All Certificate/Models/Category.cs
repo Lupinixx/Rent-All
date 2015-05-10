@@ -34,12 +34,16 @@ namespace Rent_All_Certificate.Models
     [MetadataType(typeof(CategoryMetaData))]
     public partial class Category
     {
-        
+
     }
 
     public class CategoryMetaData
     {
+        [Display(Name = "Parent Category")]
+        public Nullable<int> ParentID { get; set; }
+
         [Display(Name = "Category")]
+        [Required]
         public string CategoryName { get; set; }
 
         [Display(Name = "Products")]

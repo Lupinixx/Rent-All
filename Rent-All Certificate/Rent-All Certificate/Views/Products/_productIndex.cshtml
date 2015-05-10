@@ -1,0 +1,56 @@
+﻿@model Rent_All_Certificate.Models.ProductIndexModel
+@using (Ajax.BeginForm("UpdateProductIndex", "Products", new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "ProductList",
+        InsertionMode = InsertionMode.Replace
+    }))
+{
+    for (var i = 0; i < Model.CategorySelectList.Count(); i++)
+    {
+        @Html.DropDownList("[" + i + "].SelectCategory",
+            new SelectList(Model.CategorySelectList[i].CategoriesSelectList, "CategoryID", "CategoryName", Model.CategorySelectList[i].SelectedCategoryId),
+            "Select a category",
+            new
+            {
+                onchange = "$('input#SelectedCategory').val($(this).val()); $('#categorySelect').click();",
+                @class = "form-control"
+            })
+    }
+    <input type="hidden" id="SelectedCategory" name="SelectedCategory" />
+    <input type="submit" id="categorySelect" value="Search" class="hidden" />
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductTabelList.FirstOrDefault().ProductKey)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductTabelList.FirstOrDefault().ProductName)
+        </th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Inventory(Not yet implemented)</th>
+    </tr>
+
+    @foreach (var item in Model.ProductTabelList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductKey })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductKey })
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>
