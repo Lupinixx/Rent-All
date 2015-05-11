@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Rent_All_Certificate.Models
 {
@@ -8,7 +10,7 @@ namespace Rent_All_Certificate.Models
         {
             StarterCategoryId = null;
         }
-        public List<Category> CategorieTabelList { get; set; }
+        public IPagedList<Category> CategorieTabelList { get; set; }
 
         public List<CategorySelectListModel> CategorySelectList { get; set; }
 

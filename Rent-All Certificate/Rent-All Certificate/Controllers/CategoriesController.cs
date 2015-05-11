@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc;
 using Rent_All_Certificate.Models;
 using System.Collections.Generic;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Rent_All_Certificate.Controllers
 {
@@ -13,11 +15,13 @@ namespace Rent_All_Certificate.Controllers
         private RentAllEntities db = new RentAllEntities();
 
         // GET: Categories
-        public ActionResult Index()
+        public ActionResult Index(int? page, int? selectedCategoryId = null)
         {
-            var cim = new CategoryIndexModel();
-            cim.CategorieTabelList = db.Category.Include(c => c.Category2).ToList();
-            cim.CategorySelectList = new List<CategorySelectListModel>
+var model = new CategoryIndexModel();
+            if (selectedCategoryId == null)
+            {
+            model.CategorieTabelList = db.Category.Include(c => c.Category2).ToList().ToPagedList(page ?? 1, 2);
+            model.CategorySelectList = new List<CategorySelectListModel>
             {
                 new CategorySelectListModel
                 {
@@ -25,7 +29,36 @@ namespace Rent_All_Certificate.Controllers
                     SelectedCategoryId = 0
                 }
             };
-            return View(cim);
+            }
+            else
+            {
+                var tableList = GetAllSubCategoriesFromParent((int)selectedCategoryId);
+                model = new CategoryIndexModel
+                {
+                    StarterCategoryId = db.Category.First(c => c.CategoryID == selectedCategoryId).ParentID,
+                    CategorySelectList = GetCategorySelectLists(selectedCategoryId)
+                };
+                //Add parent (GetAllSubCategoriesFromParent() only gets the subs)
+                tableList.AddRange(db.Category.Where(c => c.CategoryID == selectedCategoryId).Include(c => c.Category2).ToList());
+                model.CategorieTabelList = tableList.ToPagedList(1, 20);
+                return View(model);
+            }
+            return View(model);
+        }
+
+
+        public PartialViewResult UpdateCategoryList(int SelectedCategory)
+        {
+            var tableList = GetAllSubCategoriesFromParent(SelectedCategory);
+            var model = new CategoryIndexModel
+            {
+                StarterCategoryId = db.Category.First(c => c.CategoryID == SelectedCategory).ParentID,
+                CategorySelectList = GetCategorySelectLists(SelectedCategory)
+            };
+            //Add parent (GetAllSubCategoriesFromParent() only gets the subs)
+            tableList.AddRange(db.Category.Where(c => c.CategoryID == SelectedCategory).Include(c => c.Category2).ToList());
+            model.CategorieTabelList = tableList.ToPagedList(1, 2);
+            return PartialView("_categoryList", model);
         }
 
         // GET: Categories/Create
@@ -120,20 +153,6 @@ namespace Rent_All_Certificate.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
-        }
-
-        public PartialViewResult UpdateCategoryList(int SelectedCategory)
-        {
-            var cslm = new CategoryIndexModel
-            {
-                StarterCategoryId = db.Category.First(c => c.CategoryID == SelectedCategory).ParentID,
-                CategorieTabelList = GetAllSubCategoriesFromParent(SelectedCategory),
-                CategorySelectList = GetCategorySelectLists(SelectedCategory)
-            };
-            //Add parent (GetAllSubCategoriesFromParent() only gets the subs)
-            cslm.CategorieTabelList.AddRange(db.Category.Where(c => c.CategoryID == SelectedCategory).Include(c => c.Category2).ToList());
-
-            return PartialView("_categoryList", cslm);
         }
 
         public PartialViewResult UpdateEditCategoryDropDownLists(int SelectedCategory, int exclude)

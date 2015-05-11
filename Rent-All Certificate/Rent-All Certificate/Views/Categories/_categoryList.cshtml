@@ -1,4 +1,6 @@
 ﻿@using Rent_All_Certificate.Models
+@using PagedList;
+@using PagedList.Mvc;
 @model CategoryIndexModel
 
 <div class="row">
@@ -68,6 +70,10 @@
         }
     }
 </table>
+
+@Html.PagedListPager(Model.CategorieTabelList, page => Url.Action("Index", new { page, selectedCategoryId = 1 }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+
+
 @helper  GetSubCategoryList(IEnumerable<Category> SubList, string inspring = "  |")
 {
     foreach (var item in SubList)
