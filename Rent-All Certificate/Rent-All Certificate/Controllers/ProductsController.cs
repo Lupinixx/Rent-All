@@ -84,6 +84,7 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProductEditModel model)
         {
+            ValidateProduct(model.Product);
             if (ModelState.IsValid)
             {
                 db.Product.Add(model.Product);
@@ -127,6 +128,7 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ProductEditModel model)
         {
+            ValidateProduct(model.Product);
             if (ModelState.IsValid)
             {
                 db.Entry(model.Product).State = EntityState.Modified;
@@ -186,6 +188,15 @@ namespace Rent_All_Certificate.Controllers
                 catIdList.Add(cat.CategoryID);
             }
             return catIdList;
+        }
+
+        private void ValidateProduct(Product product)
+        {
+            if (db.Product.Any(p => p.ProductName == product.ProductName))
+                ModelState.AddModelError("", "Product must have a unique name.");
+
+            if (db.Product.Any(p => p.ProductKey == product.ProductKey))
+                ModelState.AddModelError("", "Product must have a unique key.");
         }
     }
 }

@@ -53,6 +53,7 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CategoryEditModel model)
         {
+            ValidateCategory(model.Category);
             if (ModelState.IsValid)
             {
                 db.Category.Add(model.Category);
@@ -90,6 +91,7 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CategoryEditModel model)
         {
+            ValidateCategory(model.Category);
             if (ModelState.IsValid)
             {
                 db.Entry(model.Category).State = EntityState.Modified;
@@ -195,6 +197,12 @@ namespace Rent_All_Certificate.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void ValidateCategory(Category category)
+        {
+            if (db.Category.Any(c => c.CategoryName == category.CategoryName))
+                ModelState.AddModelError("", "Categorie must have a unique name.");
         }
     }
 }
