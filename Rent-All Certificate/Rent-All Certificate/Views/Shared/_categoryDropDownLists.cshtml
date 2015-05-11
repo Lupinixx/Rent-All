@@ -1,0 +1,14 @@
+﻿@model List<Rent_All_Certificate.Models.CategorySelectListModel>
+
+@for (var i = 0; i < Model.Count(); i++)
+{
+    @Html.DropDownList("[" + i + "].SelectCategory", new SelectList(Model[i].CategoriesSelectList, "CategoryID", "CategoryName", Model[i].SelectedCategoryId),
+        "Select a category",
+        new
+        {
+            onchange = "changeActionURL($(this).val());",
+            @class = "form-control dropdownSpacing"
+        }
+    )
+}
+

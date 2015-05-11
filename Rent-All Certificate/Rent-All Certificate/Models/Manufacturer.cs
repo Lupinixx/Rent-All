@@ -12,28 +12,28 @@
 namespace Rent_All_Certificate.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
     
-public partial class Manufacturer
-{
-
-    public Manufacturer()
+    public partial class Manufacturer
     {
 
-        this.Product = new HashSet<Product>();
+        public Manufacturer()
+        {
+
+            this.Product = new HashSet<Product>();
+
+        }
+    
+
+        public int ManufacturerID { get; set; }
+
+        public string ManufacturerName { get; set; }
+    
+
+
+        public virtual ICollection<Product> Product { get; set; }
 
     }
-
-
-    public int ManufacturerID { get; set; }
-
-    public string ManufacturerName { get; set; }
-
-
-
-    public virtual ICollection<Product> Product { get; set; }
-
-}
 
 }

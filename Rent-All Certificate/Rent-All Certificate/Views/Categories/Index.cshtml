@@ -1,0 +1,15 @@
+﻿@using Rent_All_Certificate.Models
+@model CategoryIndexModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div id="CategoryLists">
+    @Html.Partial("~/Views/Categories/_categoryList.cshtml", Model)
+</div>

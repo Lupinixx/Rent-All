@@ -12,32 +12,32 @@
 namespace Rent_All_Certificate.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
     
-public partial class Hoist
-{
+    public partial class Hoist
+    {
 
-    public string Productkey { get; set; }
+        public string Productkey { get; set; }
 
-    public string Description { get; set; }
+        public string Description { get; set; }
 
-    public string Dimensions { get; set; }
+        public string Dimensions { get; set; }
 
-    public string Material { get; set; }
+        public string Material { get; set; }
 
-    public string Heattreatment { get; set; }
+        public string Heattreatment { get; set; }
 
-    public string ProofloadApplied { get; set; }
+        public string ProofloadApplied { get; set; }
 
-    public string WorkingLoadLimit { get; set; }
+        public string WorkingLoadLimit { get; set; }
 
-    public string SafetyFactor { get; set; }
+        public string SafetyFactor { get; set; }
+    
 
 
+        public virtual Product Product { get; set; }
 
-    public virtual Product Product { get; set; }
-
-}
+    }
 
 }
