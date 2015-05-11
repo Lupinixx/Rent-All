@@ -68,38 +68,3 @@ C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certific
 C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.csprojResolveAssemblyReference.cache
 C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.dll
 C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.pdb
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Rent-All Certificate.dll.config
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Rent-All Certificate.dll
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Rent-All Certificate.pdb
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Helpers.dll
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\PagedList.dll
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\PagedList.Mvc.dll
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Helpers.pdb
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\PagedList.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\PagedList.Mvc.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\System.Web.Helpers.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\System.Web.Mvc.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\System.Web.Optimization.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\System.Web.Razor.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\System.Web.WebPages.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\System.Web.WebPages.Deployment.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\System.Web.WebPages.Razor.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Antlr3.Runtime.pdb
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Newtonsoft.Json.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\EntityFramework.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\EntityFramework.SqlServer.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.AspNet.Identity.Owin.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.Security.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.Security.Facebook.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.Security.Cookies.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.Security.OAuth.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.Security.Google.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.Security.Twitter.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.csprojResolveAssemblyReference.cache
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.dll
-C:\Users\Wouter\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.pdb
