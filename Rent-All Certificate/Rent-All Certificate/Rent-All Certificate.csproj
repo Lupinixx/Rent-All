@@ -1102,7 +1102,6 @@
     <Content Include="Views\Hoists\Edit.cshtml" />
     <Content Include="Views\Hoists\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Categories\_categoryList.cshtml" />

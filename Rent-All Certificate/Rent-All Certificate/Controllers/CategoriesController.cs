@@ -107,22 +107,16 @@ namespace Rent_All_Certificate.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Category.Find(id);
+            var category = db.Category.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
-        }
-
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Category category = db.Category.Find(id);
-            db.Category.Remove(category);
-            db.SaveChanges();
+            if (category.Product.Count == 0)
+            {
+                db.Category.Remove(category);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 

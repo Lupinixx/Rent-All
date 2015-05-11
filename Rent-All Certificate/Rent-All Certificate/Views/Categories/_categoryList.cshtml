@@ -28,8 +28,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CategorieTabelList.FirstOrDefault().CategoryName)
         </th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.CategorieTabelList.FirstOrDefault().Product)
         </th>
@@ -41,10 +40,15 @@
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID })
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                @Html.ActionLink("Edit", "Edit", new {id = item.CategoryID}) | 
+                @if (item.Product.Count > 0)
+                {
+                    <a class="grayLink" href="#">Delete</a>
+                }
+                else
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Count)
@@ -65,10 +69,15 @@
                 &nbsp;@inspring @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID })
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                @Html.ActionLink("Edit", "Edit", new {id = item.CategoryID}) |
+                @if (item.Product.Count > 0)
+                {
+                    <a class="grayLink" href="#">Delete</a>
+                }
+                else
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Count)
