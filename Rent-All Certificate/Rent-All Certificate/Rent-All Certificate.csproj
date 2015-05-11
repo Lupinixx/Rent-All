@@ -168,7 +168,9 @@
     <Compile Include="Attributes\Authorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -176,6 +178,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryEditModel.cs" />
+    <Compile Include="Models\CategoryIndexModel.cs" />
+    <Compile Include="Models\CategorySelectListModel.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
@@ -192,6 +197,8 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductEditModel.cs" />
+    <Compile Include="Models\ProductIndexModel.cs" />
     <Compile Include="Models\RentAllModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1094,6 +1101,18 @@
     <Content Include="Views\Hoists\Details.cshtml" />
     <Content Include="Views\Hoists\Edit.cshtml" />
     <Content Include="Views\Hoists\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\_categoryList.cshtml" />
+    <Content Include="Views\Shared\_categoryDropDownLists.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\_productIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

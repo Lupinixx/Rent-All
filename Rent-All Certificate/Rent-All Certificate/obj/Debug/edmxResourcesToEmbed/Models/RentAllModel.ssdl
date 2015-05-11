@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="RentAllModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="RentAllModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="CategoryID" />
     </Key>
-    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ParentID" Type="int" />
     <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
@@ -12,7 +12,7 @@
     <Key>
       <PropertyRef Name="EmployeeID" />
     </Key>
-    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RoleID" Type="int" Nullable="false" />
     <Property Name="Firstname" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
@@ -44,7 +44,7 @@
     <Key>
       <PropertyRef Name="PhaseID" />
     </Key>
-    <Property Name="PhaseID" Type="int" Nullable="false" />
+    <Property Name="PhaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PhaseName" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Product">
@@ -61,7 +61,7 @@
     <Key>
       <PropertyRef Name="RoleID" />
     </Key>
-    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="fk_category_relations_category">

@@ -13,40 +13,40 @@
 namespace Rent_All_Certificate.Models
 {
 
-using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    
 
-
-public partial class RentAllEntities : DbContext
-{
-    public RentAllEntities()
-        : base("name=RentAllEntities")
+    public partial class RentAllEntities : DbContext
     {
+        public RentAllEntities()
+            : base("name=RentAllEntities")
+        {
+
+        }
+    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
+
+        public virtual DbSet<Category> Category { get; set; }
+
+        public virtual DbSet<Employee> Employee { get; set; }
+
+        public virtual DbSet<Hoist> Hoist { get; set; }
+
+        public virtual DbSet<Manufacturer> Manufacturer { get; set; }
+
+        public virtual DbSet<Phase> Phase { get; set; }
+
+        public virtual DbSet<Product> Product { get; set; }
+
+        public virtual DbSet<Role> Role { get; set; }
 
     }
-
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-        throw new UnintentionalCodeFirstException();
-    }
-
-
-    public virtual DbSet<Category> Category { get; set; }
-
-    public virtual DbSet<Employee> Employee { get; set; }
-
-    public virtual DbSet<Hoist> Hoist { get; set; }
-
-    public virtual DbSet<Manufacturer> Manufacturer { get; set; }
-
-    public virtual DbSet<Phase> Phase { get; set; }
-
-    public virtual DbSet<Product> Product { get; set; }
-
-    public virtual DbSet<Role> Role { get; set; }
-
-}
 
 }
 

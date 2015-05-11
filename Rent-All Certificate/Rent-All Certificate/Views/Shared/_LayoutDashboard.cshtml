@@ -6,6 +6,9 @@
     <title>@ViewBag.Title - Dashboard!!</title>
     @Styles.Render("~/Content/cssdash")
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 </head>
 @using Rent_All_Certificate.Models
 <body>
@@ -37,7 +40,7 @@
                         <li>
                             <a href="@Url.Action("LogOff", "Home")"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
-                    </ul>
+                </ul>
                     <!-- /.dropdown-user -->
                 </li>
                 <li class="dropdown">
@@ -58,7 +61,7 @@
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
-                            </div>
+            </div>
                             <!-- /input-group test-->
                         </li>
                         <li>
@@ -83,13 +86,13 @@
                             <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-dashboard fa-fw"></i> Manage Employees<span class="fa arrow"></a>
                         </li>
                     </ul>
-                </div>
+        </div>
                 <!-- /.sidebar-collapse -->
-            </div>
+    </div>
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
-            @RenderBody()
+        @RenderBody()
         </div>
 
     </div>
