@@ -1,28 +1,36 @@
 ﻿@using Rent_All_Certificate.Models
 @model CategoryIndexModel
-@using (Ajax.BeginForm("UpdateCategoryList", "Categories", new AjaxOptions
+
+<div class="row">
+    <div class="col-xs-6">
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+        </p>
+    </div>
+    <div class="col-xs-6">
+        @using (Ajax.BeginForm("UpdateCategoryList", "Categories", new AjaxOptions
     {
         HttpMethod = "GET",
         UpdateTargetId = "CategoryLists",
         InsertionMode = InsertionMode.Replace
     }))
-{
-    for (var i = 0; i < Model.CategorySelectList.Count(); i++)
-    {
-        @Html.DropDownList( "[" + i + "].SelectCategory", 
-            new SelectList(Model.CategorySelectList[i].CategoriesSelectList, "CategoryID", "CategoryName", Model.CategorySelectList[i].SelectedCategoryId), 
+        {
+            for (var i = 0; i < Model.CategorySelectList.Count(); i++)
+            {
+                @Html.DropDownList("[" + i + "].SelectCategory",
+            new SelectList(Model.CategorySelectList[i].CategoriesSelectList, "CategoryID", "CategoryName", Model.CategorySelectList[i].SelectedCategoryId),
             "Select a category",
             new
             {
-                onchange = "$('input#SelectedCategory').val($(this).val()); $('#categorySelect').click();", 
+                onchange = "$('input#SelectedCategory').val($(this).val()); $('#categorySelect').click();",
                 @class = "form-control"
             })
-    }
-    <input type="hidden" id="SelectedCategory" name="SelectedCategory" />
-    <input type="submit" id="categorySelect" value="Search" class="hidden" />
-}
-
-
+            }
+            <input type="hidden" id="SelectedCategory" name="SelectedCategory" />
+            <input type="submit" id="categorySelect" value="Search" class="hidden" />
+        }
+        </div>
+    </div>
 <table class="table">
     <tr>
         <th>
