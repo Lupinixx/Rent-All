@@ -9,12 +9,14 @@
 //------------------------------------------------------------------------------
 
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Rent_All_Certificate.Models
 {
 
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Phase
     {
 
@@ -24,16 +26,30 @@ namespace Rent_All_Certificate.Models
             this.Product = new HashSet<Product>();
 
         }
-    
+
 
         public int PhaseID { get; set; }
 
         public string PhaseName { get; set; }
-    
+
 
 
         public virtual ICollection<Product> Product { get; set; }
 
     }
 
+    [MetadataType(typeof(PhaseMetaData))]
+    public partial class Phase
+    {
+
+    }
+
+    public class PhaseMetaData
+    {
+        [Display(Name = "Phase")]
+        [Required]
+        public string PhaseName { get; set; }
+    }
 }
+
+
