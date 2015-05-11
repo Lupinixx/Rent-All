@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Rent_All_Certificate.Models;
 using PagedList;
-using PagedList.Mvc;
 
 namespace Rent_All_Certificate.Controllers
 {
@@ -30,21 +25,6 @@ namespace Rent_All_Certificate.Controllers
             }
         }
 
-        // GET: Manufacturers/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Manufacturer manufacturer = db.Manufacturer.Find(id);
-            if (manufacturer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(manufacturer);
-        }
-
         // GET: Manufacturers/Create
         public ActionResult Create()
         {
@@ -58,6 +38,7 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ManufacturerID,ManufacturerName")] Manufacturer manufacturer)
         {
+            ValidateManufacturer(manufacturer);
             if (ModelState.IsValid)
             {
                 db.Manufacturer.Add(manufacturer);
@@ -90,6 +71,7 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ManufacturerID,ManufacturerName")] Manufacturer manufacturer)
         {
+            ValidateManufacturer(manufacturer);
             if (ModelState.IsValid)
             {
                 db.Entry(manufacturer).State = EntityState.Modified;
@@ -137,6 +119,12 @@ namespace Rent_All_Certificate.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void ValidateManufacturer(Manufacturer manufacturer)
+        {
+            if (db.Manufacturer.Any(m => m.ManufacturerName == manufacturer.ManufacturerName))
+                ModelState.AddModelError("", "Manufacturer must have a unique name.");
         }
     }
 }

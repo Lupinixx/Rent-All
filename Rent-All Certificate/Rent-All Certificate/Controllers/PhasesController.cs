@@ -2,11 +2,8 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Helpers;
-using Rent_All_Certificate.Attributes;
 using Rent_All_Certificate.Models;
 using PagedList;
-using PagedList.Mvc;
 
 namespace Rent_All_Certificate.Controllers
 {
@@ -30,21 +27,6 @@ namespace Rent_All_Certificate.Controllers
             }
         }
 
-        // GET: Phases/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Phase phase = db.Phase.Find(id);
-            if (phase == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phase);
-        }
-
         // GET: Phases/Create
         public ActionResult Create()
         {
@@ -58,6 +40,7 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PhaseID,PhaseName")] Phase phase)
         {
+            ValidatePhase(phase);
             if (ModelState.IsValid)
             {
                 db.Phase.Add(phase);
@@ -90,6 +73,7 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PhaseID,PhaseName")] Phase phase)
         {
+            ValidatePhase(phase);
             if (ModelState.IsValid)
             {
                 db.Entry(phase).State = EntityState.Modified;
@@ -126,6 +110,13 @@ namespace Rent_All_Certificate.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void ValidatePhase(Phase phase)
+        {
+            if (db.Phase.Any(p => p.PhaseName.Equals(phase.PhaseName)))
+                ModelState.AddModelError("", "Phase must have a unique name.");
+
         }
     }
 }
