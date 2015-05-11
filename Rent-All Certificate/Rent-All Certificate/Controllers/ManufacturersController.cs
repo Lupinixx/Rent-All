@@ -19,15 +19,13 @@ namespace Rent_All_Certificate.Controllers
         // GET: Manufacturers
         public ActionResult Index(string search, int? page)
         {
-            var query = "SELECT M.ManufacturerID, M.ManufacturerName, COUNT(p.ProductKey) AS nProducts FROM Manufacturer M LEFT OUTER JOIN Product P ON M.ManufacturerID = P.ManufacturerID GROUP BY M.ManufacturerID, M.ManufacturerName";
-
             if (search == null)
             {
-                return View(db.Manufacturer.SqlQuery(query)
+                return View(db.Manufacturer
                     .ToList().ToPagedList(page ?? 1, 20));
             }
             else {
-                return View(db.Manufacturer.SqlQuery(query).Where(x => x.ManufacturerName.StartsWith(search))
+                return View(db.Manufacturer.Where(x => x.ManufacturerName.StartsWith(search))
                     .ToList().ToPagedList(page ?? 1, 20));
             }
         }
@@ -113,7 +111,12 @@ namespace Rent_All_Certificate.Controllers
             {
                 return HttpNotFound();
             }
-            return View(manufacturer);
+            if (manufacturer.Product.Count == 0)
+            {
+                db.Manufacturer.Remove(manufacturer);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Manufacturers/Delete/5

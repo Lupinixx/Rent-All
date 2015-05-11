@@ -1082,11 +1082,9 @@
     <Content Include="Views\Dashboard\Manual.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Manufacturers\Create.cshtml" />
-    <Content Include="Views\Manufacturers\Delete.cshtml" />
     <Content Include="Views\Manufacturers\Edit.cshtml" />
     <Content Include="Views\Manufacturers\Index.cshtml" />
     <Content Include="Views\Phases\Create.cshtml" />
-    <Content Include="Views\Phases\Details.cshtml" />
     <Content Include="Views\Phases\Edit.cshtml" />
     <Content Include="Views\Phases\Index.cshtml" />
     <Content Include="Views\Hoists\Create.cshtml" />

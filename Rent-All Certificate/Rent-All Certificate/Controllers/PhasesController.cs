@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using Helpers;
 using Rent_All_Certificate.Attributes;
 using Rent_All_Certificate.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Rent_All_Certificate.Controllers
 {
@@ -14,9 +16,18 @@ namespace Rent_All_Certificate.Controllers
         private RentAllEntities db = new RentAllEntities();
 
         // GET: Phases
-        public ActionResult Index()
+        public ActionResult Index(string search, int? page)
         {
-            return View(db.Phase.ToList());
+            if (search == null)
+            {
+                return View(db.Phase
+                    .ToList().ToPagedList(page ?? 1, 20));
+            }
+            else
+            {
+                return View(db.Phase.Where(x => x.PhaseName.StartsWith(search))
+                    .ToList().ToPagedList(page ?? 1, 20));
+            }
         }
 
         // GET: Phases/Details/5
