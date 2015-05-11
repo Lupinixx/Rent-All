@@ -1,0 +1,48 @@
+﻿@using Rent_All_Certificate.Models
+@model IEnumerable<Rent_All_Certificate.Models.Phase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Phase Management</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PhaseName)
+        </th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Products</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhaseName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {id = item.PhaseID})
+        </td>
+        <td>
+            @if (item.Product.Count > 0)
+            {
+                <a class="grayLink" href="#">Delete</a>
+            }
+            else
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.PhaseID }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+            }
+            
+        </td>
+        <td>
+           @Html.DisplayFor(modelItem => item.Product.Count)
+        </td>
+    </tr>
+}
+
+</table>
