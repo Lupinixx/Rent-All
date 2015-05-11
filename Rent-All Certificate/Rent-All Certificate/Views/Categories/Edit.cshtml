@@ -53,7 +53,7 @@
         if (value === "") {
             return;
         }
-        var url = "/Categories/UpdateEditCategoryDropDownLists?SelectedCategory=" + value;
+        var url = "/Categories/UpdateEditCategoryDropDownLists?SelectedCategory=" + value + "&exclude=@Model.Category.CategoryID";
         $("#SelectedCategory").val(value);
         $("#updateLink").attr('href', url);
         document.getElementById('updateLink').dispatchEvent(new MouseEvent("click", { "view": window, "bubbles": true, "cancelable": true }));

@@ -78,7 +78,7 @@ namespace Rent_All_Certificate.Controllers
             var categoryEditModel = new CategoryEditModel
             {
                 Category = category,
-                CategorySelectList = GetCategorySelectLists(category.ParentID)
+                CategorySelectList = GetCategorySelectLists(category.ParentID, category.CategoryID)
             };
             return View(categoryEditModel);
         }
@@ -96,7 +96,7 @@ namespace Rent_All_Certificate.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            model.CategorySelectList = GetCategorySelectLists(model.Category.ParentID);
+            model.CategorySelectList = GetCategorySelectLists(model.Category.ParentID, model.Category.CategoryID);
             return View(model);
         }
 
@@ -140,18 +140,18 @@ namespace Rent_All_Certificate.Controllers
             return PartialView("_categoryList", cslm);
         }
 
-        public PartialViewResult UpdateEditCategoryDropDownLists(int SelectedCategory)
+        public PartialViewResult UpdateEditCategoryDropDownLists(int SelectedCategory, int exclude)
         {
-            return PartialView("_categoryDropDownLists", GetCategorySelectLists(SelectedCategory));
+            return PartialView("_categoryDropDownLists", GetCategorySelectLists(SelectedCategory, exclude));
         }
 
-        public List<CategorySelectListModel> GetCategorySelectLists(int? categoryId)
+        public List<CategorySelectListModel> GetCategorySelectLists(int? categoryId, int exclude=0)
         {
             var categorySelectLists = new List<CategorySelectListModel>();
             //haal de volgende lijst op
             var temp = new CategorySelectListModel
             {
-                CategoriesSelectList = db.Category.Where(c => c.ParentID == categoryId).Include(c => c.Category2).ToList(),
+                CategoriesSelectList = db.Category.Where(c => c.ParentID == categoryId && c.CategoryID != exclude).Include(c => c.Category2).ToList(),
                 SelectedCategoryId = 0
             };
             if (temp.CategoriesSelectList.Count > 0)
@@ -171,7 +171,7 @@ namespace Rent_All_Certificate.Controllers
                         {
                             //haal de volgende lijst op
                             CategoriesSelectList =
-                                db.Category.Where(c => c.ParentID == id).Include(c => c.Category2).ToList(),
+                                db.Category.Where(c => c.ParentID == id && c.CategoryID != exclude).Include(c => c.Category2).ToList(),
                             SelectedCategoryId = selected
                         });
                 } while (categoryId != null);
