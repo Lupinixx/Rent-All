@@ -8,7 +8,7 @@ using Rent_All_Certificate.Models;
 
 namespace Rent_All_Certificate.Controllers
 {
-    [LoginValidRole(ValidRoleId = new[]{Roles.TechnicalStaff, Roles.TechnicalAdministrator})]
+    //[LoginValidRole(ValidRoleId = new[]{Roles.TechnicalStaff, Roles.TechnicalAdministrator})]
     public class PhasesController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
@@ -100,17 +100,11 @@ namespace Rent_All_Certificate.Controllers
             {
                 return HttpNotFound();
             }
-            return View(phase);
-        }
-
-        // POST: Phases/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Phase phase = db.Phase.Find(id);
-            db.Phase.Remove(phase);
-            db.SaveChanges();
+            if (phase.Product.Count == 0)
+            {
+                db.Phase.Remove(phase);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 

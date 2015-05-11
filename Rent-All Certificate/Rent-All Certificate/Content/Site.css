@@ -645,3 +645,16 @@ dt {
 #acyarchiveview .contentheading {
 	display: none;
 }
+.grayLink {
+    color: lightgray;
+    text-decoration: none;
+    
+}
+.grayLink:hover {
+    color: lightgray;
+    text-decoration: none;
+}
+.grayLink:focus {
+    color: lightgray;
+    text-decoration: none;
+}
