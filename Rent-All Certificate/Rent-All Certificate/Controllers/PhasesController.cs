@@ -2,12 +2,14 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Helpers;
 using Rent_All_Certificate.Models;
 using PagedList;
+using Rent_All_Certificate.Attributes;
 
 namespace Rent_All_Certificate.Controllers
 {
-    //[LoginValidRole(ValidRoleId = new[]{Roles.TechnicalStaff, Roles.TechnicalAdministrator})]
+    [LoginValidRole(ValidRoleId = new[]{Roles.TechnicalStaff, Roles.TechnicalAdministrator})]
     public class PhasesController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
@@ -114,7 +116,7 @@ namespace Rent_All_Certificate.Controllers
 
         private void ValidatePhase(Phase phase)
         {
-            if (db.Phase.Any(p => p.PhaseName.Equals(phase.PhaseName)))
+            if (db.Phase.Any(p => p.PhaseName.Equals(phase.PhaseName) && p.PhaseID != phase.PhaseID))
                 ModelState.AddModelError("", "Phase must have a unique name.");
 
         }

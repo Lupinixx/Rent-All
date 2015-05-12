@@ -3,66 +3,77 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Helpers;
+using PagedList;
+using Rent_All_Certificate.Attributes;
 using Rent_All_Certificate.Models;
 
 namespace Rent_All_Certificate.Controllers
 {
+    [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalStaff, Roles.TechnicalAdministrator })]
     public class ProductsController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int? page, int? selectedCategory)
         {
             var model = new ProductIndexModel
             {
-                ProductTabelList = db.Product.Include(p => p.Category).Include(p => p.Hoist).Include(p => p.Manufacturer).Include(p => p.Phase).ToList(),
-                CategorySelectList = new List<CategorySelectListModel>
-                {
-                    new CategorySelectListModel
-                    {
-                        CategoriesSelectList = db.Category.Where(c => c.ParentID == null).ToList(),
-                        SelectedCategoryId = 0
-                    }
-                }
+                CategorySelectList = new CategoriesController().GetCategorySelectLists(selectedCategory),
+                SelectedCategory = selectedCategory
             };
-
+            if (selectedCategory == null)
+            {
+                model.ProductTabelList =
+                    db.Product.Include(p => p.Category)
+                        //.Include(p => p.Hoist)
+                        //.Include(p => p.Manufacturer)
+                        //.Include(p => p.Phase)
+                        .ToList()
+                        .ToPagedList(page ?? 1, 20);
+            }
+            else
+            {
+                //Get all selected categories from the selected categories ids
+                var selectedCategoryIds = model.CategorySelectList.Select(csl => csl.SelectedCategoryId).Distinct().ToList();
+                //Get all possible subcategories
+                selectedCategoryIds.AddRange(GetAllSubCategorieIds((int)selectedCategory));
+                //Get all products with one of the selected categorie ids
+                model.ProductTabelList =
+                    db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID))
+                        //.Include(p => p.Hoist)
+                        //.Include(p => p.Manufacturer)
+                        //.Include(p => p.Phase)
+                        .ToList()
+                        .ToPagedList(page ?? 1, 20);
+            }
             return View(model);
         }
 
-        public PartialViewResult UpdateProductIndex(int SelectedCategory)
+        public PartialViewResult UpdateProductIndex(int selectedCategory)
         {
             // Create model and add the tabel data
             var catController = new CategoriesController();
             var model = new ProductIndexModel
             {
-                StarterCategoryId = db.Category.First(c => c.CategoryID == SelectedCategory).ParentID,
-                CategorySelectList = catController.GetCategorySelectLists(SelectedCategory)
+                SelectedCategory = selectedCategory,
+                CategorySelectList = catController.GetCategorySelectLists(selectedCategory)
             };
 
-            //Get all selected categories
+            //Get all selected categories from the selected categories ids
             var selectedCategoryIds = model.CategorySelectList.Select(csl => csl.SelectedCategoryId).Distinct().ToList();
             //Get all possible subcategories
-            selectedCategoryIds.AddRange(GetAllSubCategories(SelectedCategory));
+            selectedCategoryIds.AddRange(GetAllSubCategorieIds(selectedCategory));
             //Get all products with one of the selected categorie ids
-            model.ProductTabelList = db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID)).ToList();
+            model.ProductTabelList = db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID))
+                //.Include(p => p.Hoist)
+                //.Include(p => p.Manufacturer)
+                //.Include(p => p.Phase)
+                .ToList()
+                .ToPagedList(1, 20);
 
             return PartialView("_productIndex", model);
-        }
-
-        // GET: Products/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Product.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
         }
 
         // GET: Products/Create
@@ -154,15 +165,7 @@ namespace Rent_All_Certificate.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
-        }
-
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Product product = db.Product.Find(id);
+            //if (product.Iventory.Count == 0)
             db.Product.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -177,13 +180,13 @@ namespace Rent_All_Certificate.Controllers
             base.Dispose(disposing);
         }
 
-        private List<int?> GetAllSubCategories(int catId)
+        private List<int?> GetAllSubCategorieIds(int catId)
         {
             var catIdList = new List<int?>();
             foreach (var cat in db.Category.Where(c => c.ParentID == catId))
             {
                 if (db.Category.Count(c => c.ParentID == cat.CategoryID) > 0)
-                    catIdList.AddRange(GetAllSubCategories(cat.CategoryID));
+                    catIdList.AddRange(GetAllSubCategorieIds(cat.CategoryID));
 
                 catIdList.Add(cat.CategoryID);
             }
@@ -192,11 +195,8 @@ namespace Rent_All_Certificate.Controllers
 
         private void ValidateProduct(Product product)
         {
-            if (db.Product.Any(p => p.ProductName == product.ProductName))
+            if (db.Product.Any(p => p.ProductName.Equals(product.ProductName) && p.ProductKey != product.ProductKey))
                 ModelState.AddModelError("", "Product must have a unique name.");
-
-            if (db.Product.Any(p => p.ProductKey == product.ProductKey))
-                ModelState.AddModelError("", "Product must have a unique key.");
         }
     }
 }

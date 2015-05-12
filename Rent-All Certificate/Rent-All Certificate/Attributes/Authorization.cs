@@ -11,9 +11,10 @@ namespace Rent_All_Certificate.Attributes
     public class LoginInvalid : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
-            if (filterContext.HttpContext.Session != null && filterContext.HttpContext.Session["id"] != null) {
+            if (filterContext.HttpContext.Session != null && filterContext.HttpContext.Session["EmployeeID"] != null)
+            {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new {
-                    controller = "Home",
+                    controller = "Dashboard",
                     action = "Index"
                 }));
             }
@@ -29,13 +30,12 @@ namespace Rent_All_Certificate.Attributes
         public int[] ValidRoleId { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
-
             if (filterContext.HttpContext.Session != null
-                && filterContext.HttpContext.Session["id"] != null
-                && ValidRoleId.Contains(Convert.ToInt32(filterContext.HttpContext.Session["role"]))) {
+                && filterContext.HttpContext.Session["RoleID"] != null
+                && ValidRoleId.Contains(Convert.ToInt32(filterContext.HttpContext.Session["RoleID"])))
+            {
                 return;
             }
-
             filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new {
                 controller = "Account",
                 action = "Login"

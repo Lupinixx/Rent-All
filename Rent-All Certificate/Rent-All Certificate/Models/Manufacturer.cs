@@ -9,10 +9,11 @@
 //------------------------------------------------------------------------------
 
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Rent_All_Certificate.Models
 {
 
-    using System;
     using System.Collections.Generic;
     
     public partial class Manufacturer
@@ -36,4 +37,16 @@ namespace Rent_All_Certificate.Models
 
     }
 
+    [MetadataType(typeof(ManufacturerMetaData))]
+    public partial class Manufacturer
+    {
+        
+    }
+
+    public class ManufacturerMetaData
+    {
+        [Required]
+        [Display(Name = "Manufacturer")]
+        public string ManufacturerName { get; set; }
+    }
 }
