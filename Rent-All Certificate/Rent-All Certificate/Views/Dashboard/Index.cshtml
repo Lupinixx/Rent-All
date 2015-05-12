@@ -1,6 +1,6 @@
-﻿
+﻿@model Rent_All_Certificate.Models.DashboardModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
 }
 <div class="row">
     <div class="col-lg-12">
@@ -15,17 +15,17 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-comments fa-5x"></i>
+                        <i class="fa fa-archive fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">26</div>
-                        <div>New Comments!</div>
+                        <div class="huge">@Model.InvertoryCount</div>
+                        <div>Invertory items</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="@Url.Action("Index", "Dashboard")">
                 <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
+                    <span class="pull-left">View Invertory</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <div class="clearfix"></div>
                 </div>
@@ -37,17 +37,17 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-tasks fa-5x"></i>
+                        <i class="fa fa-lightbulb-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
-                        <div>New Tasks!</div>
+                        <div class="huge">@Model.ProductsCount</div>
+                        <div>Product items</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="@Url.Action("Index", "Products")">
                 <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
+                    <span class="pull-left">View Products</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <div class="clearfix"></div>
                 </div>
@@ -59,17 +59,17 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-shopping-cart fa-5x"></i>
+                        <i class="fa fa-bars fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">124</div>
-                        <div>New Orders!</div>
+                        <div class="huge">@Model.CategoryCount</div>
+                        <div>Categorie items</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="@Url.Action("Index", "Categories")">
                 <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
+                    <span class="pull-left">View Categories</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <div class="clearfix"></div>
                 </div>
@@ -81,17 +81,17 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-support fa-5x"></i>
+                        <i class="fa fa-building fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
-                        <div>Support Tickets!</div>
+                        <div class="huge">@Model.ManufactureCount</div>
+                        <div>Manufactures</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="@Url.Action("Index", "Manufacturers")">
                 <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
+                    <span class="pull-left">View Manufactures</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <div class="clearfix"></div>
                 </div>

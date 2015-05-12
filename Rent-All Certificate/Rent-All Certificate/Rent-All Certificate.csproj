@@ -181,6 +181,7 @@
     <Compile Include="Models\CategoryEditModel.cs" />
     <Compile Include="Models\CategoryIndexModel.cs" />
     <Compile Include="Models\CategorySelectListModel.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>

@@ -16,7 +16,7 @@ body {
         text-decoration:none;
         color:#777;
     }
-#CategoryLists .form-control {
+#CategoryLists .form-control, #ProductList .form-control {
     margin-bottom: 15px;
 }
 #wrapper {
@@ -114,7 +114,7 @@ body {
     background-color: #eee;
 }
 
-.sidebar .arrow {
+.sidebar .arrow, .sidebar .fa-angle-right {
     float: right;
 }
 
