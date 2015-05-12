@@ -2,16 +2,23 @@
 @model CategoryIndexModel
 @if (Model.CategorySelectList != null)
 {
-    using (Ajax.BeginForm("UpdateCategoryList", "Categories", new AjaxOptions
-        {
-            HttpMethod = "GET",
-            UpdateTargetId = "CategoryLists",
-            InsertionMode = InsertionMode.Replace
-        }))
+    <div class="row">
+        <div class="col-xs-6">
+            <p>
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+            </p>
+        </div>
+        <div class="col-xs-6">
+            @using (Ajax.BeginForm("UpdateCategoryList", "Categories", new AjaxOptions
     {
-        for (var i = 0; i < Model.CategorySelectList.Count(); i++)
-        {
-            @Html.DropDownList("[" + i + "].SelectCategory",
+        HttpMethod = "GET",
+        UpdateTargetId = "CategoryLists",
+        InsertionMode = InsertionMode.Replace
+    }))
+            {
+                for (var i = 0; i < Model.CategorySelectList.Count(); i++)
+                {
+                    @Html.DropDownList("[" + i + "].SelectCategory",
             new SelectList(Model.CategorySelectList[i].CategoriesSelectList, "CategoryID", "CategoryName", Model.CategorySelectList[i].SelectedCategoryId),
             "Select a category",
             new
@@ -19,10 +26,12 @@
                 onchange = "$('input#SelectedCategory').val($(this).val()); $('#categorySelect').click();",
                 @class = "form-control"
             })
-        }
-        <input type="hidden" id="SelectedCategory" name="SelectedCategory" />
-        <input type="submit" id="categorySelect" value="Search" class="hidden" />
-    }
+                }
+                <input type="hidden" id="SelectedCategory" name="SelectedCategory" />
+                <input type="submit" id="categorySelect" value="Search" class="hidden" />
+            }
+        </div>
+    </div>
 
     if (Model.CategorieTabelList != null)
     {
@@ -64,34 +73,34 @@
             }
         </table>
         @helper GetSubCategoryList(IEnumerable<Category> subList, string inspring = "  |")
-        {
-            foreach (var item in subList)
-            {
-                <tr>
-                    <td>
-                        &nbsp;@inspring @Html.DisplayFor(modelItem => item.CategoryName)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
-                        @if (item.Product.Count > 0 || item.Category1.Count > 0)
-                        {
-                            <a class="grayLink" href="#">Delete</a>
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }, new { onclick = "return confirm('Are you sure you want to delete?')" })
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.Count)
-                    </td>
-                </tr>
-                if (Model.CategorieTabelList.Count(m => m.ParentID == item.CategoryID) > 0)
+{
+    foreach (var item in subList)
+    {
+        <tr>
+            <td>
+                &nbsp;@inspring @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                @if (item.Product.Count > 0 || item.Category1.Count > 0)
                 {
-                    @GetSubCategoryList(Model.CategorieTabelList.Where(m => m.ParentID == item.CategoryID), inspring + "-")
+                    <a class="grayLink" href="#">Delete</a>
                 }
-            }
+                else
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Count)
+            </td>
+        </tr>
+        if (Model.CategorieTabelList.Count(m => m.ParentID == item.CategoryID) > 0)
+        {
+            @GetSubCategoryList(Model.CategorieTabelList.Where(m => m.ParentID == item.CategoryID), inspring + "-")
         }
+    }
+}
     }
     else
     {

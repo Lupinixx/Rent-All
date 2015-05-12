@@ -8,6 +8,17 @@ body {
     background-color: #f8f8f8;
 }
 
+.grayLink {
+    color: #777;
+    cursor: not-allowed;
+}
+    .grayLink:hover {
+        text-decoration:none;
+        color:#777;
+    }
+#CategoryLists .form-control {
+    margin-bottom: 15px;
+}
 #wrapper {
     width: 100%;
 }
