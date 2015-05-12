@@ -6,10 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Helpers;
+using Rent_All_Certificate.Attributes;
 using Rent_All_Certificate.Models;
 
 namespace Rent_All_Certificate.Controllers
 {
+    [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalStaff, Roles.TechnicalAdministrator })]
     public class EmployeesController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
