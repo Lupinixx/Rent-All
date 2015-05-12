@@ -4,10 +4,12 @@ using System.Net;
 using System.Web.Mvc;
 using Rent_All_Certificate.Models;
 using System.Collections.Generic;
+using Helpers;
+using Rent_All_Certificate.Attributes;
 
 namespace Rent_All_Certificate.Controllers
 {
-    //[LoginValidRole(ValidRoleId = new[]{Roles.TechnicalStaff, Roles.TechnicalAdministrator})]
+    [LoginValidRole(ValidRoleId = new[]{Roles.TechnicalStaff, Roles.TechnicalAdministrator})]
     public class CategoriesController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
@@ -15,16 +17,19 @@ namespace Rent_All_Certificate.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            var cim = new CategoryIndexModel();
-            cim.CategorieTabelList = db.Category.Include(c => c.Category2).ToList();
-            cim.CategorySelectList = new List<CategorySelectListModel>
+            var cim = new CategoryIndexModel
             {
-                new CategorySelectListModel
+                CategorieTabelList = null,
+                CategorySelectList = new List<CategorySelectListModel>
                 {
-                    CategoriesSelectList = db.Category.Where(c => c.ParentID == null).ToList(),
-                    SelectedCategoryId = 0
+                    new CategorySelectListModel
+                    {
+                        CategoriesSelectList = db.Category.Where(c => c.ParentID == null).ToList(),
+                        SelectedCategoryId = 0
+                    }
                 }
             };
+            //db.Category.Include(c => c.Category2).ToList();
             return View(cim);
         }
 
@@ -114,7 +119,7 @@ namespace Rent_All_Certificate.Controllers
             {
                 return HttpNotFound();
             }
-            if (category.Product.Count == 0)
+            if (category.Product.Count == 0 && category.Category1.Count == 0)
             {
                 db.Category.Remove(category);
                 db.SaveChanges();
@@ -136,7 +141,7 @@ namespace Rent_All_Certificate.Controllers
             return PartialView("_categoryList", cslm);
         }
 
-        public PartialViewResult UpdateEditCategoryDropDownLists(int SelectedCategory, int exclude)
+        public PartialViewResult UpdateEditCategoryDropDownLists(int SelectedCategory, int exclude=0)
         {
             return PartialView("_categoryDropDownLists", GetCategorySelectLists(SelectedCategory, exclude));
         }
@@ -144,6 +149,11 @@ namespace Rent_All_Certificate.Controllers
         public List<CategorySelectListModel> GetCategorySelectLists(int? categoryId, int exclude=0)
         {
             var categorySelectLists = new List<CategorySelectListModel>();
+            //Check of categoryId bestaat
+            if (categoryId != null && db.Category.Any(c => c.CategoryID == categoryId) == false)
+            {
+                categoryId = null;
+            }
             //haal de volgende lijst op
             var temp = new CategorySelectListModel
             {
@@ -201,7 +211,7 @@ namespace Rent_All_Certificate.Controllers
 
         private void ValidateCategory(Category category)
         {
-            if (db.Category.Any(c => c.CategoryName == category.CategoryName))
+            if (db.Category.Any(c => c.CategoryName.Equals(category.CategoryName) && c.CategoryID != category.CategoryID))
                 ModelState.AddModelError("", "Categorie must have a unique name.");
         }
     }

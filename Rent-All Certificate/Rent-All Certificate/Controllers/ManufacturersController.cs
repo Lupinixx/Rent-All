@@ -2,11 +2,14 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Helpers;
 using Rent_All_Certificate.Models;
 using PagedList;
+using Rent_All_Certificate.Attributes;
 
 namespace Rent_All_Certificate.Controllers
 {
+    [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalStaff, Roles.TechnicalAdministrator })]
     public class ManufacturersController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
@@ -123,7 +126,7 @@ namespace Rent_All_Certificate.Controllers
 
         private void ValidateManufacturer(Manufacturer manufacturer)
         {
-            if (db.Manufacturer.Any(m => m.ManufacturerName == manufacturer.ManufacturerName))
+            if (db.Manufacturer.Any(m => m.ManufacturerName.Equals(manufacturer.ManufacturerName) && m.ManufacturerID != manufacturer.ManufacturerID))
                 ModelState.AddModelError("", "Manufacturer must have a unique name.");
         }
     }
