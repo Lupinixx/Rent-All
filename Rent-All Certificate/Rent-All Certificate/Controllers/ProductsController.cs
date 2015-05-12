@@ -3,10 +3,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Helpers;
+using Rent_All_Certificate.Attributes;
 using Rent_All_Certificate.Models;
 
 namespace Rent_All_Certificate.Controllers
 {
+    [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalStaff, Roles.TechnicalAdministrator })]
     public class ProductsController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
@@ -48,21 +51,6 @@ namespace Rent_All_Certificate.Controllers
             model.ProductTabelList = db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID)).ToList();
 
             return PartialView("_productIndex", model);
-        }
-
-        // GET: Products/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Product.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
         }
 
         // GET: Products/Create
@@ -154,15 +142,7 @@ namespace Rent_All_Certificate.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
-        }
-
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Product product = db.Product.Find(id);
+            //if (product.Iventory.Count == 0)
             db.Product.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -192,11 +172,8 @@ namespace Rent_All_Certificate.Controllers
 
         private void ValidateProduct(Product product)
         {
-            if (db.Product.Any(p => p.ProductName == product.ProductName))
+            if (db.Product.Any(p => p.ProductName.Equals(product.ProductName) && p.ProductKey != product.ProductKey))
                 ModelState.AddModelError("", "Product must have a unique name.");
-
-            if (db.Product.Any(p => p.ProductKey == product.ProductKey))
-                ModelState.AddModelError("", "Product must have a unique key.");
         }
     }
 }

@@ -28,8 +28,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ProductTabelList.FirstOrDefault().ProductName)
         </th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th></th>
         <th>Inventory(Not yet implemented)</th>
     </tr>
 
@@ -43,10 +42,8 @@
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductKey })
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductKey })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductKey }) | 
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductKey }, new { onclick = "return confirm('Are you sure you want to delete?')" })
             </td>
             <td>
             </td>
