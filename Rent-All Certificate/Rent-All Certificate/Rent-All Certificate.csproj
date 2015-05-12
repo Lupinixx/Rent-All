@@ -185,6 +185,7 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeEditModel.cs" />
     <Compile Include="Models\Hoist.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>

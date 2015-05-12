@@ -42,6 +42,7 @@ namespace Rent_All_Certificate.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
+
             ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1");
             return View();
         }
@@ -51,17 +52,17 @@ namespace Rent_All_Certificate.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeID,RoleID,Firstname,Lastname,Email,PasswordHash,PasswordSalt")] Employee employee)
+        public ActionResult Create( EmployeeEditModel employeeEditModel)
         {
             if (ModelState.IsValid)
             {
-                db.Employee.Add(employee);
+                db.Employee.Add(employeeEditModel.EmployeeModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1", employee.RoleID);
-            return View(employee);
+            ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1", employeeEditModel.EmployeeModel.RoleID);
+            return View(employeeEditModel);
         }
 
         // GET: Employees/Edit/5
@@ -71,13 +72,16 @@ namespace Rent_All_Certificate.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employee.Find(id);
-            if (employee == null)
+            EmployeeEditModel employeeEditModel = new EmployeeEditModel
+            {
+                EmployeeModel = db.Employee.Find(id)
+            };
+            if (employeeEditModel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1", employee.RoleID);
-            return View(employee);
+            ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1", employeeEditModel.EmployeeModel.RoleID);
+            return View(employeeEditModel);
         }
 
         // POST: Employees/Edit/5
@@ -85,16 +89,16 @@ namespace Rent_All_Certificate.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeID,RoleID,Firstname,Lastname,Email,PasswordHash,PasswordSalt")] Employee employee)
+        public ActionResult Edit(EmployeeEditModel employeeEditModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(employeeEditModel.EmployeeModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1", employee.RoleID);
-            return View(employee);
+            ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1", employeeEditModel.EmployeeModel.RoleID);
+            return View(employeeEditModel);
         }
 
         // GET: Employees/Delete/5
