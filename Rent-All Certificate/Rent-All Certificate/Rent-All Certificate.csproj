@@ -1112,8 +1112,6 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\_productIndex.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Employees\Delete.cshtml" />
-    <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
