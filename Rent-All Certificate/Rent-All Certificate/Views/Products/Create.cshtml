@@ -1,42 +1,59 @@
 ﻿@model Rent_All_Certificate.Models.ProductEditModel
-
 @{
     ViewBag.Title = "Create";
 }
-
-<h2>Create</h2>
-
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Create Product</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Product</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product.PhaseID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Product.PhaseID", (SelectList)ViewBag.PhaseID, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Product.PhaseID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product.ManufacturerID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Product.ManufacturerID", (SelectList)ViewBag.ManufacturerID, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Product.ManufacturerID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="CategoryLists">
-                    @Html.Partial("~/Views/Shared/_categoryDropDownLists.cshtml", Model.CategorySelectList)
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Product.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Product.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Product.ProductName, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                @Ajax.ActionLink("updateLink", "UpdateEditCategoryDropDownLists", "Categories",
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Product.ProductKey, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Product.ProductKey, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Product.ProductKey, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Product.ManufacturerID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Product.ManufacturerID", (SelectList)ViewBag.ManufacturerID, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Product.ManufacturerID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Product.PhaseID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Product.PhaseID", (SelectList)ViewBag.PhaseID, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Product.PhaseID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Product.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div id="CategoryLists">
+                            @Html.Partial("~/Views/Shared/_categoryDropDownLists.cshtml", Model.CategorySelectList)
+                        </div>
+                        @Ajax.ActionLink("updateLink", "UpdateEditCategoryDropDownLists", "Categories",
                     new { SelectedCategory = "" },
                     new AjaxOptions
                     {
@@ -46,47 +63,35 @@
                     },
                     new { id = "updateLink", @class = "hidden" }
                 )
-                @Html.HiddenFor(model => model.Product.CategoryID, new { id = "SelectedCategory" })
-                @Html.ValidationMessageFor(model => model.Product.CategoryID, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Product.CategoryID, new { id = "SelectedCategory" })
+                        @Html.ValidationMessageFor(model => model.Product.CategoryID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
             </div>
+    <div class="row">
+        <div class="col-xs-6">
+            @Html.ActionLink("Back to List", "Index")
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Product.ProductName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product.ProductName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product.ProductKey, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Product.ProductKey, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product.ProductKey, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="col-xs-6">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<script type="text/javascript">
-    function changeActionURL(value) {
-        if (value === "") {
-            return;
-        }
-        var url = "/Categories/UpdateEditCategoryDropDownLists?SelectedCategory=" + value;
-        $("#SelectedCategory").val(value);
-        $("#updateLink").attr('href', url);
-        document.getElementById('updateLink').dispatchEvent(new MouseEvent("click", { "view": window, "bubbles": true, "cancelable": true }));
-    }
-</script>
+    
+             
+            }
+            <script type="text/javascript">
+                function changeActionURL(value) {
+                    if (value === "") {
+                        return;
+                    }
+                    var url = "/Categories/UpdateEditCategoryDropDownLists?SelectedCategory=" + value;
+                    $("#SelectedCategory").val(value);
+                    $("#updateLink").attr('href', url);
+                    document.getElementById('updateLink').dispatchEvent(new MouseEvent("click", { "view": window, "bubbles": true, "cancelable": true }));
+                }
+            </script>

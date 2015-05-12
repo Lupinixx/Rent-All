@@ -1,14 +1,19 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
+﻿
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
-
+.row.content {
+    margin-left: 25px;
+}
+.content h2 {
+    margin-top: 40px;
+}
+.container .content .jumbotron {
+    padding: 10px 0 10px 20px;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -352,6 +357,14 @@ a:hover {
 	margin-bottom: 5px;
 	padding-left: 10px;
 	width: 100%;
+    float: left;
+}
+#quickSearch .btn-default {
+    background-color: #fff;
+    border: medium none;
+    color: #333;
+    margin-top: -8px;
+    padding: 9px;
 }
 .content .btn-primary {
 	background-color: #444;

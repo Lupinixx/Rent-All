@@ -8,7 +8,7 @@
                 @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
             </p>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-4">
             @using (Ajax.BeginForm("UpdateCategoryList", "Categories", new AjaxOptions
     {
         HttpMethod = "GET",
@@ -30,6 +30,9 @@
                 <input type="hidden" id="SelectedCategory" name="SelectedCategory" />
                 <input type="submit" id="categorySelect" value="Search" class="hidden" />
             }
+        </div>
+        <div class="col-xs-2">
+            <a href="@Url.Action("Index", "Categories")" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> Reset</a>
         </div>
     </div>
 
@@ -104,6 +107,7 @@
     }
     else
     {
+        <hr />
         <div>Select a categorie</div>
     }
 }

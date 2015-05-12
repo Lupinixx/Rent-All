@@ -1,9 +1,14 @@
 ﻿using Rent_All_Certificate.Models;
 using System.Web.Mvc;
 using System.Linq;
+using Rent_All_Certificate.Attributes;
+using System.Web.Security;
+using Helpers;
+using Roles = Helpers.Roles;
 
 namespace Rent_All_Certificate.Controllers
 {
+    [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalStaff, Roles.TechnicalAdministrator })]
     public class DashboardController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
