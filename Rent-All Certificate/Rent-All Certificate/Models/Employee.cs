@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Ajax.Utilities;
 
 namespace Rent_All_Certificate.Models
 {
@@ -57,5 +58,11 @@ namespace Rent_All_Certificate.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string PasswordHash { get; set; }
+
+        [Display(Name = "First Name")]
+        public string Firstname { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string Lastname { get; set; }
     }
 }

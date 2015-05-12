@@ -9,12 +9,14 @@
 //------------------------------------------------------------------------------
 
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Rent_All_Certificate.Models
 {
 
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Role
     {
 
@@ -24,16 +26,26 @@ namespace Rent_All_Certificate.Models
             this.Employee = new HashSet<Employee>();
 
         }
-    
+
 
         public int RoleID { get; set; }
 
         public string Role1 { get; set; }
-    
-
 
         public virtual ICollection<Employee> Employee { get; set; }
 
+    }
+
+    [MetadataType(typeof(RoleMetaData))]
+    public partial class Role
+    {
+
+    }
+
+    public class RoleMetaData
+    {
+        [Display(Name = "Role")]
+        public string Role1 { get; set; }
     }
 
 }
