@@ -83,8 +83,8 @@ namespace Rent_All_Certificate.Controllers
             {
                 CategorySelectList = new CategoriesController().GetCategorySelectLists(null)
             };
-            ViewBag.ManufacturerID = new SelectList(db.Manufacturer, "ManufacturerID", "ManufacturerName");
-            ViewBag.PhaseID = new SelectList(db.Phase, "PhaseID", "PhaseName");
+            ViewBag.ManufacturerID = new SelectList(db.Manufacturer.OrderBy(m => m.ManufacturerName), "ManufacturerID", "ManufacturerName");
+            ViewBag.PhaseID = new SelectList(db.Phase.OrderBy(p => p.PhaseName), "PhaseID", "PhaseName");
             return View(model);
         }
 
@@ -95,6 +95,9 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProductEditModel model)
         {
+            if (db.Product.Any(p => p.ProductKey.Equals(model.Product.ProductKey)))
+                ModelState.AddModelError("", "Product must have a unique key.");
+
             ValidateProduct(model.Product);
             if (ModelState.IsValid)
             {
@@ -103,8 +106,8 @@ namespace Rent_All_Certificate.Controllers
                 return RedirectToAction("Index");
             }
             model.CategorySelectList = new CategoriesController().GetCategorySelectLists(model.Product.CategoryID);
-            ViewBag.ManufacturerID = new SelectList(db.Manufacturer, "ManufacturerID", "ManufacturerName", model.Product.ManufacturerID);
-            ViewBag.PhaseID = new SelectList(db.Phase, "PhaseID", "PhaseName", model.Product.PhaseID);
+            ViewBag.ManufacturerID = new SelectList(db.Manufacturer.OrderBy(m => m.ManufacturerName), "ManufacturerID", "ManufacturerName", model.Product.ManufacturerID);
+            ViewBag.PhaseID = new SelectList(db.Phase.OrderBy(p => p.PhaseName), "PhaseID", "PhaseName", model.Product.PhaseID);
             return View(model);
         }
 
@@ -127,8 +130,8 @@ namespace Rent_All_Certificate.Controllers
             };
             //ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "CategoryName", product.CategoryID);
             //ViewBag.ProductKey = new SelectList(db.Hoist, "Productkey", "Description", product.ProductKey);
-            ViewBag.ManufacturerID = new SelectList(db.Manufacturer, "ManufacturerID", "ManufacturerName", product.ManufacturerID);
-            ViewBag.PhaseID = new SelectList(db.Phase, "PhaseID", "PhaseName", product.PhaseID);
+            ViewBag.ManufacturerID = new SelectList(db.Manufacturer.OrderBy(m => m.ManufacturerName), "ManufacturerID", "ManufacturerName", product.ManufacturerID);
+            ViewBag.PhaseID = new SelectList(db.Phase.OrderBy(p => p.PhaseName), "PhaseID", "PhaseName", product.PhaseID);
             return View(model);
         }
 
@@ -148,8 +151,8 @@ namespace Rent_All_Certificate.Controllers
             }
             model.CategorySelectList = new CategoriesController().GetCategorySelectLists(model.Product.CategoryID);
             //ViewBag.ProductKey = new SelectList(db.Hoist, "Productkey", "Description", model.Product.ProductKey);
-            ViewBag.ManufacturerID = new SelectList(db.Manufacturer, "ManufacturerID", "ManufacturerName", model.Product.ManufacturerID);
-            ViewBag.PhaseID = new SelectList(db.Phase, "PhaseID", "PhaseName", model.Product.PhaseID);
+            ViewBag.ManufacturerID = new SelectList(db.Manufacturer.OrderBy(m => m.ManufacturerName), "ManufacturerID", "ManufacturerName", model.Product.ManufacturerID);
+            ViewBag.PhaseID = new SelectList(db.Phase.OrderBy(p => p.PhaseName), "PhaseID", "PhaseName", model.Product.PhaseID);
             return View(model);
         }
 
