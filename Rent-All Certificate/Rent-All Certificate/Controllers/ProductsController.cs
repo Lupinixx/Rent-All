@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -27,9 +29,9 @@ namespace Rent_All_Certificate.Controllers
             {
                 model.ProductTabelList =
                     db.Product.Include(p => p.Category)
-                        //.Include(p => p.Hoist)
-                        //.Include(p => p.Manufacturer)
-                        //.Include(p => p.Phase)
+                    //.Include(p => p.Hoist)
+                    //.Include(p => p.Manufacturer)
+                    //.Include(p => p.Phase)
                         .ToList()
                         .ToPagedList(page ?? 1, 20);
             }
@@ -42,9 +44,9 @@ namespace Rent_All_Certificate.Controllers
                 //Get all products with one of the selected categorie ids
                 model.ProductTabelList =
                     db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID))
-                        //.Include(p => p.Hoist)
-                        //.Include(p => p.Manufacturer)
-                        //.Include(p => p.Phase)
+                    //.Include(p => p.Hoist)
+                    //.Include(p => p.Manufacturer)
+                    //.Include(p => p.Phase)
                         .ToList()
                         .ToPagedList(page ?? 1, 20);
             }
@@ -101,9 +103,23 @@ namespace Rent_All_Certificate.Controllers
             ValidateProduct(model.Product);
             if (ModelState.IsValid)
             {
-                db.Product.Add(model.Product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Product.Add(model.Product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException dbex)
+                {
+                    var ex = (SqlException)dbex.InnerException.InnerException;
+                    foreach (SqlError error in ex.Errors)
+                    {
+                        if (error.Number == 50000)
+                        {
+                            ModelState.AddModelError("", error.Message);
+                        }
+                    }
+                }
             }
             model.CategorySelectList = new CategoriesController().GetCategorySelectLists(model.Product.CategoryID);
             ViewBag.ManufacturerID = new SelectList(db.Manufacturer.OrderBy(m => m.ManufacturerName), "ManufacturerID", "ManufacturerName", model.Product.ManufacturerID);
