@@ -8,65 +8,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
 
 namespace Rent_All_Certificate.Models
 {
 
-    using System;
+using System;
     using System.Collections.Generic;
     
-    public partial class Product
-    {
+public partial class Product
+{
 
-        public string ProductKey { get; set; }
+    public string ProductKey { get; set; }
 
-        public int PhaseID { get; set; }
+    public int PhaseID { get; set; }
 
-        public int CategoryID { get; set; }
+    public int CategoryID { get; set; }
 
-        public int ManufacturerID { get; set; }
+    public int ManufacturerID { get; set; }
 
-        public string ProductName { get; set; }
-    
+    public string ProductName { get; set; }
 
 
-        public virtual Category Category { get; set; }
 
-        public virtual Hoist Hoist { get; set; }
+    public virtual Category Category { get; set; }
 
-        public virtual Manufacturer Manufacturer { get; set; }
+    public virtual Hoist Hoist { get; set; }
 
-        public virtual Phase Phase { get; set; }
+    public virtual Manufacturer Manufacturer { get; set; }
 
-    }
+    public virtual Phase Phase { get; set; }
 
-    [MetadataType(typeof(ProductMetaData))]
-    public partial class Product
-    {
+}
 
-    }
-
-    public class ProductMetaData
-    {
-        [Display(Name = "Category")]
-        [Required]
-        public int CategoryID { get; set; }
-
-        [Display(Name = "Manufacturer")]
-        [Required]
-        public int ManufacturerID { get; set; }
-
-        [Display(Name = "Phase")]
-        [Required]
-        public int PhaseID { get; set; }
-
-        [Display(Name = "Product")]
-        [Required]
-        public string ProductName { get; set; }
-
-        [Display(Name = "Key")]
-        [Required]
-        public string ProductKey { get; set; }
-    }
 }

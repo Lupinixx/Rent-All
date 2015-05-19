@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc;
 using Rent_All_Certificate.Models;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using Helpers;
 using Rent_All_Certificate.Attributes;
 
@@ -58,12 +60,25 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CategoryEditModel model)
         {
-            ValidateCategory(model.Category);
             if (ModelState.IsValid)
             {
-                db.Category.Add(model.Category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Category.Add(model.Category);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException dbex)
+                {
+                    var ex = (SqlException)dbex.InnerException.InnerException;
+                    foreach (SqlError error in ex.Errors)
+                    {
+                        if (error.Number == 50000)
+                        {
+                            ModelState.AddModelError("", error.Message);
+                        }
+                    }
+                }
             }
             model.CategorySelectList = GetCategorySelectLists(model.Category.ParentID);
             return View(model);
@@ -96,12 +111,27 @@ namespace Rent_All_Certificate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CategoryEditModel model)
         {
-            ValidateCategory(model.Category);
             if (ModelState.IsValid)
             {
-                db.Entry(model.Category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(model.Category).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException dbex)
+                {
+                    var ex = (SqlException)dbex.InnerException.InnerException;
+                    foreach (SqlError error in ex.Errors)
+                    {
+                        if (error.Number == 50000)
+                        {
+                            ModelState.AddModelError("", error.Message);
+                        }
+                    }
+                }
+
+
             }
             model.CategorySelectList = GetCategorySelectLists(model.Category.ParentID, model.Category.CategoryID);
             return View(model);
@@ -207,12 +237,6 @@ namespace Rent_All_Certificate.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private void ValidateCategory(Category category)
-        {
-            if (db.Category.Any(c => c.CategoryName.Equals(category.CategoryName) && c.CategoryID != category.CategoryID))
-                ModelState.AddModelError("", "Categorie must have a unique name.");
         }
     }
 }

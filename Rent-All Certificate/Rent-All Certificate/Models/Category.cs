@@ -8,57 +8,40 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
 
 namespace Rent_All_Certificate.Models
 {
 
-    using System;
+using System;
     using System.Collections.Generic;
     
-    public partial class Category
+public partial class Category
+{
+
+    public Category()
     {
 
-        public Category()
-        {
+        this.Category1 = new HashSet<Category>();
 
-            this.Category1 = new HashSet<Category>();
-
-            this.Product = new HashSet<Product>();
-
-        }
-    
-
-        public int CategoryID { get; set; }
-
-        public Nullable<int> ParentID { get; set; }
-
-        public string CategoryName { get; set; }
-    
-        public virtual ICollection<Category> Category1 { get; set; }
-
-        public virtual Category Category2 { get; set; }
-
-        public virtual ICollection<Product> Product { get; set; }
+        this.Product = new HashSet<Product>();
 
     }
 
-    [MetadataType(typeof(CategoryMetaData))]
-    public partial class Category
-    {
 
-    }
+    public int CategoryID { get; set; }
 
-    public class CategoryMetaData
-    {
-        [Display(Name = "Parent Category")]
-        public Nullable<int> ParentID { get; set; }
+    public Nullable<int> ParentID { get; set; }
 
-        [Display(Name = "Category")]
-        [Required]
-        public string CategoryName { get; set; }
+    public string CategoryName { get; set; }
 
-        [Display(Name = "Products")]
-        public virtual ICollection<Product> Product { get; set; }
-    }
+
+
+    public virtual ICollection<Category> Category1 { get; set; }
+
+    public virtual Category Category2 { get; set; }
+
+    public virtual ICollection<Product> Product { get; set; }
+
+}
+
 }

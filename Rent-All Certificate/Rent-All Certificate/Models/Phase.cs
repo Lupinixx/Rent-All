@@ -9,47 +9,31 @@
 //------------------------------------------------------------------------------
 
 
-using System.ComponentModel.DataAnnotations;
-
 namespace Rent_All_Certificate.Models
 {
 
-    using System;
+using System;
     using System.Collections.Generic;
+    
+public partial class Phase
+{
 
-    public partial class Phase
+    public Phase()
     {
 
-        public Phase()
-        {
-
-            this.Product = new HashSet<Product>();
-
-        }
-
-
-        public int PhaseID { get; set; }
-
-        public string PhaseName { get; set; }
-
-
-
-        public virtual ICollection<Product> Product { get; set; }
+        this.Product = new HashSet<Product>();
 
     }
 
-    [MetadataType(typeof(PhaseMetaData))]
-    public partial class Phase
-    {
 
-    }
+    public int PhaseID { get; set; }
 
-    public class PhaseMetaData
-    {
-        [Display(Name = "Phase")]
-        [Required]
-        public string PhaseName { get; set; }
-    }
+    public string PhaseName { get; set; }
+
+
+
+    public virtual ICollection<Product> Product { get; set; }
+
 }
 
-
+}

@@ -2,10 +2,25 @@
 @model Rent_All_Certificate.Models.ProductIndexModel
 
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-3">
         <p>
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-success"})
         </p>
+    </div>
+    <div class="col-xs-3">
+        <div class="input-group custom-search-form">
+            @using (@Html.BeginForm("Index", "Products", FormMethod.Get))
+            {
+
+                @Html.TextBox("search", null, new { @class = "form-control", placeholder = "ProductKey" })
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            }
+        </div>
     </div>
     <div class="col-xs-4">
 @using (Ajax.BeginForm("UpdateProductIndex", "Products", new AjaxOptions

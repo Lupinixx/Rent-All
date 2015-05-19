@@ -18,7 +18,7 @@ namespace Rent_All_Certificate.Controllers
         private RentAllEntities db = new RentAllEntities();
 
         // GET: Products
-        public ActionResult Index(int? page, int? selectedCategory)
+        public ActionResult Index(int? page, int? selectedCategory, string search)
         {
             var model = new ProductIndexModel
             {
@@ -27,13 +27,28 @@ namespace Rent_All_Certificate.Controllers
             };
             if (selectedCategory == null)
             {
-                model.ProductTabelList =
-                    db.Product.Include(p => p.Category)
-                    //.Include(p => p.Hoist)
-                    //.Include(p => p.Manufacturer)
-                    //.Include(p => p.Phase)
-                        .ToList()
-                        .ToPagedList(page ?? 1, 20);
+                if (search == null)
+                {
+                    model.ProductTabelList =
+                        db.Product.Include(p => p.Category)
+                            //.Include(p => p.Hoist)
+                            //.Include(p => p.Manufacturer)
+                            //.Include(p => p.Phase)
+                            .ToList()
+                            .ToPagedList(page ?? 1, 20);
+                }
+                else
+                {
+                    model.ProductTabelList =
+                            db.Product.Include(p => p.Category)
+                                .Where(x => x.ProductKey.StartsWith(search))
+                        //.Include(p => p.Hoist)
+                        //.Include(p => p.Manufacturer)
+                        //.Include(p => p.Phase)
+                                .ToList()
+                                .ToPagedList(page ?? 1, 20);
+                }
+
             }
             else
             {

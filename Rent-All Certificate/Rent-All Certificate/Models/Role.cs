@@ -12,28 +12,28 @@
 namespace Rent_All_Certificate.Models
 {
 
-    using System;
+using System;
     using System.Collections.Generic;
     
-    public partial class Role
+public partial class Role
+{
+
+    public Role()
     {
 
-        public Role()
-        {
-
-            this.Employee = new HashSet<Employee>();
-
-        }
-    
-
-        public int RoleID { get; set; }
-
-        public string Role1 { get; set; }
-    
-
-
-        public virtual ICollection<Employee> Employee { get; set; }
+        this.Employee = new HashSet<Employee>();
 
     }
+
+
+    public int RoleID { get; set; }
+
+    public string Role1 { get; set; }
+
+
+
+    public virtual ICollection<Employee> Employee { get; set; }
+
+}
 
 }
