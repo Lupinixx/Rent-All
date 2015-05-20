@@ -31,9 +31,9 @@ namespace Rent_All_Certificate.Controllers
                 {
                     model.ProductTabelList =
                         db.Product.Include(p => p.Category)
-                            //.Include(p => p.Hoist)
-                            //.Include(p => p.Manufacturer)
-                            //.Include(p => p.Phase)
+                        //.Include(p => p.Hoist)
+                        //.Include(p => p.Manufacturer)
+                        //.Include(p => p.Phase)
                             .ToList()
                             .ToPagedList(page ?? 1, 20);
                 }
@@ -42,9 +42,6 @@ namespace Rent_All_Certificate.Controllers
                     model.ProductTabelList =
                             db.Product.Include(p => p.Category)
                                 .Where(x => x.ProductKey.StartsWith(search))
-                        //.Include(p => p.Hoist)
-                        //.Include(p => p.Manufacturer)
-                        //.Include(p => p.Phase)
                                 .ToList()
                                 .ToPagedList(page ?? 1, 20);
                 }
@@ -59,9 +56,6 @@ namespace Rent_All_Certificate.Controllers
                 //Get all products with one of the selected categorie ids
                 model.ProductTabelList =
                     db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID))
-                    //.Include(p => p.Hoist)
-                    //.Include(p => p.Manufacturer)
-                    //.Include(p => p.Phase)
                         .ToList()
                         .ToPagedList(page ?? 1, 20);
             }
@@ -77,16 +71,11 @@ namespace Rent_All_Certificate.Controllers
                 SelectedCategory = selectedCategory,
                 CategorySelectList = catController.GetCategorySelectLists(selectedCategory)
             };
-
-            //Get all selected categories from the selected categories ids
-            var selectedCategoryIds = model.CategorySelectList.Select(csl => csl.SelectedCategoryId).Distinct().ToList();
             //Get all possible subcategories
-            selectedCategoryIds.AddRange(GetAllSubCategorieIds(selectedCategory));
+            var selectedCategoryIds = GetAllSubCategorieIds(selectedCategory);
+            selectedCategoryIds.Add(selectedCategory);
             //Get all products with one of the selected categorie ids
             model.ProductTabelList = db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID))
-                //.Include(p => p.Hoist)
-                //.Include(p => p.Manufacturer)
-                //.Include(p => p.Phase)
                 .ToList()
                 .ToPagedList(1, 20);
 
