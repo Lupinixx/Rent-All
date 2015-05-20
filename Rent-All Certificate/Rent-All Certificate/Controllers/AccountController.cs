@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Helpers;
@@ -48,5 +49,27 @@ namespace Rent_All_Certificate.Controllers
 
             return View(model);
         }
+
+        private List<Category> sortAllCategories()
+        {
+            var categoryList = db.Category.Where(c => c.ParentID == null).ToList();
+            var categoryListOut = new List<Category>();
+            var sub = new List<Category>();
+            Methods method = new Methods();
+
+            foreach (var parent in categoryList)
+            {
+                categoryListOut.Add(parent);
+                sub = method.GetAllSubCategoriesFromParent(parent.CategoryID);
+                foreach (var item in sub)
+                {
+                    categoryListOut.Add(item);
+                }
+            }
+            return categoryListOut;
+        }
+
+
+
     }
 }

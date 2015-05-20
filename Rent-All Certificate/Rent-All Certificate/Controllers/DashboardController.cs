@@ -30,5 +30,11 @@ namespace Rent_All_Certificate.Controllers
         {
             return View();
         }
+
+        public ActionResult LogOff()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

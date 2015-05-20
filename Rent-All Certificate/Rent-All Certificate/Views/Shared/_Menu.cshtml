@@ -1,0 +1,41 @@
+﻿@using Rent_All_Certificate.Models
+@model IEnumerable<Rent_All_Certificate.Models.Category>
+
+
+@foreach (var item in Model.Where(m => m.ParentID == null))
+{
+    if (Model.Count(m => m.ParentID == item.CategoryID) > 0)
+    {
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">@Html.DisplayFor(modelItem => item.CategoryName) <b class="caret"></b></a>
+            <ul class="dropdown-menu">@GetSubCategoryList(Model.Where(m => m.ParentID == item.CategoryID))</ul>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a href="#">@Html.DisplayFor(modelItem => item.CategoryName)</a>
+        </li>
+    }
+}
+
+@helper GetSubCategoryList(IEnumerable<Category> subList)
+{
+    foreach (var item in subList)
+    {
+        if (Model.Count(m => m.ParentID == item.CategoryID) > 0)
+        {
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">@Html.DisplayFor(modelItem => item.CategoryName) <b class="caret"></b></a>
+                <ul class="dropdown-menu">@GetSubCategoryList(Model.Where(m => m.ParentID == item.CategoryID))</ul>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="#">@Html.DisplayFor(modelItem => item.CategoryName)</a>
+            </li>
+        }
+    }
+}
+
