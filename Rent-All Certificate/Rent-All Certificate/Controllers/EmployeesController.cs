@@ -43,6 +43,7 @@ namespace Rent_All_Certificate.Controllers
             {
                 var passwordHash = new HashHelper().Hash(employeeEditModel.Password.ToCharArray(), "1234");
                 employeeEditModel.EmployeeModel.PasswordHash = passwordHash;
+                employeeEditModel.EmployeeModel.PasswordSalt = "1234";
                 db.Employee.Add(employeeEditModel.EmployeeModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
