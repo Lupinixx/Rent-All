@@ -36,16 +36,4 @@ namespace Rent_All_Certificate.Models
 
     }
 
-    [MetadataType(typeof(RoleMetaData))]
-    public partial class Role
-    {
-
-    }
-
-    public class RoleMetaData
-    {
-        [Display(Name = "Role")]
-        public string Role1 { get; set; }
-    }
-
 }

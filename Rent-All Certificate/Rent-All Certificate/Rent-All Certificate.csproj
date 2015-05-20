@@ -192,6 +192,7 @@
     <Compile Include="Models\Manufacturer.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MetaData.cs" />
     <Compile Include="Models\Phase.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>

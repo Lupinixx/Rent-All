@@ -36,17 +36,4 @@ namespace Rent_All_Certificate.Models
         public virtual ICollection<Product> Product { get; set; }
 
     }
-
-    [MetadataType(typeof(ManufacturerMetaData))]
-    public partial class Manufacturer
-    {
-        
-    }
-
-    public class ManufacturerMetaData
-    {
-        [Required]
-        [Display(Name = "Manufacturer")]
-        public string ManufacturerName { get; set; }
-    }
 }

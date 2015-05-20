@@ -41,32 +41,4 @@ namespace Rent_All_Certificate.Models
 
     }
 
-    [MetadataType(typeof(ProductMetaData))]
-    public partial class Product
-    {
-
-    }
-
-    public class ProductMetaData
-    {
-        [Display(Name = "Category")]
-        [Required]
-        public int CategoryID { get; set; }
-
-        [Display(Name = "Manufacturer")]
-        [Required]
-        public int ManufacturerID { get; set; }
-
-        [Display(Name = "Phase")]
-        [Required]
-        public int PhaseID { get; set; }
-
-        [Display(Name = "Product")]
-        [Required]
-        public string ProductName { get; set; }
-
-        [Display(Name = "Key")]
-        [Required]
-        public string ProductKey { get; set; }
-    }
 }

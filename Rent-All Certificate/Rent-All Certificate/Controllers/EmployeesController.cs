@@ -24,21 +24,6 @@ namespace Rent_All_Certificate.Controllers
             return View(employee.ToList());
         }
 
-        // GET: Employees/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employee.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee);
-        }
-
         // GET: Employees/Create
         public ActionResult Create()
         {
@@ -56,6 +41,8 @@ namespace Rent_All_Certificate.Controllers
         {
             if (ModelState.IsValid)
             {
+                var passwordHash = new HashHelper().Hash(employeeEditModel.Password.ToCharArray(), "1234");
+                employeeEditModel.EmployeeModel.PasswordHash = passwordHash;
                 db.Employee.Add(employeeEditModel.EmployeeModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -99,21 +86,6 @@ namespace Rent_All_Certificate.Controllers
             }
             ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1", employeeEditModel.EmployeeModel.RoleID);
             return View(employeeEditModel);
-        }
-
-        // GET: Employees/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employee.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee);
         }
 
         // POST: Employees/Delete/5

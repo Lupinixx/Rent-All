@@ -38,18 +38,6 @@ namespace Rent_All_Certificate.Models
 
     }
 
-    [MetadataType(typeof(PhaseMetaData))]
-    public partial class Phase
-    {
-
-    }
-
-    public class PhaseMetaData
-    {
-        [Display(Name = "Phase")]
-        [Required]
-        public string PhaseName { get; set; }
-    }
 }
 
 
