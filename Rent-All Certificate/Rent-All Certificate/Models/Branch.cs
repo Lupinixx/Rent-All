@@ -15,10 +15,10 @@ namespace Rent_All_Certificate.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Employee
+public partial class Branch
 {
 
-    public Employee()
+    public Branch()
     {
 
         this.Certification = new HashSet<Certification>();
@@ -26,23 +26,15 @@ public partial class Employee
     }
 
 
-    public int EmployeeID { get; set; }
+    public string BranchName { get; set; }
 
-    public int RoleID { get; set; }
+    public int BranchID { get; set; }
 
-    public string Firstname { get; set; }
-
-    public string Lastname { get; set; }
-
-    public string Email { get; set; }
-
-    public string PasswordHash { get; set; }
-
-    public string PasswordSalt { get; set; }
+    public string CityName { get; set; }
 
 
 
-    public virtual Role Role { get; set; }
+    public virtual City City { get; set; }
 
     public virtual ICollection<Certification> Certification { get; set; }
 

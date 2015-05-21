@@ -167,6 +167,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attributes\Authorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CertificationsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -175,12 +176,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Branch.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryEditModel.cs" />
     <Compile Include="Models\CategoryIndexModel.cs" />
     <Compile Include="Models\CategorySelectListModel.cs" />
+    <Compile Include="Models\Certification.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CertificationsUploadModel.cs" />
+    <Compile Include="Models\City.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
@@ -188,10 +202,16 @@
     <Compile Include="Models\Hoist.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Inventory.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Manufacturer.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MetaData.cs" />
+    <Compile Include="Models\Nen3140.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Phase.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
@@ -1110,9 +1130,11 @@
     <Content Include="Views\Products\_productIndex.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Certifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Uploads\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\LoginTest\" />
   </ItemGroup>
