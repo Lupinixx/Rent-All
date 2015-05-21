@@ -1,20 +1,21 @@
 ﻿@using Rent_All_Certificate.Models
-@model IEnumerable<Rent_All_Certificate.Models.Category>
+@model Rent_All_Certificate.Models.MenuModel
 
+<li class="@(Model.SelectedCategory == null ? " active" : "")"><a href="/">Home</a></li>
 
-@foreach (var item in Model.Where(m => m.ParentID == null))
+@foreach (var item in Model.Categories.Where(m => m.ParentID == null))
 {
-    if (Model.Count(m => m.ParentID == item.CategoryID) > 0)
+    if (Model.Categories.Count(m => m.ParentID == item.CategoryID) > 0)
     {
-        <li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">@Html.DisplayFor(modelItem => item.CategoryName) <b class="caret"></b></a>
-            <ul class="dropdown-menu">@GetSubCategoryList(Model.Where(m => m.ParentID == item.CategoryID))</ul>
+        <li class="dropdown @(item.CategoryID == Model.SelectedCategory ? " active" : "")">
+            <a class="dropdown-toggle" href="/Home/products?selectedCategory=@Html.DisplayFor(modelItem => item.CategoryID)">@Html.DisplayFor(modelItem => item.CategoryName) <b class="caret"></b></a>
+            <ul class="dropdown-menu">@GetSubCategoryList(Model.Categories.Where(m => m.ParentID == item.CategoryID))</ul>
         </li>
     }
     else
     {
-        <li>
-            <a href="#">@Html.DisplayFor(modelItem => item.CategoryName)</a>
+        <li class="@(item.CategoryID == Model.SelectedCategory ? " active" : "")">
+            <a href="/Home/products?selectedCategory=@Html.DisplayFor(modelItem => item.CategoryID)">@Html.DisplayFor(modelItem => item.CategoryName)</a>
         </li>
     }
 }
@@ -23,17 +24,17 @@
 {
     foreach (var item in subList)
     {
-        if (Model.Count(m => m.ParentID == item.CategoryID) > 0)
+        if (Model.Categories.Count(m => m.ParentID == item.CategoryID) > 0)
         {
-            <li class="dropdown">
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown">@Html.DisplayFor(modelItem => item.CategoryName) <b class="caret"></b></a>
-                <ul class="dropdown-menu">@GetSubCategoryList(Model.Where(m => m.ParentID == item.CategoryID))</ul>
+            <li class="dropdown @(item.CategoryID == Model.SelectedCategory ? " active" : "")">
+                <a class="dropdown-toggle" href="/Home/products?selectedCategory=@Html.DisplayFor(modelItem => item.CategoryID)">@Html.DisplayFor(modelItem => item.CategoryName) <b class="caret"></b></a>
+                <ul class="dropdown-menu">@GetSubCategoryList(Model.Categories.Where(m => m.ParentID == item.CategoryID))</ul>
             </li>
         }
         else
         {
-            <li>
-                <a href="#">@Html.DisplayFor(modelItem => item.CategoryName)</a>
+            <li class="@(item.CategoryID == Model.SelectedCategory ? " active" : "")">
+                <a href="/Home/products?selectedCategory=@Html.DisplayFor(modelItem => item.CategoryID)">@Html.DisplayFor(modelItem => item.CategoryName)</a>
             </li>
         }
     }

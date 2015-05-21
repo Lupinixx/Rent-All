@@ -1,0 +1,15 @@
+﻿@using Rent_All_Certificate.Models
+@model IEnumerable<Rent_All_Certificate.Models.Category>
+
+@{
+    ViewBag.Title = "_MenuName";
+}
+
+@foreach (var item in Model)
+{
+    <h2>@Html.DisplayFor(modelItem => item.CategoryName)</h2>
+}
+
+
+
+

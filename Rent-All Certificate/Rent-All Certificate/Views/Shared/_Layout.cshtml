@@ -1,6 +1,4 @@
-﻿@using Rent_All_Certificate.Models
-@model IEnumerable<Rent_All_Certificate.Models.Category>
-
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,12 +33,8 @@
                 <div class="navbar-collapse collapse">
                     <div class="moduletable_menu">
                         <ul class="nav menu navbar-nav">
-                            <li class="active"><a href="/">Home</a></li>
                             @Html.Action("Index", "SharedMenu")
                         </ul>
-
-
-
 
                         @Html.Partial("_LoginPartial")
                     </div>
@@ -51,10 +45,27 @@
 </div>
 
 <div class="container">
-        <div class="row content">
-            @RenderBody()
+<div class="row content">
+    @RenderBody()
+    <div class="row">
+        <hr />
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h3>Quick search</h3>
+                <form id="quickSearch">
+                    <input id="search" class="form-control" type="text" value="" placeholder="Product Key" name="searchkey">
+                    <input id="search" class="form-control" type="text" value="" placeholder="Product ID" name="searchid">
+                    <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    Search
+                                </button>
+                            </span>
+                </form>
+            </div>
         </div>
-     </div>
+    </div>
+</div>
+    </div>
 
     <div class="footer">
         <div class="container">
@@ -96,7 +107,7 @@
                 <div class="custom">
                     <div class="col-md-4" style="text-align: left;"><a href="/en/disclamer.html" target="_blank">Disclaimer &amp; Data Privacy Statement</a></div>
                     <div class="col-md-4" style="text-align: center;"><a href="/images/pdf/13General_conditions_Rent_All_BV.pdf" target="_blank">General conditions</a></div>
-                    <div class="col-md-4" style="text-align: right;">&nbsp;<a href="/en/disclamer.html" target="_blank">Copyright 2014-2015 Rent-All B.V.</a></div>
+                    <div class="col-md-4" style="text-align: right;">&nbsp;<a href="/en/disclamer.html" target="_blank">Copyright Rent-All B.V.</a></div>
                 </div>
             </div>
         </div>

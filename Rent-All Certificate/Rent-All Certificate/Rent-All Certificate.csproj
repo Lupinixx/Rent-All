@@ -180,6 +180,7 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\CategoryEditModel.cs" />
     <Compile Include="Models\CategoryIndexModel.cs" />
     <Compile Include="Models\CategorySelectListModel.cs" />
@@ -1110,6 +1111,8 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
+    <Content Include="Views\Shared\_MenuName.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

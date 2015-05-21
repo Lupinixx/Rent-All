@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc
+@model Rent_All_Certificate.Models.ProductIndexModel
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        
+        @Html.Action("MenuName", "SharedMenu")
+
+        <hr/>
+        @if (Model.ProductTabelList != null && Model.ProductTabelList.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductTabelList.FirstOrDefault().ProductKey)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductTabelList.FirstOrDefault().ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductTabelList.FirstOrDefault().Category.CategoryName)
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.ProductTabelList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductKey)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+                @Html.PagedListPager(Model.ProductTabelList, page => Url.Action("Products", new { page, selectedCategory = Model.SelectedCategory }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+
+                }
+                else
+                {
+                <div>No product(s) were found.</div>
+                }
+            </div>
+</div>

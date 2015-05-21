@@ -30,9 +30,19 @@ namespace Rent_All_Certificate.Controllers
             return categoryListOut;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? selectedCategory)
         {
-            return PartialView("_Menu", sortAllCategories());
+            var model = new MenuModel
+            {
+                SelectedCategory = selectedCategory,
+                Categories = sortAllCategories()
+            };
+            return PartialView("_Menu", model);
+        }
+
+        public ActionResult MenuName(int? selectedCategory)
+        {
+            return PartialView("_MenuName", db.Category.Where(c => c.CategoryID == selectedCategory).Distinct().ToList());
         }
 
 

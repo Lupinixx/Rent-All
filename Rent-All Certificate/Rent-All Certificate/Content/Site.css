@@ -393,7 +393,7 @@ p {
 .rightmodule a {
 	color: #fff;
 }
-.menu .dropdown .dropdown-menu .dropdown:hover .dropdown-menu {
+.menu .dropdown .dropdown-menu .dropdown:hover > .dropdown-menu {
 	border-radius: 0;
 	display: block;
 	margin-left: 99%;
@@ -527,7 +527,7 @@ p {
 	.navbar-default.zoeken .search {
 		margin-top: -9px;
 	}
-	.menu .dropdown .dropdown-menu .dropdown:hover .dropdown-menu {
+	.menu .dropdown .dropdown-menu .dropdown:hover > .dropdown-menu {
 		border-radius: 0;
 		display: block;
 		margin-left: 20px;
@@ -676,4 +676,30 @@ dt {
 }
 .dropdownSpacing:last-child{
     margin-bottom: 0;
+}
+
+.menu .dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.nav a:hover .caret {
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+   background-color: #c541a5;
+	background: linear-gradient(to left bottom, #c541a5 0%, #8e026c 100%);
+	background: -webkit-linear-gradient(to left bottom, #c541a5 0%, #8e026c 100%); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(to left bottom, #c541a5 0%, #8e026c 100%); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(to left bottom, #c541a5 0%, #8e026c 100%); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to left bottom, #c541a5 0%, #8e026c 100%); /* Standard syntax */ 
+}
+
+.table {
+    border: 1px solid #ddd;
+}
+
+table.table.table-striped tr th {
+    background-color: #ededed;
 }
