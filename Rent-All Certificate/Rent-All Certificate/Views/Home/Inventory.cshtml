@@ -1,0 +1,62 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Rent_All_Certificate.Models.Inventory>
+@{
+    ViewBag.Title = "Inventory";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <h2>@Html.DisplayFor(modelItem => item.Product.Manufacturer.ManufacturerName) @Html.DisplayFor(modelItem => item.Product.ProductName) - Certificates</h2>
+                break;
+            }
+        }
+        else
+        {
+            <h2>Certificates</h2>
+        }
+
+        <hr/>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.First().ProductKey)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().InventoryID)</th>
+                    <th>Certificate</th>
+                </tr>
+
+                @if (Model == null || Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="3">No rows match search criteria</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductKey)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InventoryID)
+                            </td>
+                            <td>
+                                Link
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("Inventory", new { page, product = Request.QueryString["product"], inventory = Request.QueryString["inventory"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+        </div>
+
+    </div>
+</div>

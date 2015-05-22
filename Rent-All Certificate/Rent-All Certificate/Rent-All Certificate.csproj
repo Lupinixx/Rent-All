@@ -177,7 +177,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Branch.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Certification.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\City.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Inventory.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MenuModel.cs" />
@@ -192,6 +207,9 @@
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Manufacturer.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Nen3140.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Phase.cs">
@@ -1113,6 +1131,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Shared\_MenuName.cshtml" />
+    <Content Include="Views\Home\Inventory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

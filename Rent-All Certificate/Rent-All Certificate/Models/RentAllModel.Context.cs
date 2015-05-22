@@ -17,6 +17,9 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
+using System.Data.Entity.Core.Objects;
+using System.Linq;
+
 
 public partial class RentAllEntities : DbContext
 {
@@ -45,6 +48,75 @@ public partial class RentAllEntities : DbContext
     public virtual DbSet<Product> Product { get; set; }
 
     public virtual DbSet<Role> Role { get; set; }
+
+    public virtual DbSet<Branch> Branch { get; set; }
+
+    public virtual DbSet<Certification> Certification { get; set; }
+
+    public virtual DbSet<City> City { get; set; }
+
+    public virtual DbSet<Country> Country { get; set; }
+
+    public virtual DbSet<Inventory> Inventory { get; set; }
+
+    public virtual DbSet<Nen3140> Nen3140 { get; set; }
+
+
+    public virtual int addHoist(string description, string dimensions, string material, string heattreatment, string proofLoadApplied, string workingLoadLimit, string safetyFactor, Nullable<int> productKey, string productName, Nullable<int> manufacturerID)
+    {
+
+        var descriptionParameter = description != null ?
+            new ObjectParameter("Description", description) :
+            new ObjectParameter("Description", typeof(string));
+
+
+        var dimensionsParameter = dimensions != null ?
+            new ObjectParameter("Dimensions", dimensions) :
+            new ObjectParameter("Dimensions", typeof(string));
+
+
+        var materialParameter = material != null ?
+            new ObjectParameter("Material", material) :
+            new ObjectParameter("Material", typeof(string));
+
+
+        var heattreatmentParameter = heattreatment != null ?
+            new ObjectParameter("Heattreatment", heattreatment) :
+            new ObjectParameter("Heattreatment", typeof(string));
+
+
+        var proofLoadAppliedParameter = proofLoadApplied != null ?
+            new ObjectParameter("ProofLoadApplied", proofLoadApplied) :
+            new ObjectParameter("ProofLoadApplied", typeof(string));
+
+
+        var workingLoadLimitParameter = workingLoadLimit != null ?
+            new ObjectParameter("WorkingLoadLimit", workingLoadLimit) :
+            new ObjectParameter("WorkingLoadLimit", typeof(string));
+
+
+        var safetyFactorParameter = safetyFactor != null ?
+            new ObjectParameter("SafetyFactor", safetyFactor) :
+            new ObjectParameter("SafetyFactor", typeof(string));
+
+
+        var productKeyParameter = productKey.HasValue ?
+            new ObjectParameter("ProductKey", productKey) :
+            new ObjectParameter("ProductKey", typeof(int));
+
+
+        var productNameParameter = productName != null ?
+            new ObjectParameter("ProductName", productName) :
+            new ObjectParameter("ProductName", typeof(string));
+
+
+        var manufacturerIDParameter = manufacturerID.HasValue ?
+            new ObjectParameter("ManufacturerID", manufacturerID) :
+            new ObjectParameter("ManufacturerID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("addHoist", descriptionParameter, dimensionsParameter, materialParameter, heattreatmentParameter, proofLoadAppliedParameter, workingLoadLimitParameter, safetyFactorParameter, productKeyParameter, productNameParameter, manufacturerIDParameter);
+    }
 
 }
 

@@ -18,6 +18,14 @@ using System;
 public partial class Product
 {
 
+    public Product()
+    {
+
+        this.Inventory = new HashSet<Inventory>();
+
+    }
+
+
     public string ProductKey { get; set; }
 
     public int PhaseID { get; set; }
@@ -37,6 +45,8 @@ public partial class Product
     public virtual Manufacturer Manufacturer { get; set; }
 
     public virtual Phase Phase { get; set; }
+
+    public virtual ICollection<Inventory> Inventory { get; set; }
 
 }
 

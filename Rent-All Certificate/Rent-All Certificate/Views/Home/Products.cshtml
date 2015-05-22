@@ -7,12 +7,19 @@
 
 <div class="row">
     <div class="col-md-12">
-        
-        @Html.Action("MenuName", "SharedMenu")
 
-        <hr/>
         @if (Model.ProductTabelList != null && Model.ProductTabelList.Any())
         {
+            if (Model.SelectedCategory != null)
+            {
+                @Html.Action("MenuName", "SharedMenu")
+            }
+            else
+            {
+                <h2>Products</h2>
+            }
+
+            <hr />
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tr>
@@ -33,7 +40,7 @@
                                 @Html.DisplayFor(modelItem => item.ProductKey)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ProductName)
+                                <a href="inventory?product=@Html.DisplayFor(modelItem => item.ProductKey)">@Html.DisplayFor(modelItem => item.Manufacturer.ManufacturerName) - @Html.DisplayFor(modelItem => item.ProductName)</a>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
@@ -43,12 +50,14 @@
                 </table>
             </div>
 
-                @Html.PagedListPager(Model.ProductTabelList, page => Url.Action("Products", new { page, selectedCategory = Model.SelectedCategory }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                @Html.PagedListPager(Model.ProductTabelList, page => Url.Action("Products", new { page, selectedCategory = Model.SelectedCategory, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
 
                 }
                 else
                 {
-                <div>No product(s) were found.</div>
+                    <h2>Products</h2>
+                    <hr />
+                    <div>No product(s) were found.</div>
                 }
             </div>
 </div>

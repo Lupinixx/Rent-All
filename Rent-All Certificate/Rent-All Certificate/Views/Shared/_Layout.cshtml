@@ -52,15 +52,19 @@
         <div class="col-md-12">
             <div class="jumbotron">
                 <h3>Quick search</h3>
-                <form id="quickSearch">
-                    <input id="search" class="form-control" type="text" value="" placeholder="Product Key" name="searchkey">
-                    <input id="search" class="form-control" type="text" value="" placeholder="Product ID" name="searchid">
+
+                @using (@Html.BeginForm("search", "Home", FormMethod.Get, new { @id = "quickSearch" }))
+                {
+
+                    @Html.TextBox("searchkey", null, new { @class = "form-control", placeholder = "Product Key", @id = "search" })
+                    @Html.TextBox("searchid", null, new { @class = "form-control", placeholder = "Product ID", @id = "search" })
+
                     <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    Search
-                                </button>
-                            </span>
-                </form>
+                        <button class="btn btn-default" type="submit">
+                            Search
+                        </button>
+                    </span>
+                }
             </div>
         </div>
     </div>

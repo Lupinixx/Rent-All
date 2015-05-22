@@ -60,7 +60,7 @@
             @Html.DisplayNameFor(model => model.ProductTabelList.FirstOrDefault().ProductName)
         </th>
             <th></th>
-        <th>Inventory(Not yet implemented)</th>
+        <th>Inventory</th>
     </tr>
     @foreach (var item in Model.ProductTabelList)
     {
@@ -69,13 +69,13 @@
                 @Html.DisplayFor(modelItem => item.ProductKey)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
+                @Html.DisplayFor(modelItem => item.Manufacturer.ManufacturerName) - @Html.DisplayFor(modelItem => item.ProductName)
             </td>
             <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ProductKey }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.ProductKey }, new { onclick = "return confirm('Are you sure you want to delete?')" })
                 </td>
-                <td></td>
+                <td>@Html.DisplayFor(modelItem => item.Inventory.Count)</td>
         </tr>
     }
 </table>

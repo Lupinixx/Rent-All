@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -32,17 +33,17 @@ namespace Rent_All_Certificate.Controllers
                 if (search == null)
                 {
                     model.ProductTabelList =
-                        db.Product.Include(p => p.Category)
+                        db.Product.Include(p => p.Category).Include(p => p.Manufacturer)
                             .ToList()
-                            .ToPagedList(page ?? 1, 20);
+                            .ToPagedList(page ?? 1, 40);
                 }
                 else
                 {
                     model.ProductTabelList =
-                            db.Product.Include(p => p.Category)
+                            db.Product.Include(p => p.Category).Include(p => p.Manufacturer)
                                 .Where(x => x.ProductKey.StartsWith(search))
                                 .ToList()
-                                .ToPagedList(page ?? 1, 20);
+                                .ToPagedList(page ?? 1, 40);
                 }
 
             }
@@ -52,12 +53,52 @@ namespace Rent_All_Certificate.Controllers
                 selectedCategoryIds.Add(selectedCategory);
 
                 model.ProductTabelList =
-                    db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID))
+                    db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID)).Include(p => p.Manufacturer)
                         .ToList()
-                        .ToPagedList(page ?? 1, 20);
+                        .ToPagedList(page ?? 1, 40);
             }
             return View(model);
         }
+
+
+        public ActionResult Inventory(string product, int? inventory, int? page )
+        {
+            if (product != null && inventory == null)
+            {
+                return View(db.Inventory.Where(i => i.ProductKey == product)
+                                        .ToList()
+                                        .ToPagedList(page ?? 1, 40));  
+            }
+            else if (product != null && inventory != null)
+            {
+                return View(db.Inventory.Where(i => i.ProductKey == product)
+                                        .Where(i => i.InventoryID == inventory)
+                                        .ToList()
+                                        .ToPagedList(page ?? 1, 40));
+            }
+            else
+            {
+                return View();
+            }
+           
+        }
+
+        public ActionResult search(string searchkey, int? searchid)
+        {
+            if (searchkey == null && searchid == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (searchkey != null && searchid == null)
+            {
+                return RedirectToAction("Products", new{search = searchkey});
+            }
+            else
+            {
+                return RedirectToAction("Inventory", new{product = searchkey, inventory = searchid});
+            }
+        }
+
 
         private List<int?> GetAllSubCategorieIds(int? catId)
         {
@@ -71,5 +112,6 @@ namespace Rent_All_Certificate.Controllers
             }
             return catIdList;
         }
+
     }
 }

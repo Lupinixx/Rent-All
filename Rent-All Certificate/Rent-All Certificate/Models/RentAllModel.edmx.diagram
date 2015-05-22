@@ -18,6 +18,19 @@
         <AssociationConnector Association="RentAllModel.fk_hoist_inheritan_product" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_product_relations_manufact" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_product_relations_phase" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RentAllModel.Branch" Width="1.5" PointX="5.25" PointY="11.75" />
+        <EntityTypeShape EntityType="RentAllModel.Certification" Width="1.5" PointX="7.5" PointY="6.25" />
+        <EntityTypeShape EntityType="RentAllModel.City" Width="1.5" PointX="3" PointY="11.75" />
+        <EntityTypeShape EntityType="RentAllModel.Country" Width="1.5" PointX="0.75" PointY="12" />
+        <EntityTypeShape EntityType="RentAllModel.Inventory" Width="1.5" PointX="5.25" PointY="8.625" />
+        <EntityTypeShape EntityType="RentAllModel.Nen3140" Width="1.5" PointX="9.75" PointY="6.5" />
+        <AssociationConnector Association="RentAllModel.fk_branch_located_i_city" />
+        <AssociationConnector Association="RentAllModel.fk_certific_cetified__branch" />
+        <AssociationConnector Association="RentAllModel.fk_certific_certified_employee" />
+        <AssociationConnector Association="RentAllModel.fk_certific_relations_inventor" />
+        <AssociationConnector Association="RentAllModel.fk_nen3140_certifica_certific" />
+        <AssociationConnector Association="RentAllModel.fk_city_located_i_country" />
+        <AssociationConnector Association="RentAllModel.fk_inventor_product_i_product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
