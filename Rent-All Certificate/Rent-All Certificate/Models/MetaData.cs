@@ -39,7 +39,6 @@ namespace Rent_All_Certificate.Models
         [Display(Name = "Email address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "{0} is required.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string PasswordHash { get; set; }
