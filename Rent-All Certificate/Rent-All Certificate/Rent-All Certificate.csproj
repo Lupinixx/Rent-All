@@ -209,13 +209,13 @@
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MetaData.cs" />
+    <Compile Include="Controllers\PhasesController.cs" />
     <Compile Include="Models\Nen3140.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Phase.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\PhasesController.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>

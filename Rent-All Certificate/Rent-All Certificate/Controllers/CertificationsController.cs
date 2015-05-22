@@ -61,9 +61,9 @@ namespace Rent_All_Certificate.Controllers
                             continue;
                         }
 
-                        if (db.Inventory.Any(i => i.ProductKey == productKey && i.InventoryID == inventoryId) == false)
+                        if (db.Inventories.Any(i => i.ProductKey == productKey && i.InventoryID == inventoryId) == false)
                         {
-                            db.Inventory.Add(new Inventory
+                            db.Inventories.Add(new Inventory
                             {
                                 InventoryID = inventoryId,
                                 ProductKey = productKey
@@ -76,9 +76,10 @@ namespace Rent_All_Certificate.Controllers
                         file.SaveAs(path);
 
                         model.Certification.InventoryID = inventoryId;
+                        model.Certification.ProductKey = productKey;
                         model.Certification.EmployeeID = (int)Session["EmployeeID"];
                         model.Certification.Date = DateTime.Now;
-                        db.Certification.Add(model.Certification);
+                        db.Certifications.Add(model.Certification);
                         db.SaveChanges();
                     }
                 }

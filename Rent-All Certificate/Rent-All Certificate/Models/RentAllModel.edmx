@@ -27,6 +27,7 @@
           </Key>
           <Property Name="CertificateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InventoryID" Type="int" Nullable="false" />
+          <Property Name="ProductKey" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="BranchID" Type="int" Nullable="false" />
           <Property Name="EmployeeID" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
@@ -72,8 +73,9 @@
         <EntityType Name="Inventory">
           <Key>
             <PropertyRef Name="InventoryID" />
+            <PropertyRef Name="ProductKey" />
           </Key>
-          <Property Name="InventoryID" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="InventoryID" Type="int" Nullable="false" />
           <Property Name="ProductKey" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Manufacturer">
@@ -172,9 +174,11 @@
           <ReferentialConstraint>
             <Principal Role="Inventory">
               <PropertyRef Name="InventoryID" />
+              <PropertyRef Name="ProductKey" />
             </Principal>
             <Dependent Role="Certification">
               <PropertyRef Name="InventoryID" />
+              <PropertyRef Name="ProductKey" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -368,7 +372,7 @@
           <Property Name="PasswordHash" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Role" Relationship="Self.fk_employee_relations_role" FromRole="Employee" ToRole="Role" />
-          <NavigationProperty Name="Certification" Relationship="RentAllModel.fk_certific_certified_employee" FromRole="Employee" ToRole="Certification" />
+          <NavigationProperty Name="Certifications" Relationship="RentAllModel.fk_certific_certified_employee" FromRole="Employee" ToRole="Certification" />
         </EntityType>
         <EntityType Name="Hoist">
           <Key>
@@ -413,7 +417,7 @@
           <NavigationProperty Name="Hoist" Relationship="Self.fk_hoist_inheritan_product" FromRole="Product" ToRole="Hoist" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.fk_product_relations_manufact" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="Phase" Relationship="Self.fk_product_relations_phase" FromRole="Product" ToRole="Phase" />
-          <NavigationProperty Name="Inventory" Relationship="RentAllModel.fk_inventor_product_i_product" FromRole="Product" ToRole="Inventory" />
+          <NavigationProperty Name="Inventories" Relationship="RentAllModel.fk_inventor_product_i_product" FromRole="Product" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -528,38 +532,16 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <EntitySet Name="Branch" EntityType="RentAllModel.Branch" />
-          <EntitySet Name="Certification" EntityType="RentAllModel.Certification" />
           <EntitySet Name="City" EntityType="RentAllModel.City" />
           <EntitySet Name="Country" EntityType="RentAllModel.Country" />
-          <EntitySet Name="Inventory" EntityType="RentAllModel.Inventory" />
           <EntitySet Name="Nen3140" EntityType="RentAllModel.Nen3140" />
           <AssociationSet Name="fk_branch_located_i_city" Association="RentAllModel.fk_branch_located_i_city">
             <End Role="City" EntitySet="City" />
             <End Role="Branch" EntitySet="Branch" />
           </AssociationSet>
-          <AssociationSet Name="fk_certific_cetified__branch" Association="RentAllModel.fk_certific_cetified__branch">
-            <End Role="Branch" EntitySet="Branch" />
-            <End Role="Certification" EntitySet="Certification" />
-          </AssociationSet>
-          <AssociationSet Name="fk_certific_certified_employee" Association="RentAllModel.fk_certific_certified_employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Certification" EntitySet="Certification" />
-          </AssociationSet>
-          <AssociationSet Name="fk_certific_relations_inventor" Association="RentAllModel.fk_certific_relations_inventor">
-            <End Role="Inventory" EntitySet="Inventory" />
-            <End Role="Certification" EntitySet="Certification" />
-          </AssociationSet>
-          <AssociationSet Name="fk_nen3140_certifica_certific" Association="RentAllModel.fk_nen3140_certifica_certific">
-            <End Role="Certification" EntitySet="Certification" />
-            <End Role="Nen3140" EntitySet="Nen3140" />
-          </AssociationSet>
           <AssociationSet Name="fk_city_located_i_country" Association="RentAllModel.fk_city_located_i_country">
             <End Role="Country" EntitySet="Country" />
             <End Role="City" EntitySet="City" />
-          </AssociationSet>
-          <AssociationSet Name="fk_inventor_product_i_product" Association="RentAllModel.fk_inventor_product_i_product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
           <FunctionImport Name="addHoist">
             <Parameter Name="Description" Mode="In" Type="String" />
@@ -573,6 +555,28 @@
             <Parameter Name="ProductName" Mode="In" Type="String" />
             <Parameter Name="ManufacturerID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Certifications" EntityType="RentAllModel.Certification" />
+          <EntitySet Name="Inventories" EntityType="RentAllModel.Inventory" />
+          <AssociationSet Name="fk_certific_cetified__branch" Association="RentAllModel.fk_certific_cetified__branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="Certification" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_certific_certified_employee" Association="RentAllModel.fk_certific_certified_employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Certification" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_certific_relations_inventor" Association="RentAllModel.fk_certific_relations_inventor">
+            <End Role="Inventory" EntitySet="Inventories" />
+            <End Role="Certification" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_nen3140_certifica_certific" Association="RentAllModel.fk_nen3140_certifica_certific">
+            <End Role="Certification" EntitySet="Certifications" />
+            <End Role="Nen3140" EntitySet="Nen3140" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inventor_product_i_product" Association="RentAllModel.fk_inventor_product_i_product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Branch">
           <Key>
@@ -582,21 +586,7 @@
           <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City" Relationship="RentAllModel.fk_branch_located_i_city" FromRole="Branch" ToRole="City" />
-          <NavigationProperty Name="Certification" Relationship="RentAllModel.fk_certific_cetified__branch" FromRole="Branch" ToRole="Certification" />
-        </EntityType>
-        <EntityType Name="Certification">
-          <Key>
-            <PropertyRef Name="CertificateID" />
-          </Key>
-          <Property Name="CertificateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InventoryID" Type="Int32" Nullable="false" />
-          <Property Name="BranchID" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Branch" Relationship="RentAllModel.fk_certific_cetified__branch" FromRole="Certification" ToRole="Branch" />
-          <NavigationProperty Name="Employee" Relationship="RentAllModel.fk_certific_certified_employee" FromRole="Certification" ToRole="Employee" />
-          <NavigationProperty Name="Inventory" Relationship="RentAllModel.fk_certific_relations_inventor" FromRole="Certification" ToRole="Inventory" />
-          <NavigationProperty Name="Nen3140" Relationship="RentAllModel.fk_nen3140_certifica_certific" FromRole="Certification" ToRole="Nen3140" />
+          <NavigationProperty Name="Certifications" Relationship="RentAllModel.fk_certific_cetified__branch" FromRole="Branch" ToRole="Certification" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -613,15 +603,6 @@
           </Key>
           <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City" Relationship="RentAllModel.fk_city_located_i_country" FromRole="Country" ToRole="City" />
-        </EntityType>
-        <EntityType Name="Inventory">
-          <Key>
-            <PropertyRef Name="InventoryID" />
-          </Key>
-          <Property Name="InventoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="ProductKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Certification" Relationship="RentAllModel.fk_certific_relations_inventor" FromRole="Inventory" ToRole="Certification" />
-          <NavigationProperty Name="Product" Relationship="RentAllModel.fk_inventor_product_i_product" FromRole="Inventory" ToRole="Product" />
         </EntityType>
         <EntityType Name="Nen3140">
           <Key>
@@ -647,6 +628,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_city_located_i_country">
+          <End Type="RentAllModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="RentAllModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryName" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Certification">
+          <Key>
+            <PropertyRef Name="CertificateID" />
+          </Key>
+          <Property Name="CertificateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InventoryID" Type="Int32" Nullable="false" />
+          <Property Name="ProductKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BranchID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Branch" Relationship="RentAllModel.fk_certific_cetified__branch" FromRole="Certification" ToRole="Branch" />
+          <NavigationProperty Name="Employee" Relationship="RentAllModel.fk_certific_certified_employee" FromRole="Certification" ToRole="Employee" />
+          <NavigationProperty Name="Inventory" Relationship="RentAllModel.fk_certific_relations_inventor" FromRole="Certification" ToRole="Inventory" />
+          <NavigationProperty Name="Nen3140" Relationship="RentAllModel.fk_nen3140_certifica_certific" FromRole="Certification" ToRole="Nen3140" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="InventoryID" />
+            <PropertyRef Name="ProductKey" />
+          </Key>
+          <Property Name="InventoryID" Type="Int32" Nullable="false" />
+          <Property Name="ProductKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Certifications" Relationship="RentAllModel.fk_certific_relations_inventor" FromRole="Inventory" ToRole="Certification" />
+          <NavigationProperty Name="Product" Relationship="RentAllModel.fk_inventor_product_i_product" FromRole="Inventory" ToRole="Product" />
+        </EntityType>
         <Association Name="fk_certific_cetified__branch">
           <End Type="RentAllModel.Branch" Role="Branch" Multiplicity="1" />
           <End Type="RentAllModel.Certification" Role="Certification" Multiplicity="*" />
@@ -677,9 +695,11 @@
           <ReferentialConstraint>
             <Principal Role="Inventory">
               <PropertyRef Name="InventoryID" />
+              <PropertyRef Name="ProductKey" />
             </Principal>
             <Dependent Role="Certification">
               <PropertyRef Name="InventoryID" />
+              <PropertyRef Name="ProductKey" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -692,18 +712,6 @@
             </Principal>
             <Dependent Role="Nen3140">
               <PropertyRef Name="CertificateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_city_located_i_country">
-          <End Type="RentAllModel.Country" Role="Country" Multiplicity="1" />
-          <End Type="RentAllModel.City" Role="City" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryName" />
-            </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="CountryName" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -805,17 +813,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Certification">
-            <EntityTypeMapping TypeName="RentAllModel.Certification">
-              <MappingFragment StoreEntitySet="Certification">
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
-                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
-                <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="City">
             <EntityTypeMapping TypeName="RentAllModel.City">
               <MappingFragment StoreEntitySet="City">
@@ -831,14 +828,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Inventory">
-            <EntityTypeMapping TypeName="RentAllModel.Inventory">
-              <MappingFragment StoreEntitySet="Inventory">
-                <ScalarProperty Name="ProductKey" ColumnName="ProductKey" />
-                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Nen3140">
             <EntityTypeMapping TypeName="RentAllModel.Nen3140">
               <MappingFragment StoreEntitySet="Nen3140">
@@ -848,6 +837,26 @@
                 <ScalarProperty Name="BranchID" ColumnName="BranchID" />
                 <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
                 <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Certifications">
+            <EntityTypeMapping TypeName="RentAllModel.Certification">
+              <MappingFragment StoreEntitySet="Certification">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="ProductKey" ColumnName="ProductKey" />
+                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+                <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="RentAllModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="ProductKey" ColumnName="ProductKey" />
+                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
