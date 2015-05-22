@@ -29,7 +29,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                @{ var vendor = new RentAllEntities().Employee.Find((int)Session["RoleID"]);
+                @{ var vendor = new RentAllEntities().Employee.Find((int)Session["EmployeeID"]);
                    var name = vendor.Firstname.ToCharArray(0, 1)[0] + ". " + vendor.Lastname + " ";}
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -87,9 +87,12 @@
                         <li>
                             <a href="@Url.Action("Index", "Manufacturers")"><i class="fa fa fa-building fa-fw"></i> Manufacturer<span class="fa fa-angle-right"></span></a>
                         </li>
-                        <li>
-                            <a href="@Url.Action("Index", "Employees")"><i class="fa fa-dashboard fa-fw"></i> Manage Employees<span class="fa arrow"></span></a>
-                        </li>
+                        @if (vendor.RoleID == 2)
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Employees")"><i class="fa fa-user fa-fw"></i> Manage Employees<span class="fa arrow"></span></a>
+                            </li>
+                        }
                     </ul>
         </div>
                 <!-- /.sidebar-collapse -->

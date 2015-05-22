@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Helpers;
+using PagedList;
 using Rent_All_Certificate.Attributes;
 using Rent_All_Certificate.Models;
 
@@ -18,10 +19,10 @@ namespace Rent_All_Certificate.Controllers
         private RentAllEntities db = new RentAllEntities();
 
         // GET: Employees
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var employee = db.Employee.Include(e => e.Role);
-            return View(employee.ToList());
+            return View(employee.ToList().ToPagedList(page ?? 1, 40));
         }
 
         // GET: Employees/Create
