@@ -87,6 +87,7 @@ namespace Rent_All_Certificate.Controllers
         {
             if (searchkey == null && searchid == null)
             {
+                
                 return RedirectToAction("Index");
             }
             else if (searchkey != null && searchid == null)

@@ -72,8 +72,15 @@
                 @Html.DisplayFor(modelItem => item.Manufacturer.ManufacturerName) - @Html.DisplayFor(modelItem => item.ProductName)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductKey }) |
+                @Html.ActionLink("Edit", "Edit", new {id = item.ProductKey}) |
+                @if (item.Inventory.Count > 0)
+                {
+                    <a class="grayLink" href="#">Delete</a>
+                }
+                else
+                {
                     @Html.ActionLink("Delete", "Delete", new { id = item.ProductKey }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+                }
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.Inventory.Count)</td>
         </tr>
