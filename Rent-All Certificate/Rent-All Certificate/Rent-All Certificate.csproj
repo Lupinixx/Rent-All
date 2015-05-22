@@ -169,6 +169,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Methods.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -203,6 +204,8 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeEditModel.cs" />
+    <Compile Include="Models\EmployeeNewModel.cs" />
     <Compile Include="Models\Hoist.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
@@ -212,6 +215,7 @@
     <Compile Include="Models\Nen3140.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MetaData.cs" />
     <Compile Include="Models\Phase.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
@@ -1132,6 +1136,9 @@
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Shared\_MenuName.cshtml" />
     <Content Include="Views\Home\Inventory.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

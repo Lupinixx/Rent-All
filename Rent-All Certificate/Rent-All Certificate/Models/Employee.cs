@@ -47,5 +47,4 @@ public partial class Employee
     public virtual ICollection<Certification> Certification { get; set; }
 
 }
-
 }

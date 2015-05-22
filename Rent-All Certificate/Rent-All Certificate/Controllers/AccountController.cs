@@ -31,7 +31,7 @@ namespace Rent_All_Certificate.Controllers
                 var employee = db.Employee.SingleOrDefault(emp => emp.Email == model.Email);
                 if (employee != null)
                 {
-                    var passwordHash = new HashHelper().Hash(model.PasswordHash.ToCharArray(), employee.PasswordSalt);
+                    var passwordHash = HashHelper.Hash(model.PasswordHash.ToCharArray(), employee.PasswordSalt);
 
                     if (passwordHash.Equals(employee.PasswordHash))
                     {
