@@ -167,6 +167,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attributes\Authorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CertificationsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -193,33 +194,34 @@
     <Compile Include="Models\Country.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hoist.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Inventory.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Manufacturer.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\CategoryEditModel.cs" />
     <Compile Include="Models\CategoryIndexModel.cs" />
     <Compile Include="Models\CategorySelectListModel.cs" />
+    <Compile Include="Models\CertificationsUploadModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
-    <Compile Include="Models\Employee.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EmployeeEditModel.cs" />
     <Compile Include="Models\EmployeeNewModel.cs" />
-    <Compile Include="Models\Hoist.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Manufacturer.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\MetaData.cs" />
+    <Compile Include="Controllers\PhasesController.cs" />
     <Compile Include="Models\Nen3140.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MetaData.cs" />
     <Compile Include="Models\Phase.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\PhasesController.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
@@ -743,23 +745,6 @@
     <Content Include="obj\Debug\Rent-All Certificate.pdb" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\RentAllModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RentAllModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\RentAllModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RentAllModel.edmx</DependentUpon>
-      <LastGenOutput>RentAllModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\RentAllModel.edmx.diagram">
-      <DependentUpon>RentAllModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\RentAllModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RentAllModel.edmx</DependentUpon>
-      <LastGenOutput>RentAllModel.cs</LastGenOutput>
-    </Content>
     <Content Include="bin\Rent-All Certificate.dll.config" />
     <Content Include="obj\Debug\build.force" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
@@ -1079,6 +1064,23 @@
     <Content Include="Content\dashboard\less\mixins.less" />
     <Content Include="Content\dashboard\less\sb-admin-2.less" />
     <Content Include="Content\dashboard\less\variables.less" />
+    <EntityDeploy Include="Models\RentAllModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RentAllModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\RentAllModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RentAllModel.edmx</DependentUpon>
+      <LastGenOutput>RentAllModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\RentAllModel.edmx.diagram">
+      <DependentUpon>RentAllModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\RentAllModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RentAllModel.edmx</DependentUpon>
+      <LastGenOutput>RentAllModel.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1139,9 +1141,12 @@
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\Certifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Uploads\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\LoginTest\" />
     <Folder Include="Views\SharedMenu\" />
