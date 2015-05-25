@@ -194,6 +194,38 @@ namespace Rent_All_Certificate.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult InventoryIndex(string key, int? page)
+        {
+            if (key == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(db.Inventory.Where(i => i.ProductKey == key).ToList().ToPagedList(page ?? 1, 20));
+        }
+
+        public ActionResult DeleteInventory(int? id, string key)
+        {
+            if (id == null || key == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var inventory = db.Inventory.FirstOrDefault(i => i.ProductKey == key && i.InventoryID == id);
+            if (inventory == null)
+            {
+                return HttpNotFound();
+            }
+            var path = Server.MapPath("~/Content/Uploads/" + inventory.ProductKey + "-" + inventory.InventoryID + ".pdf");
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+            var certificates = db.Certification.Where(c => c.InventoryID == id && c.ProductKey == key).ToList();
+            db.Certification.RemoveRange(certificates);
+            db.Inventory.Remove(inventory);
+            db.SaveChanges();
+            return RedirectToAction("InventoryIndex", new { key });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
