@@ -15,24 +15,28 @@ namespace Rent_All_Certificate.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Nen3140
+public partial class CertificationLog
 {
 
     public int CertificateID { get; set; }
 
-    public Nullable<int> InventoryID { get; set; }
+    public int InventoryID { get; set; }
 
-    public Nullable<int> BranchID { get; set; }
+    public string ProductKey { get; set; }
 
-    public Nullable<int> EmployeeID { get; set; }
+    public int BranchID { get; set; }
+
+    public int EmployeeID { get; set; }
 
     public System.DateTime Date { get; set; }
 
-    public string File { get; set; }
 
 
+    public virtual Branch Branch { get; set; }
 
-    public virtual Certification Certification { get; set; }
+    public virtual Employee Employee { get; set; }
+
+    public virtual Inventory Inventory { get; set; }
 
 }
 

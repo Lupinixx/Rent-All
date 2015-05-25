@@ -11,7 +11,7 @@ namespace Rent_All_Certificate.Models
         public Employee EmployeeModel { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Password (Leave empty to leave unchanged)")]
+        [Display(Name = "Password")]
         public string EditPassword { get; set; }
 
         [DataType(DataType.Password)]

@@ -8,49 +8,52 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Category.CategoryID)
-        <div class="form-group">
-            @Html.LabelFor(model => model.Category.ParentID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="CategoryLists">
-                    @Html.Partial("~/Views/Shared/_categoryDropDownLists.cshtml", Model.CategorySelectList)
+<div class="col-md-6">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.Category.CategoryID)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Category.ParentID, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    <div id="CategoryLists">
+                        @Html.Partial("~/Views/Shared/_categoryDropDownLists.cshtml", Model.CategorySelectList)
+                    </div>
+                    @Ajax.ActionLink("updateLink", "UpdateEditCategoryDropDownLists",
+                        new {SelectedCategory = ""},
+                        new AjaxOptions
+                        {
+                            HttpMethod = "GET",
+                            UpdateTargetId = "CategoryLists",
+                            InsertionMode = InsertionMode.Replace
+                        },
+                        new {id = "updateLink", @class = "hidden"}
+                        )
+                    @Html.HiddenFor(model => model.Category.ParentID, new {id = "SelectedCategory"})
+                    @Html.ValidationMessageFor(model => model.Category.ParentID, "", new {@class = "text-danger"})
                 </div>
-                                @Ajax.ActionLink("updateLink", "UpdateEditCategoryDropDownLists",
-                                    new { SelectedCategory = "" },
-                                    new AjaxOptions
-                                    {
-                                        HttpMethod = "GET",
-                                        UpdateTargetId = "CategoryLists",
-                                        InsertionMode = InsertionMode.Replace
-                                    },
-                                    new { id = "updateLink", @class = "hidden" }
-                )
-                @Html.HiddenFor(model => model.Category.ParentID, new { id = "SelectedCategory" })
-                @Html.ValidationMessageFor(model => model.Category.ParentID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Category.CategoryName, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Category.CategoryName, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Category.CategoryName, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-success"/>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Category.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Category.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Category.CategoryName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
     </div>
-}
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
 <script type="text/javascript">
     function changeActionURL(value) {
         if (value === "") {

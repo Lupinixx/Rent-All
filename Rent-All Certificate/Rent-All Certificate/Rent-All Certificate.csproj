@@ -188,6 +188,9 @@
     <Compile Include="Models\Certification.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CertificationLog.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\City.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>

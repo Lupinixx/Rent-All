@@ -1,6 +1,6 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
-@model IPagedList<Rent_All_Certificate.Models.Inventory>
+@model IPagedList<Rent_All_Certificate.Models.Certification>
 @{
     ViewBag.Title = "Inventory";
 }
@@ -11,7 +11,7 @@
         {
             foreach (var item in Model)
             {
-                <h2>@Html.DisplayFor(modelItem => item.Product.Manufacturer.ManufacturerName) @Html.DisplayFor(modelItem => item.Product.ProductName) - Certificates</h2>
+                <h2>@Html.DisplayFor(modelItem => item.Inventory.Product.Manufacturer.ManufacturerName) @Html.DisplayFor(modelItem => item.Inventory.Product.ProductName) - Certificates</h2>
                 break;
             }
         }
@@ -27,6 +27,7 @@
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.First().ProductKey)</th>
                     <th>@Html.DisplayNameFor(model => model.First().InventoryID)</th>
+                    <th>Inspection Date</th>
                     <th>Certificate</th>
                 </tr>
 
@@ -48,7 +49,11 @@
                                 @Html.DisplayFor(modelItem => item.InventoryID)
                             </td>
                             <td>
-                                Link
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                <a href="/Content/Uploads/@Html.DisplayFor(modelItem => item.ProductKey)-@Html.DisplayFor(modelItem => item.InventoryID)
+.pdf">Link</a>
                             </td>
                         </tr>
                     }

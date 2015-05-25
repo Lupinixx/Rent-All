@@ -65,14 +65,14 @@ namespace Rent_All_Certificate.Controllers
         {
             if (product != null && inventory == null)
             {
-                return View(db.Inventory.Where(i => i.ProductKey == product)
+                return View(db.Certification.Where(c => c.ProductKey == product)
                                         .ToList()
                                         .ToPagedList(page ?? 1, 40));  
             }
             else if (product != null && inventory != null)
             {
-                return View(db.Inventory.Where(i => i.ProductKey == product)
-                                        .Where(i => i.InventoryID == inventory)
+                return View(db.Certification.Where(c => c.ProductKey == product)
+                                        .Where(c => c.InventoryID == inventory)
                                         .ToList()
                                         .ToPagedList(page ?? 1, 40));
             }

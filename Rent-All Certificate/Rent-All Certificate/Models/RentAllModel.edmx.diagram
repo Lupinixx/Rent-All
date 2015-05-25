@@ -31,6 +31,10 @@
         <AssociationConnector Association="RentAllModel.fk_inventor_product_i_product" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_product_relations_manufact" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_product_relations_phase" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RentAllModel.CertificationLog" Width="1.5" PointX="7.75" PointY="9.375" />
+        <AssociationConnector Association="RentAllModel.fk_certific_cetified__branch_log" />
+        <AssociationConnector Association="RentAllModel.fk_certific_certified_employee_log" />
+        <AssociationConnector Association="RentAllModel.fk_certific_relations_inventor_log" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

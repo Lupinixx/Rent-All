@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RentAllModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RentAllModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Branch">
           <Key>
             <PropertyRef Name="BranchID" />
@@ -26,6 +26,17 @@
             <PropertyRef Name="CertificateID" />
           </Key>
           <Property Name="CertificateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryID" Type="int" Nullable="false" />
+          <Property Name="ProductKey" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="BranchID" Type="int" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CertificationLog">
+          <Key>
+            <PropertyRef Name="CertificateID" />
+          </Key>
+          <Property Name="CertificateID" Type="int" Nullable="false" />
           <Property Name="InventoryID" Type="int" Nullable="false" />
           <Property Name="ProductKey" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="BranchID" Type="int" Nullable="false" />
@@ -156,6 +167,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_certific_certified_employee_log">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="CertificationLog" Type="Self.CertificationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CertificationLog">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_certific_cetified__branch">
           <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
           <End Role="Certification" Type="Self.Certification" Multiplicity="*" />
@@ -164,6 +187,18 @@
               <PropertyRef Name="BranchID" />
             </Principal>
             <Dependent Role="Certification">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_certific_cetified__branch_log">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="CertificationLog" Type="Self.CertificationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchID" />
+            </Principal>
+            <Dependent Role="CertificationLog">
               <PropertyRef Name="BranchID" />
             </Dependent>
           </ReferentialConstraint>
@@ -177,6 +212,20 @@
               <PropertyRef Name="ProductKey" />
             </Principal>
             <Dependent Role="Certification">
+              <PropertyRef Name="InventoryID" />
+              <PropertyRef Name="ProductKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_certific_relations_inventor_log">
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="1" />
+          <End Role="CertificationLog" Type="Self.CertificationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="InventoryID" />
+              <PropertyRef Name="ProductKey" />
+            </Principal>
+            <Dependent Role="CertificationLog">
               <PropertyRef Name="InventoryID" />
               <PropertyRef Name="ProductKey" />
             </Dependent>
@@ -282,6 +331,7 @@
           <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CertificationLog" EntityType="Self.CertificationLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
@@ -304,13 +354,25 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Certification" EntitySet="Certification" />
           </AssociationSet>
+          <AssociationSet Name="fk_certific_certified_employee_log" Association="Self.fk_certific_certified_employee_log">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CertificationLog" EntitySet="CertificationLog" />
+          </AssociationSet>
           <AssociationSet Name="fk_certific_cetified__branch" Association="Self.fk_certific_cetified__branch">
             <End Role="Branch" EntitySet="Branch" />
             <End Role="Certification" EntitySet="Certification" />
           </AssociationSet>
+          <AssociationSet Name="fk_certific_cetified__branch_log" Association="Self.fk_certific_cetified__branch_log">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="CertificationLog" EntitySet="CertificationLog" />
+          </AssociationSet>
           <AssociationSet Name="fk_certific_relations_inventor" Association="Self.fk_certific_relations_inventor">
             <End Role="Inventory" EntitySet="Inventory" />
             <End Role="Certification" EntitySet="Certification" />
+          </AssociationSet>
+          <AssociationSet Name="fk_certific_relations_inventor_log" Association="Self.fk_certific_relations_inventor_log">
+            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="CertificationLog" EntitySet="CertificationLog" />
           </AssociationSet>
           <AssociationSet Name="fk_city_located_i_country" Association="Self.fk_city_located_i_country">
             <End Role="Country" EntitySet="Country" />
@@ -345,8 +407,7 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RentAllModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -359,6 +420,7 @@
           <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="City" Relationship="Self.fk_branch_located_i_city" FromRole="Branch" ToRole="City" />
           <NavigationProperty Name="Certification" Relationship="Self.fk_certific_cetified__branch" FromRole="Branch" ToRole="Certification" />
+          <NavigationProperty Name="CertificationLog" Relationship="RentAllModel.fk_certific_cetified__branch_log" FromRole="Branch" ToRole="CertificationLog" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -415,6 +477,7 @@
           <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Certification" Relationship="Self.fk_certific_certified_employee" FromRole="Employee" ToRole="Certification" />
           <NavigationProperty Name="Role" Relationship="Self.fk_employee_relations_role" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="CertificationLog" Relationship="RentAllModel.fk_certific_certified_employee_log" FromRole="Employee" ToRole="CertificationLog" />
         </EntityType>
         <EntityType Name="Hoist">
           <Key>
@@ -439,6 +502,7 @@
           <Property Name="ProductKey" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Certification" Relationship="Self.fk_certific_relations_inventor" FromRole="Inventory" ToRole="Certification" />
           <NavigationProperty Name="Product" Relationship="Self.fk_inventor_product_i_product" FromRole="Inventory" ToRole="Product" />
+          <NavigationProperty Name="CertificationLog" Relationship="RentAllModel.fk_certific_relations_inventor_log" FromRole="Inventory" ToRole="CertificationLog" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -715,7 +779,72 @@
             <End Role="Phase" EntitySet="Phase" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <EntitySet Name="CertificationLog" EntityType="RentAllModel.CertificationLog" />
+          <AssociationSet Name="fk_certific_cetified__branch_log" Association="RentAllModel.fk_certific_cetified__branch_log">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="CertificationLog" EntitySet="CertificationLog" />
+          </AssociationSet>
+          <AssociationSet Name="fk_certific_certified_employee_log" Association="RentAllModel.fk_certific_certified_employee_log">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CertificationLog" EntitySet="CertificationLog" />
+          </AssociationSet>
+          <AssociationSet Name="fk_certific_relations_inventor_log" Association="RentAllModel.fk_certific_relations_inventor_log">
+            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="CertificationLog" EntitySet="CertificationLog" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CertificationLog">
+          <Key>
+            <PropertyRef Name="CertificateID" />
+          </Key>
+          <Property Name="CertificateID" Type="Int32" Nullable="false" />
+          <Property Name="InventoryID" Type="Int32" Nullable="false" />
+          <Property Name="ProductKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BranchID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Branch" Relationship="RentAllModel.fk_certific_cetified__branch_log" FromRole="CertificationLog" ToRole="Branch" />
+          <NavigationProperty Name="Employee" Relationship="RentAllModel.fk_certific_certified_employee_log" FromRole="CertificationLog" ToRole="Employee" />
+          <NavigationProperty Name="Inventory" Relationship="RentAllModel.fk_certific_relations_inventor_log" FromRole="CertificationLog" ToRole="Inventory" />
+        </EntityType>
+        <Association Name="fk_certific_cetified__branch_log">
+          <End Type="RentAllModel.Branch" Role="Branch" Multiplicity="1" />
+          <End Type="RentAllModel.CertificationLog" Role="CertificationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchID" />
+            </Principal>
+            <Dependent Role="CertificationLog">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_certific_certified_employee_log">
+          <End Type="RentAllModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="RentAllModel.CertificationLog" Role="CertificationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CertificationLog">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_certific_relations_inventor_log">
+          <End Type="RentAllModel.Inventory" Role="Inventory" Multiplicity="1" />
+          <End Type="RentAllModel.CertificationLog" Role="CertificationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="InventoryID" />
+              <PropertyRef Name="ProductKey" />
+            </Principal>
+            <Dependent Role="CertificationLog">
+              <PropertyRef Name="InventoryID" />
+              <PropertyRef Name="ProductKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -846,6 +975,18 @@
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CertificationLog">
+            <EntityTypeMapping TypeName="RentAllModel.CertificationLog">
+              <MappingFragment StoreEntitySet="CertificationLog">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="ProductKey" ColumnName="ProductKey" />
+                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+                <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
