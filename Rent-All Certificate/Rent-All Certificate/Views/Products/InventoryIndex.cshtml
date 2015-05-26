@@ -5,6 +5,10 @@
 }
 
 <h2>Manage Inventory</h2>
+@if (Model == null || !Model.Any())
+{
+    <div>No entries found.</div>
+}else{
 <table class="table">
     <tr>
         <th>
@@ -12,6 +16,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.InventoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Certification.FirstOrDefault().Date)
         </th>
         <th>
             Delete
@@ -30,6 +37,9 @@
                 @Html.DisplayFor(modelItem => item.InventoryID)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Certification.OrderByDescending(c => c.Date).ToList().FirstOrDefault().Date)
+            </td>
+            <td>
                 @Html.ActionLink("Delete", "DeleteInventory", new { id = item.InventoryID, key = item.ProductKey }, new { onclick = "return confirm('Are you sure you want to delete?')" })
             </td>
             <td>
@@ -46,3 +56,4 @@
 }
 
 </table>
+    }
