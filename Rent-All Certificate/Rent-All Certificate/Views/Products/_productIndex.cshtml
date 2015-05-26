@@ -66,7 +66,14 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.ProductKey, "InventoryIndex", new { key = item.ProductKey})
+                @if (item.Inventory.Count > 0)
+                {
+                    @Html.ActionLink(item.ProductKey, "InventoryIndex", new {key = item.ProductKey})
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.ProductKey)
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Manufacturer.ManufacturerName) - @Html.DisplayFor(modelItem => item.ProductName)
