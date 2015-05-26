@@ -29,8 +29,8 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                @{ var vendor = new RentAllEntities().Employee.Find((int)Session["EmployeeID"]);
-                   var name = vendor.Firstname.ToCharArray(0, 1)[0] + ". " + vendor.Lastname + " ";}
+                @{ var employee = new RentAllEntities().Employee.Find((int)Session["EmployeeID"]);
+                 var name = employee.Firstname.ToCharArray(0, 1)[0] + ". " + employee.Lastname + " ";}
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -40,7 +40,7 @@
                         <li>
                             <a href="@Url.Action("LogOff", "Dashboard")"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
-                </ul>
+                    </ul>
                     <!-- /.dropdown-user -->
                 </li>
                 <li class="dropdown">
@@ -57,16 +57,15 @@
                             <div class="input-group custom-search-form">
                                 @using (@Html.BeginForm("Index", "Products", FormMethod.Get))
                                 {
-
                                     @Html.TextBox("search", null, new { @class = "form-control", placeholder = "ProductKey" })
 
-                                <span class="input-group-btn">
+                                    <span class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
                                 }
-            </div>
+                            </div>
                             <!-- /input-group test-->
                         </li>
                         <li>
@@ -87,20 +86,20 @@
                         <li>
                             <a href="@Url.Action("Index", "Manufacturers")"><i class="fa fa fa-building fa-fw"></i> Manufacturer<span class="fa fa-angle-right"></span></a>
                         </li>
-                        @if (vendor.RoleID == 2)
+                        @if (employee.RoleID == 2)
                         {
                             <li>
                                 <a href="@Url.Action("Index", "Employees")"><i class="fa fa-user fa-fw"></i> Manage Employees<span class="fa fa-angle-right"></span></a>
                             </li>
                         }
                     </ul>
-        </div>
+                </div>
                 <!-- /.sidebar-collapse -->
-    </div>
+            </div>
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
-        @RenderBody()
+            @RenderBody()
         </div>
 
     </div>
