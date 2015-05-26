@@ -13,7 +13,7 @@ using Rent_All_Certificate.Models;
 
 namespace Rent_All_Certificate.Controllers
 {
-    [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalStaff, Roles.TechnicalAdministrator })]
+    [LoginValidRole(ValidRoleId = new[] {Roles.TechnicalAdministrator })]
     public class EmployeesController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
