@@ -7,23 +7,11 @@
 
 <div class="row">
     <div class="col-md-12">
-        @if (Model != null && Model.Count() > 0)
-        {
-            foreach (var item in Model)
-            {
-                <h2>@Html.DisplayFor(modelItem => item.Inventory.Product.Manufacturer.ManufacturerName) @Html.DisplayFor(modelItem => item.Inventory.Product.ProductName) - Certificates</h2>
-                break;
-            }
-        }
-        else
-        {
-            <h2>Certificates</h2>
-        }
-
-        <hr/>
+            <h2>Expired Certificates</h2>
+        <hr />
 
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table">
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.First().ProductKey)</th>
                     <th>@Html.DisplayNameFor(model => model.First().InventoryID)</th>
@@ -60,7 +48,7 @@
                 }
 
             </table>
-            @Html.PagedListPager(Model, page => Url.Action("Inventory", new { page, product = Request.QueryString["product"], inventory = Request.QueryString["inventory"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+            @Html.PagedListPager(Model, page => Url.Action("ExpiredCertificates", new { page}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
         </div>
 
     </div>

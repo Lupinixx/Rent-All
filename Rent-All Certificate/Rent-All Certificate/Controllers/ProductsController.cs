@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
@@ -201,6 +202,14 @@ namespace Rent_All_Certificate.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             return View(db.Inventory.Where(i => i.ProductKey == key).ToList().ToPagedList(page ?? 1, 20));
+        }
+
+        public ActionResult ExpiredCertificates(int? page)
+        {
+            DateTime dt = DateTime.UtcNow.AddHours(2);
+            var thisYear = new DateTime(dt.Year - 1, dt.Month, dt.Day);
+
+            return View(db.Certification.Where(c => c.Date < thisYear).ToList().ToPagedList(page ?? 1, 20));
         }
 
         public ActionResult DeleteInventory(int? id, string key)
