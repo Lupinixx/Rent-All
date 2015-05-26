@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Rent_All_Certificate.Models.Inventory>
+
+@{
+    ViewBag.Title = "Manage Inventory";
+}
+
+<h2>Manage Inventory</h2>
+@if (Model == null || !Model.Any())
+{
+    <div>No entries found.</div>
+}else{
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductKey)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Certification.FirstOrDefault().Date)
+        </th>
+        <th>
+            Delete
+        </th>
+        <th>
+            Certificate
+        </th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Certification.OrderByDescending(c => c.Date).ToList().FirstOrDefault().Date)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteInventory", new { id = item.InventoryID, key = item.ProductKey }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+            </td>
+            <td>
+                @if (File.Exists(Server.MapPath("~/Content/Uploads/" + item.ProductKey + "-" + item.InventoryID + ".pdf")))
+                {
+                    <a href="~/Content/Uploads/@(item.ProductKey)-@(item.InventoryID).pdf" target="blank">Link</a>
+                }
+                else
+                {
+                    <a class="grayLink" href="#">Not found</a>
+                }
+            </td>
+        </tr>
+}
+
+</table>
+    }
