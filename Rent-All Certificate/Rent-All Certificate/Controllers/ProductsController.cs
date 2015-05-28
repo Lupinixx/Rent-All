@@ -19,66 +19,56 @@ namespace Rent_All_Certificate.Controllers
         private RentAllEntities db = new RentAllEntities();
 
         // GET: Products
-        public ActionResult Index(int? page, int? selectedCategory, string search)
+        public ActionResult Index(int? page, int? selectedCategory, string search = "")
         {
             var model = new ProductIndexModel
             {
                 CategorySelectList = new CategoriesController().GetCategorySelectLists(selectedCategory),
-                SelectedCategory = selectedCategory
+                SelectedCategory = selectedCategory,
+                Search = search
             };
             if (selectedCategory == null)
             {
-                if (search == null)
-                {
-                    model.ProductTabelList =
+                model.ProductTabelList =
                         db.Product.Include(p => p.Category)
-                        //.Include(p => p.Hoist)
-                        //.Include(p => p.Manufacturer)
-                        //.Include(p => p.Phase)
+                            .Where(x => x.ProductKey.StartsWith(search))
                             .ToList()
                             .ToPagedList(page ?? 1, 20);
-                }
-                else
-                {
-                    model.ProductTabelList =
-                            db.Product.Include(p => p.Category)
-                                .Where(x => x.ProductKey.StartsWith(search))
-                                .ToList()
-                                .ToPagedList(page ?? 1, 20);
-                }
 
             }
             else
             {
-                //Get all selected categories from the selected categories ids
-                var selectedCategoryIds = model.CategorySelectList.Select(csl => csl.SelectedCategoryId).Distinct().ToList();
                 //Get all possible subcategories
-                selectedCategoryIds.AddRange(GetAllSubCategorieIds((int)selectedCategory));
+                var selectedCategoryIds = GetAllSubCategorieIds((int)selectedCategory);
                 //Get all products with one of the selected categorie ids
+                selectedCategoryIds.Add((int)selectedCategory);
+
                 model.ProductTabelList =
-                    db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID))
+                    db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID) && p.ProductKey.StartsWith(search))
                         .ToList()
                         .ToPagedList(page ?? 1, 20);
             }
             return View(model);
         }
 
-        public PartialViewResult UpdateProductIndex(int selectedCategory)
+        public PartialViewResult UpdateProductIndex(int selectedCategory, string search = "")
         {
             // Create model and add the tabel data
             var catController = new CategoriesController();
             var model = new ProductIndexModel
             {
                 SelectedCategory = selectedCategory,
-                CategorySelectList = catController.GetCategorySelectLists(selectedCategory)
+                CategorySelectList = catController.GetCategorySelectLists(selectedCategory),
+                Search = search
             };
             //Get all possible subcategories
             var selectedCategoryIds = GetAllSubCategorieIds(selectedCategory);
             selectedCategoryIds.Add(selectedCategory);
             //Get all products with one of the selected categorie ids
-            model.ProductTabelList = db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID))
-                .ToList()
-                .ToPagedList(1, 20);
+            model.ProductTabelList =
+                db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID) && p.ProductKey.StartsWith(search))
+                    .ToList()
+                    .ToPagedList(1, 20);
 
             return PartialView("_productIndex", model);
         }

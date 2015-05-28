@@ -31,6 +31,10 @@ namespace Rent_All_Certificate.Controllers
             {
                 foreach (var file in model.Certificates)
                 {
+                    if (file == null)
+                    {
+                        continue;
+                    }
                     if (file.ContentType != "application/pdf")
                     {
                         ModelState.AddModelError("", "The file :\"" + file.FileName + "\" isn't recognized as a pdf file.");
