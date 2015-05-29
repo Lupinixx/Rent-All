@@ -15,5 +15,7 @@ namespace Rent_All_Certificate.Models
         public List<CategorySelectListModel> CategorySelectList { get; set; }
 
         public int? SelectedCategory { get; set; }
+
+        public string Search { get; set; }
     }
 }

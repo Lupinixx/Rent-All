@@ -44,8 +44,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Certification.BranchID, "Upload", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="file" name="Certificates" id="Certificates" accept="application/pdf" multiple="multiple" />
-                    @Html.ValidationMessageFor(model => model.Certification.BranchID, "", new { @class = "text-danger" })
+                    @Html.DisplayFor(model => model.Certificates, new { type = "file"})
+                    <input type="file" name="Certificates" id="Certificates" accept="application/pdf" multiple="multiple"/>
+                    @Html.ValidationMessageFor(model => model.Certification.BranchID, "", new {@class = "text-danger"})
                 </div>
             </div>
             <div class="form-group">

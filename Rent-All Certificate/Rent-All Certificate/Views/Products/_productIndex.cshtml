@@ -11,7 +11,7 @@
         <div class="input-group custom-search-form">
             @using (@Html.BeginForm("Index", "Products", FormMethod.Get))
             {
-
+                @Html.Hidden("selectedCategory", Model.SelectedCategory)
                 @Html.TextBox("search", null, new { @class = "form-control", placeholder = "ProductKey" })
 
                 <span class="input-group-btn">
@@ -41,7 +41,8 @@
                 @class = "form-control"
             })
             }
-            <input type="hidden" id="SelectedCategory" name="selectedCategory" />
+            <input type="hidden" id="SelectedCategory" name="selectedCategory"/>
+            @Html.HiddenFor(model => model.Search)
             <input type="submit" id="categorySelect" value="Search" class="hidden" />
         }
     </div>
