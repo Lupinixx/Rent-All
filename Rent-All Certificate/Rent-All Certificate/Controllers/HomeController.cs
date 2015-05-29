@@ -34,6 +34,7 @@ namespace Rent_All_Certificate.Controllers
                 {
                     model.ProductTabelList =
                         db.Product.Include(p => p.Category).Include(p => p.Manufacturer)
+                            .OrderBy(p => p.ProductKey)
                             .ToList()
                             .ToPagedList(page ?? 1, 40);
                 }
@@ -42,6 +43,7 @@ namespace Rent_All_Certificate.Controllers
                     model.ProductTabelList =
                             db.Product.Include(p => p.Category).Include(p => p.Manufacturer)
                                 .Where(x => x.ProductKey.StartsWith(search))
+                                .OrderBy(p => p.ProductKey)
                                 .ToList()
                                 .ToPagedList(page ?? 1, 40);
                 }
@@ -54,6 +56,7 @@ namespace Rent_All_Certificate.Controllers
 
                 model.ProductTabelList =
                     db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID)).Include(p => p.Manufacturer)
+                        .OrderBy(p => p.ProductKey)
                         .ToList()
                         .ToPagedList(page ?? 1, 40);
             }
@@ -66,6 +69,7 @@ namespace Rent_All_Certificate.Controllers
             if (product != null && inventory == null)
             {
                 return View(db.Certification.Where(c => c.ProductKey == product)
+                                        .OrderBy(c => c.InventoryID)
                                         .ToList()
                                         .ToPagedList(page ?? 1, 40));  
             }
@@ -73,12 +77,13 @@ namespace Rent_All_Certificate.Controllers
             {
                 return View(db.Certification.Where(c => c.ProductKey == product)
                                         .Where(c => c.InventoryID == inventory)
+                                        .OrderBy(c => c.InventoryID)
                                         .ToList()
                                         .ToPagedList(page ?? 1, 40));
             }
             else
             {
-                return View();
+                return View(db.Certification.OrderBy(c => c.InventoryID).ToList().ToPagedList(page ?? 1, 40));
             }
            
         }
@@ -87,7 +92,6 @@ namespace Rent_All_Certificate.Controllers
         {
             if (searchkey == null && searchid == null)
             {
-                
                 return RedirectToAction("Index");
             }
             else if (searchkey != null && searchid == null)

@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        @if (Model != null && Model.Count() > 0)
+        @if (Model != null && Model.Count() > 0 && Request.QueryString["product"] != null)
         {
             foreach (var item in Model)
             {
@@ -60,7 +60,9 @@
                 }
 
             </table>
-            @Html.PagedListPager(Model, page => Url.Action("Inventory", new { page, product = Request.QueryString["product"], inventory = Request.QueryString["inventory"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+
+                @Html.PagedListPager(Model, page => Url.Action("Inventory", new { page, product = Request.QueryString["product"], inventory = Request.QueryString["inventory"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+
         </div>
 
     </div>
