@@ -186,22 +186,16 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CertificateType.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Certification.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CertificationLog.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\City.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Country.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Employee.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Hoist.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Inventory.cs">
@@ -220,9 +214,6 @@
     <Compile Include="Models\EmployeeNewModel.cs" />
     <Compile Include="Models\MetaData.cs" />
     <Compile Include="Controllers\PhasesController.cs" />
-    <Compile Include="Models\Nen3140.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Phase.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
