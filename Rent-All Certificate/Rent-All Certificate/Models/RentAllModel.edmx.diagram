@@ -4,37 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ef10f8a6ca4647c998c5cbbe0ba78fbb" Name="Diagram1">
-        <EntityTypeShape EntityType="RentAllModel.Branch" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Certification" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.City" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Country" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Employee" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Hoist" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Inventory" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Manufacturer" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Nen3140" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Phase" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Product" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentAllModel.Role" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <AssociationConnector Association="RentAllModel.fk_branch_located_i_city" ManuallyRouted="false" />
+      <Diagram DiagramId="f15182126a8f4861bdc417d36b565308" Name="Diagram1">
+        <EntityTypeShape EntityType="RentAllModel.Branch" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.Category" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.CertificateType" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.Certification" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.CertificationLog" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.Employee" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.Inventory" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.Manufacturer" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.Phase" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.Product" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentAllModel.Role" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
         <AssociationConnector Association="RentAllModel.fk_certific_cetified__branch" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_category_relations_category" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_product_relations_category" ManuallyRouted="false" />
+        <AssociationConnector Association="RentAllModel.fk_certific_type_of_certific" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_certific_certified_employee" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_certific_relations_inventor" ManuallyRouted="false" />
-        <AssociationConnector Association="RentAllModel.fk_nen3140_certifica_certific" ManuallyRouted="false" />
-        <AssociationConnector Association="RentAllModel.fk_city_located_i_country" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_employee_relations_role" ManuallyRouted="false" />
-        <AssociationConnector Association="RentAllModel.fk_hoist_inheritan_product" ManuallyRouted="false" />
-        <AssociationConnector Association="RentAllModel.fk_inventor_product_i_product" ManuallyRouted="false" />
+        <AssociationConnector Association="RentAllModel.fk_inventor_relations_product" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_product_relations_manufact" ManuallyRouted="false" />
         <AssociationConnector Association="RentAllModel.fk_product_relations_phase" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="RentAllModel.CertificationLog" Width="1.5" PointX="7.75" PointY="9.375" />
-        <AssociationConnector Association="RentAllModel.fk_certific_cetified__branch_log" />
-        <AssociationConnector Association="RentAllModel.fk_certific_certified_employee_log" />
-        <AssociationConnector Association="RentAllModel.fk_certific_relations_inventor_log" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

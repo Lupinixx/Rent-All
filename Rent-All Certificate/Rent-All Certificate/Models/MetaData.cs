@@ -120,46 +120,16 @@ namespace Rent_All_Certificate.Models
         public string Role1 { get; set; }
     }
 
-    [MetadataType(typeof (BranchMetaData))]
+    [MetadataType(typeof(BranchMetaData))]
     public partial class Branch
     {
-        
+
     }
 
     public class BranchMetaData
     {
         [Display(Name = "Branch")]
         public string BranchName { get; set; }
-
-        [Display(Name = "City")]
-        public string CityName { get; set; }
-    }
-
-    [MetadataType(typeof(CityMetaData))]
-    public partial class City
-    {
-        
-    }
-
-    public class CityMetaData
-    {
-        [Display(Name = "City")]
-        public string CityName { get; set; }
-
-        [Display(Name = "Country")]
-        public string CountryName { get; set; }
-    }
-
-    [MetadataType(typeof(CountryMetaData))]
-    public partial class Country
-    {
-        
-    }
-    public class CountryMetaData
-    {
-        [Display(Name = "Country")]
-        public string CountryName { get; set; }
     }
 }
-
     

@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Helpers;
-using Rent_All_Certificate.Attributes;
 using Rent_All_Certificate.Models;
+using Rent_All_Certificate.Attributes;
+using Helpers;
 
 namespace Rent_All_Certificate.Controllers
 {
-    [LoginValidRole(ValidRoleId = new[] {Roles.TechnicalAdministrator })]
+    [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalAdministrator })]
     public class BranchesController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
@@ -20,16 +20,13 @@ namespace Rent_All_Certificate.Controllers
         // GET: Branches
         public ActionResult Index()
         {
-            var branch = db.Branch.Include(b => b.City);
-            return View(branch.ToList());
+            return View(db.Branch.ToList());
         }
 
-        
 
         // GET: Branches/Create
         public ActionResult Create()
         {
-            ViewBag.CityName = new SelectList(db.City, "CityName", "CityName");
             return View();
         }
 
@@ -38,7 +35,7 @@ namespace Rent_All_Certificate.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BranchID,BranchName,CityName")] Branch branch)
+        public ActionResult Create([Bind(Include = "BranchID,BranchName")] Branch branch)
         {
             if (ModelState.IsValid)
             {
@@ -47,7 +44,6 @@ namespace Rent_All_Certificate.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CityName = new SelectList(db.City, "CityName", "CityName", branch.CityName);
             return View(branch);
         }
 
@@ -63,8 +59,27 @@ namespace Rent_All_Certificate.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CityName = new SelectList(db.City, "CityName", "CityName", branch.CityName);
             return View(branch);
+        }
+
+        // GET: Branches/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Branch branch = db.Branch.Find(id);
+            if (branch == null)
+            {
+                return HttpNotFound();
+            }
+            if (branch.Certification.Count == 0)
+            {
+                db.Branch.Remove(branch);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Branches/Edit/5
@@ -72,7 +87,7 @@ namespace Rent_All_Certificate.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BranchID,BranchName,CityName")] Branch branch)
+        public ActionResult Edit([Bind(Include = "BranchID,BranchName")] Branch branch)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +95,6 @@ namespace Rent_All_Certificate.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CityName = new SelectList(db.City, "CityName", "CityName", branch.CityName);
             return View(branch);
         }
 

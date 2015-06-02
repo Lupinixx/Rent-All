@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.BranchName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CityName)
+            
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City.CountryName)
+            Certifications
         </th>
         <th></th>
     </tr>
@@ -29,14 +29,18 @@
             @Html.DisplayFor(modelItem => item.BranchName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CityName)
+            @Html.ActionLink("Edit", "Edit", new {id = item.BranchID}) |
+            @if (item.Certification.Count > 0)
+            {
+                <a class="grayLink" href="#">Delete</a>
+            }
+            else
+            {
+                @Html.ActionLink("Delete", "Delete", new {id = item.BranchID}, new {onclick = "return confirm('Are you sure you want to delete?')"})
+            }
         </td>
         <td>
-            
-            @Html.DisplayFor(modelItem => item.City.CountryName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BranchID })
+            @Html.DisplayFor(modelItem => item.Certification.Count)
         </td>
     </tr>
 }
