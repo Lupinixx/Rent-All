@@ -197,7 +197,7 @@ namespace Rent_All_Certificate.Controllers
         public ActionResult ExpiredCertificates(int? page)
         {
             DateTime dt = DateTime.UtcNow.AddHours(2);
-            var thisYear = new DateTime(dt.Year - 1, dt.Month, dt.Day);
+            var thisYear = new DateTime(dt.Year - 1, dt.Month + 1, dt.Day);
 
             return View(db.Certification.Where(c => c.Date < thisYear).ToList().ToPagedList(page ?? 1, 20));
         }
