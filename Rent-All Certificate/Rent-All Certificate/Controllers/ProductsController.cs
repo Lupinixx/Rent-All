@@ -202,8 +202,19 @@ namespace Rent_All_Certificate.Controllers
             }
             return View(db.Certification.Where(c => c.ProductKey == key)
                                         .Where(c => c.InventoryID == invetory)
-                                        .OrderBy(c => c.ProductKey)
-                                        .OrderBy(c => c.InventoryID)
+                                        .ToList()
+                                        .ToPagedList(page ?? 1, 20));
+        }
+        public ActionResult CertificatesHistory(string key, int? invetory, int? type, int? page)
+        {
+            if (key == null || invetory == null || type == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(db.CertificationLog.Where(c => c.ProductKey == key)
+                                        .Where(c => c.InventoryID == invetory)
+                                        .Where(c => c.CertificateTypeID == type)
+                                        .OrderBy(c => c.Date)
                                         .ToList()
                                         .ToPagedList(page ?? 1, 20));
         }

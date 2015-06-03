@@ -1144,6 +1144,7 @@
     <Content Include="Views\Branches\Edit.cshtml" />
     <Content Include="Views\Branches\Index.cshtml" />
     <Content Include="Views\Products\CertificatesIndex.cshtml" />
+    <Content Include="Views\Products\CertificatesHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

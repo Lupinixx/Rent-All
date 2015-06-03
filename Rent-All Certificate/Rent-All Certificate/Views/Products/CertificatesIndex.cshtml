@@ -15,16 +15,20 @@
 }
 else
 {
+    <div id="row">
+        <p><Strong>Key:</Strong> @Request.QueryString["key"]</p>
+        <p><strong>ID:</strong> @Request.QueryString["invetory"]</p>
+    </div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProductKey)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InventoryID)
+                @Html.DisplayNameFor(model => model.CertificateType.CertificateTypeName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                History
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employee.Firstname)
@@ -40,19 +44,19 @@ else
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductKey)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InventoryID)
+                    @Html.DisplayFor(modelItem => item.CertificateType.CertificateTypeName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
+                    @Html.ActionLink("Detials", "CertificatesHistory", new { invetory = item.InventoryID, key = item.ProductKey, type = item.CertificateTypeID })
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Employee.Firstname) @Html.DisplayFor(modelItem => item.Employee.Lastname)
                 </td>
                 <td>
-                   @Html.DisplayFor(modelItem => item.Branch.BranchName)
+                    @Html.DisplayFor(modelItem => item.Branch.BranchName)
                 </td>
                 <td>
                     @if (File.Exists(Server.MapPath("~/Content/Uploads/" + item.ProductKey + "-" + item.InventoryID + ".pdf")))
