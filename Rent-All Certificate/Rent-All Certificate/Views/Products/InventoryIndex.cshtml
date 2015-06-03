@@ -23,9 +23,6 @@
             @Html.DisplayNameFor(model => model.InventoryID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Certification.FirstOrDefault().Date)
-        </th>
-        <th>
             Delete
         </th>
         <th>
@@ -40,9 +37,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InventoryID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Certification.OrderByDescending(c => c.Date).ToList().FirstOrDefault().Date)
             </td>
             <td>
                 @Html.ActionLink("Delete", "DeleteInventory", new {id = item.InventoryID, key = item.ProductKey}, new {onclick = "return confirm('Are you sure you want to delete?')"})
