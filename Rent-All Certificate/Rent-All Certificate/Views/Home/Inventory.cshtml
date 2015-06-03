@@ -28,6 +28,7 @@
                     <th>@Html.DisplayNameFor(model => model.First().ProductKey)</th>
                     <th>@Html.DisplayNameFor(model => model.First().InventoryID)</th>
                     <th>Upload Date</th>
+                    <th>Type Certificate</th>
                     <th>Certificate</th>
                 </tr>
 
@@ -50,6 +51,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CertificateType.CertificateTypeName)
                             </td>
                             <td>
                                 <a href="/Content/Uploads/@Html.DisplayFor(modelItem => item.ProductKey)-@Html.DisplayFor(modelItem => item.InventoryID)

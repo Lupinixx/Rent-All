@@ -194,6 +194,20 @@ namespace Rent_All_Certificate.Controllers
             return View(db.Inventory.Where(i => i.ProductKey == key).ToList().ToPagedList(page ?? 1, 20));
         }
 
+        public ActionResult CertificatesIndex(string key, int? invetory, int? page)
+        {
+            if (key == null || invetory == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(db.Certification.Where(c => c.ProductKey == key)
+                                        .Where(c => c.InventoryID == invetory)
+                                        .OrderBy(c => c.ProductKey)
+                                        .OrderBy(c => c.InventoryID)
+                                        .ToList()
+                                        .ToPagedList(page ?? 1, 20));
+        }
+
         public ActionResult ExpiredCertificates(int? page)
         {
             DateTime dt = DateTime.UtcNow.AddHours(2);
@@ -201,6 +215,7 @@ namespace Rent_All_Certificate.Controllers
 
             return View(db.Certification.Where(c => c.Date < thisYear).ToList().ToPagedList(page ?? 1, 20));
         }
+
 
         public ActionResult DeleteInventory(int? id, string key)
         {

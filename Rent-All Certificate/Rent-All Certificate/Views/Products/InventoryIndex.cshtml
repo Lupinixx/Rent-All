@@ -4,10 +4,15 @@
     ViewBag.Title = "Manage Inventory";
 }
 
-<h2>Manage Inventory</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Manage inventory</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
 @if (Model == null || !Model.Any())
 {
-    <div>No entries found.</div>
+    <div>No row(s) found.</div>
 }else{
 <table class="table">
     <tr>
@@ -24,7 +29,7 @@
             Delete
         </th>
         <th>
-            Certificate
+            Details
         </th>
     </tr>
 
@@ -40,17 +45,10 @@
                 @Html.DisplayFor(modelItem => item.Certification.OrderByDescending(c => c.Date).ToList().FirstOrDefault().Date)
             </td>
             <td>
-                @Html.ActionLink("Delete", "DeleteInventory", new { id = item.InventoryID, key = item.ProductKey }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+                @Html.ActionLink("Delete", "DeleteInventory", new {id = item.InventoryID, key = item.ProductKey}, new {onclick = "return confirm('Are you sure you want to delete?')"})
             </td>
             <td>
-                @if (File.Exists(Server.MapPath("~/Content/Uploads/" + item.ProductKey + "-" + item.InventoryID + ".pdf")))
-                {
-                    <a href="~/Content/Uploads/@(item.ProductKey)-@(item.InventoryID).pdf" target="blank">Link</a>
-                }
-                else
-                {
-                    <a class="grayLink" href="#">Not found</a>
-                }
+                @Html.ActionLink("Detials", "CertificatesIndex", new { invetory = item.InventoryID, key = item.ProductKey })
             </td>
         </tr>
 }
