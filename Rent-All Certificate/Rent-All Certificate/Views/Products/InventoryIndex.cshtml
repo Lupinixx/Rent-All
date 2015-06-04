@@ -13,39 +13,64 @@
 @if (Model == null || !Model.Any())
 {
     <div>No row(s) found.</div>
-}else{
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.ProductKey)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InventoryID)
-        </th>
-        <th>
-            Delete
-        </th>
-        <th>
-            Details
-        </th>
-    </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ProductKey)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InventoryID)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "DeleteInventory", new {id = item.InventoryID, key = item.ProductKey}, new {onclick = "return confirm('Are you sure you want to delete?')"})
-            </td>
-            <td>
-                @Html.ActionLink("Detials", "CertificatesIndex", new { invetory = item.InventoryID, key = item.ProductKey })
-            </td>
-        </tr>
 }
+else
+{
+    <div class="row">
+        <div class="sidebar-search col-xs-6">
+            <div class="input-group custom-search-form">
+                @using (@Html.BeginForm("InventoryIndex", "Products", FormMethod.Get))
+                {
 
-</table>
-    }
+                    @Html.TextBox("id", null, new { @class = "form-control", placeholder = "InventoryID" })
+                    @Html.Hidden("key", @Request.QueryString["key"], new {@class = "form-control", placeholder = "Phase"})
+
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                }
+            </div>
+            <!-- /input-group test-->
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryID)
+            </th>
+            <th>
+                Certificates
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductKey)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryID)
+                </td>
+                <td>
+                    @Html.ActionLink("Detials", "CertificatesIndex", new { invetory = item.InventoryID, key = item.ProductKey })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteInventory", new {id = item.InventoryID, key = item.ProductKey}, new {onclick = "return confirm('Are you sure you want to delete?')"})
+                </td>
+            </tr>
+        }
+
+    </table>
+        </div>
+        }

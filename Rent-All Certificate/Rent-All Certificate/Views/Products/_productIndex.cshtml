@@ -41,7 +41,7 @@
                 @class = "form-control"
             })
             }
-            <input type="hidden" id="SelectedCategory" name="selectedCategory"/>
+            <input type="hidden" id="SelectedCategory" name="selectedCategory" />
             @Html.HiddenFor(model => model.Search)
             <input type="submit" id="categorySelect" value="Search" class="hidden" />
         }
@@ -52,7 +52,8 @@
 </div>
 @if (Model.ProductTabelList != null && Model.ProductTabelList.Any())
 {
-    <table class="table">
+    <div class="table-responsive">
+    <table class="table table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ProductTabelList.FirstOrDefault().ProductKey)
@@ -72,7 +73,7 @@
                 @if (item.Inventory.Count > 0)
                 {
                     <td>
-                        @Html.ActionLink(item.Manufacturer.ManufacturerName + " - " + item.ProductName, "InventoryIndex", new { key = item.ProductKey })
+                        @Html.ActionLink(item.Manufacturer.ManufacturerName + " - " + item.ProductName, "InventoryIndex", new {key = item.ProductKey})
                     </td>
                 }
                 else
@@ -82,23 +83,24 @@
                     </td>
                 }
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductKey }) |
+                    @Html.ActionLink("Edit", "Edit", new {id = item.ProductKey}) |
                     @if (item.Inventory.Count > 0)
                     {
                         <a class="grayLink" href="#">Delete</a>
                     }
                     else
                     {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductKey }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+                        @Html.ActionLink("Delete", "Delete", new {id = item.ProductKey}, new {onclick = "return confirm('Are you sure you want to delete?')"})
                     }
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.Inventory.Count)</td>
             </tr>
         }
     </table>
-    @Html.PagedListPager(Model.ProductTabelList, page => Url.Action("Index", new { page, selectedCategory = Model.SelectedCategory }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
-}
-else
-{
-    <div>No product(s) were found.</div>
-}
+        </div>
+        @Html.PagedListPager(Model.ProductTabelList, page => Url.Action("Index", new { page, selectedCategory = Model.SelectedCategory }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+        }
+        else
+        {
+        <div>No product(s) were found.</div>
+        }

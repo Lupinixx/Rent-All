@@ -22,7 +22,7 @@ namespace Rent_All_Certificate.Controllers
         public ActionResult Index(int? page)
         {
             var employee = db.Employee.Include(e => e.Role);
-            return View(employee.ToList().ToPagedList(page ?? 1, 40));
+            return View(employee.ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
         }
 
         // GET: Employees/Create

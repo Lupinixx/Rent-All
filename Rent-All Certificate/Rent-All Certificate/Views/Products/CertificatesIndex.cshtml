@@ -15,11 +15,26 @@
 }
 else
 {
-    <div id="row">
-        <p><Strong>Key:</Strong> @Request.QueryString["key"]</p>
-        <p><strong>ID:</strong> @Request.QueryString["invetory"]</p>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                   <strong>Key:</strong>
+                </th>
+                <th>
+                    <strong>ID:</strong>
+                </th>
+            </tr>
+            <tr>
+                <td>@Request.QueryString["key"]</td>
+                <td>@Request.QueryString["invetory"]</td>
+            </tr>
+        </table>
     </div>
-    <table class="table">
+    
+
+    <div class="table-responsive">
+    <table class="table table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.CertificateType.CertificateTypeName)
@@ -50,7 +65,7 @@ else
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    @Html.ActionLink("Detials", "CertificatesHistory", new { invetory = item.InventoryID, key = item.ProductKey, type = item.CertificateTypeID })
+                    @Html.ActionLink("Detials", "CertificatesHistory", new {invetory = item.InventoryID, key = item.ProductKey, type = item.CertificateTypeID})
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Employee.Firstname) @Html.DisplayFor(modelItem => item.Employee.Lastname)
@@ -71,4 +86,5 @@ else
             </tr>
         }
     </table>
-}
+        </div>
+        }

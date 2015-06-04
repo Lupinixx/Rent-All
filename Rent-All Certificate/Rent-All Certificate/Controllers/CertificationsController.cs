@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -180,10 +182,23 @@ namespace Rent_All_Certificate.Controllers
                         model.Certification.CertificateTypeID = CertificationTypes.Hoist;
                         model.Certification.EmployeeID = (int)Session["EmployeeID"];
                         model.Certification.Date = DateTime.Now;
-                        db.Certification.Add(model.Certification);
-                        db.SaveChanges();
-
-                        fileSuccessCount++;
+                        try
+                        {
+                            db.Certification.Add(model.Certification);
+                            db.SaveChanges();
+                            fileSuccessCount++;
+                        }
+                        catch (DbUpdateException dbex)
+                        {
+                            var ex = (SqlException)dbex.InnerException.InnerException;
+                            foreach (SqlError error in ex.Errors)
+                            {
+                                if (error.Number == 50000)
+                                {
+                                    ModelState.AddModelError("", error.Message + " Filename: " + fileName);
+                                }
+                            }
+                        }
                     }
                 }
                 ViewBag.FileSuccessCount = fileSuccessCount;

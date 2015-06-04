@@ -195,6 +195,7 @@
     <Compile Include="Models\CertificationLog.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CertificationLogModel.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
@@ -1155,6 +1156,7 @@
     <Folder Include="Content\Uploads\Hoist\" />
     <Folder Include="Content\Uploads\NEN3140\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\CertificationLogModel\" />
     <Folder Include="Views\LoginTest\" />
     <Folder Include="Views\SharedMenu\" />
   </ItemGroup>

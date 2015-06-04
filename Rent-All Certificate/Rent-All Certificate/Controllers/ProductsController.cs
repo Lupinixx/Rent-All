@@ -33,7 +33,7 @@ namespace Rent_All_Certificate.Controllers
                         db.Product.Include(p => p.Category)
                             .Where(x => x.ProductKey.StartsWith(search))
                             .ToList()
-                            .ToPagedList(page ?? 1, 20);
+                            .ToPagedList(page ?? 1, Pagenumber.MaxResults);
 
             }
             else
@@ -46,7 +46,7 @@ namespace Rent_All_Certificate.Controllers
                 model.ProductTabelList =
                     db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID) && p.ProductKey.StartsWith(search))
                         .ToList()
-                        .ToPagedList(page ?? 1, 20);
+                        .ToPagedList(page ?? 1, Pagenumber.MaxResults);
             }
             return View(model);
         }
@@ -68,7 +68,7 @@ namespace Rent_All_Certificate.Controllers
             model.ProductTabelList =
                 db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID) && p.ProductKey.StartsWith(search))
                     .ToList()
-                    .ToPagedList(1, 20);
+                    .ToPagedList(1, Pagenumber.MaxResults);
 
             return PartialView("_productIndex", model);
         }
@@ -185,13 +185,19 @@ namespace Rent_All_Certificate.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult InventoryIndex(string key, int? page)
+        public ActionResult InventoryIndex(string key, int? id, int? page)
         {
             if (key == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(db.Inventory.Where(i => i.ProductKey == key).ToList().ToPagedList(page ?? 1, 20));
+            if (id != null)
+            {
+                return View(db.Inventory.Where(i => i.ProductKey == key).Where(i => i.InventoryID == id).ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
+            }
+            else {
+                return View(db.Inventory.Where(i => i.ProductKey == key).ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
+            }
         }
 
         public ActionResult CertificatesIndex(string key, int? invetory, int? page)
@@ -203,7 +209,7 @@ namespace Rent_All_Certificate.Controllers
             return View(db.Certification.Where(c => c.ProductKey == key)
                                         .Where(c => c.InventoryID == invetory)
                                         .ToList()
-                                        .ToPagedList(page ?? 1, 20));
+                                        .ToPagedList(page ?? 1, Pagenumber.MaxResults));
         }
         public ActionResult CertificatesHistory(string key, int? invetory, int? type, int? page)
         {
@@ -211,12 +217,13 @@ namespace Rent_All_Certificate.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             return View(db.CertificationLog.Where(c => c.ProductKey == key)
                                         .Where(c => c.InventoryID == invetory)
                                         .Where(c => c.CertificateTypeID == type)
                                         .OrderBy(c => c.Date)
                                         .ToList()
-                                        .ToPagedList(page ?? 1, 20));
+                                        .ToPagedList(page ?? 1, Pagenumber.MaxResults));
         }
 
         public ActionResult ExpiredCertificates(int? page)
@@ -224,7 +231,7 @@ namespace Rent_All_Certificate.Controllers
             DateTime dt = DateTime.UtcNow.AddHours(2);
             var thisYear = new DateTime(dt.Year - 1, dt.Month + 1, dt.Day);
 
-            return View(db.Certification.Where(c => c.Date < thisYear).ToList().ToPagedList(page ?? 1, 20));
+            return View(db.Certification.Where(c => c.Date < thisYear).ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
         }
 
 

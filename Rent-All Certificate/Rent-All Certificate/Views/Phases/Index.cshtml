@@ -34,43 +34,43 @@
         <!-- /input-group test-->
     </div>
 </div>
-
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().PhaseName)
-                </th>
-                <th></th>
-                <th>Products</th>
-            </tr>
-            @if (Model.Count() == 0)
-            {
-                <tr>
-                    <td colspan="3">No rows match search criteria</td>
-                </tr>
-            }
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhaseName)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.PhaseID }) |
-                        @if (item.Product.Count > 0)
-                        {
-                            <a class="grayLink" href="#">Delete</a>
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Delete", "Delete", new { id = item.PhaseID }, new { onclick = "return confirm('Are you sure you want to delete?')" })
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.Count)
-                    </td>
-                </tr>
-            }
-        </table>
-
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+<div class="table-responsive">
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PhaseName)
+        </th>
+        <th></th>
+        <th>Products</th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3">No rows match search criteria</td>
+        </tr>
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhaseName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.PhaseID}) |
+                @if (item.Product.Count > 0)
+                {
+                    <a class="grayLink" href="#">Delete</a>
+                }
+                else
+                {
+                    @Html.ActionLink("Delete", "Delete", new {id = item.PhaseID}, new {onclick = "return confirm('Are you sure you want to delete?')"})
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Count)
+            </td>
+        </tr>
+    }
+</table>
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })

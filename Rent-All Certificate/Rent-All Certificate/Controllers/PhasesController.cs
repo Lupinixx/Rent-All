@@ -20,12 +20,12 @@ namespace Rent_All_Certificate.Controllers
             if (search == null)
             {
                 return View(db.Phase
-                    .ToList().ToPagedList(page ?? 1, 20));
+                    .ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
             }
             else
             {
                 return View(db.Phase.Where(x => x.PhaseName.StartsWith(search))
-                    .ToList().ToPagedList(page ?? 1, 20));
+                    .ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
             }
         }
 

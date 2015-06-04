@@ -36,7 +36,7 @@ namespace Rent_All_Certificate.Controllers
                         db.Product.Include(p => p.Category).Include(p => p.Manufacturer)
                             .OrderBy(p => p.ProductKey)
                             .ToList()
-                            .ToPagedList(page ?? 1, 40);
+                            .ToPagedList(page ?? 1, Pagenumber.MaxResults);
                 }
                 else
                 {
@@ -45,7 +45,7 @@ namespace Rent_All_Certificate.Controllers
                                 .Where(x => x.ProductKey.StartsWith(search))
                                 .OrderBy(p => p.ProductKey)
                                 .ToList()
-                                .ToPagedList(page ?? 1, 40);
+                                .ToPagedList(page ?? 1, Pagenumber.MaxResults);
                 }
 
             }
@@ -58,7 +58,7 @@ namespace Rent_All_Certificate.Controllers
                     db.Product.Where(p => selectedCategoryIds.Contains(p.CategoryID)).Include(p => p.Manufacturer)
                         .OrderBy(p => p.ProductKey)
                         .ToList()
-                        .ToPagedList(page ?? 1, 40);
+                        .ToPagedList(page ?? 1, Pagenumber.MaxResults);
             }
             return View(model);
         }
@@ -71,7 +71,7 @@ namespace Rent_All_Certificate.Controllers
                 return View(db.Certification.Where(c => c.ProductKey == product)
                                         .OrderBy(c => c.InventoryID)
                                         .ToList()
-                                        .ToPagedList(page ?? 1, 40));  
+                                        .ToPagedList(page ?? 1, Pagenumber.MaxResults));  
             }
             else if (product != null && inventory != null)
             {
@@ -79,11 +79,11 @@ namespace Rent_All_Certificate.Controllers
                                         .Where(c => c.InventoryID == inventory)
                                         .OrderBy(c => c.InventoryID)
                                         .ToList()
-                                        .ToPagedList(page ?? 1, 40));
+                                        .ToPagedList(page ?? 1, Pagenumber.MaxResults));
             }
             else
             {
-                return View(db.Certification.OrderBy(c => c.InventoryID).ToList().ToPagedList(page ?? 1, 40));
+                return View(db.Certification.OrderBy(c => c.InventoryID).ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
             }
            
         }
