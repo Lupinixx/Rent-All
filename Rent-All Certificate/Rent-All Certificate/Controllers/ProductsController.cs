@@ -254,13 +254,20 @@ namespace Rent_All_Certificate.Controllers
             {
                 return HttpNotFound();
             }
-            var path = Server.MapPath("~/Content/Uploads/" + inventory.ProductKey + "-" + inventory.InventoryID + ".pdf");
-            if (System.IO.File.Exists(path))
+            var pathNEN3140 = Server.MapPath("~/Content/Uploads/NEN3140/" + inventory.ProductKey + "-" + inventory.InventoryID + ".pdf");
+            var pathHoists = Server.MapPath("~/Content/Uploads/Hoists/" + inventory.ProductKey + "-" + inventory.InventoryID + ".pdf");
+            if (System.IO.File.Exists(pathNEN3140))
             {
-                System.IO.File.Delete(path);
+                System.IO.File.Delete(pathNEN3140);
+            }
+            if (System.IO.File.Exists(pathHoists))
+            {
+                System.IO.File.Delete(pathHoists);
             }
             var certificates = db.Certification.Where(c => c.InventoryID == id && c.ProductKey == key).ToList();
+            var certificatesLog = db.CertificationLog.Where(c => c.InventoryID == id && c.ProductKey == key).ToList();
             db.Certification.RemoveRange(certificates);
+            db.CertificationLog.RemoveRange(certificatesLog);
             db.Inventory.Remove(inventory);
             db.SaveChanges();
             return RedirectToAction("InventoryIndex", new { key });
