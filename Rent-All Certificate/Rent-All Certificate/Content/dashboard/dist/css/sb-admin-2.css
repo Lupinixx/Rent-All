@@ -14,13 +14,17 @@ body {
     color: #777;
     cursor: not-allowed;
 }
+ h1, .h1, .h2, h2 {
+    color: #8e026c;
+}
     .grayLink:hover {
         text-decoration:none;
         color:#777;
     }
-    table.table.table-striped tr th {
+table.table.table-striped tr th {
     background-color: #ededed;
-}.table {
+}
+.table {
     border: 1px solid #ddd;
 }
 
