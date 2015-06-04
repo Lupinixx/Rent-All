@@ -172,6 +172,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Methods.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -1149,6 +1150,8 @@
     <Content Include="Views\Products\CertificatesIndex.cshtml" />
     <Content Include="Views\Products\CertificatesHistory.cshtml" />
     <Content Include="Views\Certifications\Hoist.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Visitor404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
