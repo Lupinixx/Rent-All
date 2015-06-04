@@ -20,11 +20,11 @@ namespace Rent_All_Certificate.Controllers
             if (search == null)
             {
                 return View(db.Manufacturer
-                    .ToList().ToPagedList(page ?? 1, 20));
+                    .ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
             }
             else {
                 return View(db.Manufacturer.Where(x => x.ManufacturerName.StartsWith(search))
-                    .ToList().ToPagedList(page ?? 1, 20));
+                    .ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
             }
         }
 

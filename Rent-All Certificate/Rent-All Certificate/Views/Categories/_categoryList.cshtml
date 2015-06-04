@@ -38,7 +38,8 @@
 
     if (Model.CategorieTabelList != null)
     {
-        <table class="table">
+        <div class="table-responsive">
+        <table class="table table-striped">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.CategorieTabelList.FirstOrDefault().CategoryName)
@@ -55,14 +56,14 @@
                         @Html.DisplayFor(modelItem => item.CategoryName)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                        @Html.ActionLink("Edit", "Edit", new {id = item.CategoryID}) |
                         @if (item.Product.Count > 0 || item.Category1.Count > 0)
                         {
                             <a class="grayLink" href="#">Delete</a>
                         }
                         else
                         {
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }, new { onclick = "return confirm('Are you sure you want to delete?')" })
+                            @Html.ActionLink("Delete", "Delete", new {id = item.CategoryID}, new {onclick = "return confirm('Are you sure you want to delete?')"})
                         }
                     </td>
                     <td>
@@ -75,7 +76,9 @@
                 }
             }
         </table>
-        @helper GetSubCategoryList(IEnumerable<Category> subList, string inspring = "  |")
+            </div>
+            
+    @helper GetSubCategoryList(IEnumerable<Category> subList, string inspring = "  |")
 {
     foreach (var item in subList)
     {
@@ -104,14 +107,14 @@
         }
     }
 }
-    }
-    else
-    {
-        <hr />
-        <div>Select a categorie</div>
-    }
-}
-else
-{
-    <div>No categories were found.</div>
-}
+            }
+            else
+            {
+            <hr />
+            <div>Select a categorie</div>
+            }
+            }
+            else
+            {
+            <div>No categories were found.</div>
+            }

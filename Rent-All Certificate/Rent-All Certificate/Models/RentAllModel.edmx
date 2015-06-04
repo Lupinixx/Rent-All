@@ -244,6 +244,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="addHoist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Description" Type="text" Mode="In" />
+          <Parameter Name="Dimensions" Type="text" Mode="In" />
+          <Parameter Name="Material" Type="text" Mode="In" />
+          <Parameter Name="Heattreatment" Type="text" Mode="In" />
+          <Parameter Name="ProofLoadApplied" Type="text" Mode="In" />
+          <Parameter Name="WorkingLoadLimit" Type="text" Mode="In" />
+          <Parameter Name="SafetyFactor" Type="text" Mode="In" />
+          <Parameter Name="ProductKey" Type="int" Mode="In" />
+          <Parameter Name="ProductName" Type="varchar" Mode="In" />
+          <Parameter Name="ManufacturerID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="RentAllModelStoreContainer">
           <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -605,6 +617,18 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Fired" EntitySet="Fired" />
           </AssociationSet>
+          <FunctionImport Name="addHoist">
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Dimensions" Mode="In" Type="String" />
+            <Parameter Name="Material" Mode="In" Type="String" />
+            <Parameter Name="Heattreatment" Mode="In" Type="String" />
+            <Parameter Name="ProofLoadApplied" Mode="In" Type="String" />
+            <Parameter Name="WorkingLoadLimit" Mode="In" Type="String" />
+            <Parameter Name="SafetyFactor" Mode="In" Type="String" />
+            <Parameter Name="ProductKey" Mode="In" Type="Int32" />
+            <Parameter Name="ProductName" Mode="In" Type="String" />
+            <Parameter Name="ManufacturerID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Fired">
           <Key>
@@ -745,6 +769,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="addHoist" FunctionName="RentAllModel.Store.addHoist" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

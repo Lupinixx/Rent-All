@@ -11,4 +11,9 @@
         public const int NEN3140 = 1;
         public const int Hoist = 2;
     }
+
+    public static class Pagenumber
+    {
+        public const int MaxResults = 40;
+    }
 }

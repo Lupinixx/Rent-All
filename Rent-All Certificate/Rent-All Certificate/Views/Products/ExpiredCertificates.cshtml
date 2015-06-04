@@ -1,4 +1,5 @@
-﻿@using PagedList;
+﻿@using Helpers
+@using PagedList;
 @using PagedList.Mvc;
 @model IPagedList<Rent_All_Certificate.Models.Certification>
 @{
@@ -7,11 +8,11 @@
 
 <div class="row">
     <div class="col-md-12">
-            <h2>Expired Certificates</h2>
+        <h2>Expired NEN3140 Certificates</h2>
         <hr />
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped">
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.First().ProductKey)</th>
                     <th>@Html.DisplayNameFor(model => model.First().InventoryID)</th>
@@ -40,15 +41,21 @@
                                 @Html.DisplayFor(modelItem => item.Date)
                             </td>
                             <td>
-                                <a href="/Content/Uploads/@Html.DisplayFor(modelItem => item.ProductKey)-@Html.DisplayFor(modelItem => item.InventoryID)
-.pdf">Link</a>
+                                @if (File.Exists(Server.MapPath("~/Content/Uploads/" + string.Format("{0}", (item.CertificateTypeID == CertificationTypes.Hoist) ? "Hoist/" : "NEN3140/") + item.ProductKey + "-" + item.InventoryID + ".pdf")))
+                                {
+                                    <a href="~/Content/Uploads/@string.Format("{0}", (item.CertificateTypeID == CertificationTypes.Hoist) ? "Hoist/" : "NEN3140/")@(item.ProductKey)-@(item.InventoryID).pdf" target="blank">Link</a>
+                                }
+                                else
+                                {
+                                    <a class="grayLink" href="#">Not found</a>
+                                }
                             </td>
                         </tr>
                     }
                 }
 
             </table>
-            @Html.PagedListPager(Model, page => Url.Action("ExpiredCertificates", new { page}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+            @Html.PagedListPager(Model, page => Url.Action("ExpiredCertificates", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
         </div>
 
     </div>

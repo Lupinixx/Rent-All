@@ -7,7 +7,9 @@
 body {
     background-color: #f8f8f8;
 }
-
+.sidebar-search input#id, .sidebar-search input#key {
+    width: 50%;
+}
 .grayLink {
     color: #777;
     cursor: not-allowed;
@@ -16,6 +18,12 @@ body {
         text-decoration:none;
         color:#777;
     }
+    table.table.table-striped tr th {
+    background-color: #ededed;
+}.table {
+    border: 1px solid #ddd;
+}
+
 #CategoryLists .form-control, #ProductList .form-control {
     margin-bottom: 15px;
 }

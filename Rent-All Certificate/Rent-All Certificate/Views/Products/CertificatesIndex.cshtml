@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Rent_All_Certificate.Models.Certification>
+﻿@using Helpers
+@model IEnumerable<Rent_All_Certificate.Models.Certification>
 @{
     ViewBag.Title = "CertificatesIndex";
 }
@@ -15,11 +16,26 @@
 }
 else
 {
-    <div id="row">
-        <p><Strong>Key:</Strong> @Request.QueryString["key"]</p>
-        <p><strong>ID:</strong> @Request.QueryString["invetory"]</p>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                   <strong>Key:</strong>
+                </th>
+                <th>
+                    <strong>ID:</strong>
+                </th>
+            </tr>
+            <tr>
+                <td>@Request.QueryString["key"]</td>
+                <td>@Request.QueryString["invetory"]</td>
+            </tr>
+        </table>
     </div>
-    <table class="table">
+    
+
+    <div class="table-responsive">
+    <table class="table table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.CertificateType.CertificateTypeName)
@@ -50,7 +66,7 @@ else
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    @Html.ActionLink("Detials", "CertificatesHistory", new { invetory = item.InventoryID, key = item.ProductKey, type = item.CertificateTypeID })
+                    @Html.ActionLink("Detials", "CertificatesHistory", new {invetory = item.InventoryID, key = item.ProductKey, type = item.CertificateTypeID})
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Employee.Firstname) @Html.DisplayFor(modelItem => item.Employee.Lastname)
@@ -59,9 +75,9 @@ else
                     @Html.DisplayFor(modelItem => item.Branch.BranchName)
                 </td>
                 <td>
-                    @if (File.Exists(Server.MapPath("~/Content/Uploads/" + item.ProductKey + "-" + item.InventoryID + ".pdf")))
+                    @if (File.Exists(Server.MapPath("~/Content/Uploads/" + string.Format("{0}",(item.CertificateTypeID == CertificationTypes.Hoist)?"Hoist/":"NEN3140/") + item.ProductKey + "-" + item.InventoryID + ".pdf")))
                     {
-                        <a href="~/Content/Uploads/@(item.ProductKey)-@(item.InventoryID).pdf" target="blank">Link</a>
+                        <a href="~/Content/Uploads/@string.Format("{0}", (item.CertificateTypeID == CertificationTypes.Hoist) ? "Hoist/" : "NEN3140/")@(item.ProductKey)-@(item.InventoryID).pdf" target="blank">Link</a>
                     }
                     else
                     {
@@ -71,4 +87,5 @@ else
             </tr>
         }
     </table>
-}
+        </div>
+        }

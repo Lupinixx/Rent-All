@@ -196,6 +196,7 @@
     <Compile Include="Models\CertificationLog.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CertificationLogModel.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
@@ -1152,12 +1153,14 @@
     <Content Include="Views\Certifications\Hoist.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Visitor404.cshtml" />
+    <Content Include="Views\Products\ExpiredHoistCertificates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Uploads\Hoist\" />
     <Folder Include="Content\Uploads\NEN3140\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\CertificationLogModel\" />
     <Folder Include="Views\LoginTest\" />
     <Folder Include="Views\SharedMenu\" />
   </ItemGroup>
