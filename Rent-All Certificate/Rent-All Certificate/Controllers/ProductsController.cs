@@ -245,7 +245,9 @@ namespace Rent_All_Certificate.Controllers
                 System.IO.File.Delete(path);
             }
             var certificates = db.Certification.Where(c => c.InventoryID == id && c.ProductKey == key).ToList();
+            var certificatesLog = db.CertificationLog.Where(c => c.InventoryID == id && c.ProductKey == key).ToList();
             db.Certification.RemoveRange(certificates);
+            db.CertificationLog.RemoveRange(certificatesLog);
             db.Inventory.Remove(inventory);
             db.SaveChanges();
             return RedirectToAction("InventoryIndex", new { key });
