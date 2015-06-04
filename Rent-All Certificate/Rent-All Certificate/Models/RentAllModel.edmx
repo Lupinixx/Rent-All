@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RentAllModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RentAllModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Branch">
           <Key>
             <PropertyRef Name="BranchID" />
@@ -64,6 +64,12 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PasswordHash" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="PasswordSalt" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fired">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -178,6 +184,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_fired_referenaces_employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Fired" Type="Self.Fired" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Fired">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_inventor_relations_product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
@@ -233,6 +251,7 @@
           <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CertificationLog" EntityType="Self.CertificationLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fired" EntityType="Self.Fired" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phase" EntityType="Self.Phase" Schema="dbo" store:Type="Tables" />
@@ -262,6 +281,10 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
+          <AssociationSet Name="fk_fired_referenaces_employee" Association="Self.fk_fired_referenaces_employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Fired" EntitySet="Fired" />
+          </AssociationSet>
           <AssociationSet Name="fk_inventor_relations_product" Association="Self.fk_inventor_relations_product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Inventory" EntitySet="Inventory" />
@@ -279,8 +302,7 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RentAllModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -354,6 +376,7 @@
           <Property Name="PasswordSalt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Certification" Relationship="Self.fk_certific_certified_employee" FromRole="Employee" ToRole="Certification" />
           <NavigationProperty Name="Role" Relationship="Self.fk_employee_relations_role" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="Fired" Relationship="RentAllModel.fk_fired_referenaces_employee" FromRole="Employee" ToRole="Fired" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -577,7 +600,31 @@
             <End Role="Phase" EntitySet="Phase" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <EntitySet Name="Fired" EntityType="RentAllModel.Fired" />
+          <AssociationSet Name="fk_fired_referenaces_employee" Association="RentAllModel.fk_fired_referenaces_employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Fired" EntitySet="Fired" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Fired">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="RentAllModel.fk_fired_referenaces_employee" FromRole="Fired" ToRole="Employee" />
+        </EntityType>
+        <Association Name="fk_fired_referenaces_employee">
+          <End Type="RentAllModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="RentAllModel.Fired" Role="Fired" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Fired">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -688,6 +735,13 @@
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fired">
+            <EntityTypeMapping TypeName="RentAllModel.Fired">
+              <MappingFragment StoreEntitySet="Fired">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

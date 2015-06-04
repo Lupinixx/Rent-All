@@ -29,5 +29,6 @@ namespace Rent_All_Certificate.Models
     
         public virtual ICollection<Certification> Certification { get; set; }
         public virtual Role Role { get; set; }
+        public virtual Fired Fired { get; set; }
     }
 }

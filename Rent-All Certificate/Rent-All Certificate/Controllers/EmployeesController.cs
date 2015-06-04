@@ -13,7 +13,7 @@ using Rent_All_Certificate.Models;
 
 namespace Rent_All_Certificate.Controllers
 {
-    [LoginValidRole(ValidRoleId = new[] {Roles.TechnicalAdministrator })]
+    [LoginValidRole(ValidRoleId = new[] {Roles.TechnicalAdministrator})]
     public class EmployeesController : Controller
     {
         private RentAllEntities db = new RentAllEntities();
@@ -28,7 +28,6 @@ namespace Rent_All_Certificate.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-
             ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1");
             return View();
         }
@@ -38,13 +37,14 @@ namespace Rent_All_Certificate.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( EmployeeNewModel employeeNewModel)
+        public ActionResult Create(EmployeeNewModel employeeNewModel)
         {
             employeeNewModel.EmployeeModel.PasswordHash = "temp";
             if (ModelState.IsValid)
             {
                 employeeNewModel.EmployeeModel.PasswordSalt = HashHelper.CreateSalt();
-                var passwordHash =  HashHelper.Hash(employeeNewModel.Password.ToCharArray(), employeeNewModel.EmployeeModel.PasswordSalt);
+                var passwordHash = HashHelper.Hash(employeeNewModel.Password.ToCharArray(),
+                    employeeNewModel.EmployeeModel.PasswordSalt);
                 employeeNewModel.EmployeeModel.PasswordHash = passwordHash;
                 db.Employee.Add(employeeNewModel.EmployeeModel);
                 db.SaveChanges();
@@ -90,11 +90,10 @@ namespace Rent_All_Certificate.Controllers
                     db.Entry(employeeEditModel.EmployeeModel).State = EntityState.Modified;
                     employeeEditModel.EmployeeModel.PasswordSalt = HashHelper.CreateSalt();
                     employeeEditModel.EmployeeModel.PasswordHash =
-                         HashHelper.Hash(employeeEditModel.EditPassword.ToCharArray(),
+                        HashHelper.Hash(employeeEditModel.EditPassword.ToCharArray(),
                             employeeEditModel.EmployeeModel.PasswordSalt);
                     db.SaveChanges();
                     return RedirectToAction("Index");
-
                 }
                 else
                 {
@@ -107,19 +106,40 @@ namespace Rent_All_Certificate.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-               
             }
             ViewBag.RoleID = new SelectList(db.Role, "RoleID", "Role1", employeeEditModel.EmployeeModel.RoleID);
             return View(employeeEditModel);
         }
 
-        // POST: Employees/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        // GET: Employees/Deactivate/1
+ 
+        public ActionResult Deactivate(int id)
         {
-            Employee employee = db.Employee.Find(id);
-            db.Employee.Remove(employee);
+            var employee = db.Employee.Find(id);
+            var fired = new Fired
+            {
+                EmployeeID = employee.EmployeeID
+            };
+            db.Fired.Add(fired);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // POST: Employees/Reactivate/1
+        public ActionResult Reactivate(int id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var fired = db.Fired.Find(id);
+            if (fired == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Fired.Remove(fired);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
