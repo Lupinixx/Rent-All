@@ -1137,7 +1137,7 @@
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Index.cshtml" />
-    <Content Include="Views\Certifications\Index.cshtml" />
+    <Content Include="Views\Certifications\NEN3140.cshtml" />
     <Content Include="Views\Products\InventoryIndex.cshtml" />
     <Content Include="Views\Products\ExpiredCertificates.cshtml" />
     <Content Include="Views\Branches\Create.cshtml" />
@@ -1145,10 +1145,12 @@
     <Content Include="Views\Branches\Index.cshtml" />
     <Content Include="Views\Products\CertificatesIndex.cshtml" />
     <Content Include="Views\Products\CertificatesHistory.cshtml" />
+    <Content Include="Views\Certifications\Hoist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Uploads\" />
+    <Folder Include="Content\Uploads\Hoist\" />
+    <Folder Include="Content\Uploads\NEN3140\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\LoginTest\" />
     <Folder Include="Views\SharedMenu\" />
