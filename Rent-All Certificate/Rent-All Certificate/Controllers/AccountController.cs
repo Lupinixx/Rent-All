@@ -33,7 +33,7 @@ namespace Rent_All_Certificate.Controllers
                 {
                     var passwordHash = HashHelper.Hash(model.PasswordHash.ToCharArray(), employee.PasswordSalt);
 
-                    if (passwordHash.Equals(employee.PasswordHash))
+                    if (passwordHash.Equals(employee.PasswordHash) && employee.Fired == null)
                     {
                         Session["EmployeeID"] = employee.EmployeeID;
                         Session["RoleID"] = employee.RoleID;

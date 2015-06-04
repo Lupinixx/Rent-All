@@ -36,5 +36,6 @@ namespace Rent_All_Certificate.Models
         public virtual DbSet<Phase> Phase { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<Fired> Fired { get; set; }
     }
 }

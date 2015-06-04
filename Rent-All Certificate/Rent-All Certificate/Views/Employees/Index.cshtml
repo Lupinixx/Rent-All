@@ -21,41 +21,49 @@
     </div>
 </div>
 
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Role.Role1)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Firstname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Lastname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Role.Role1)
-            </th>
-            <th></th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.Role1)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.EmployeeID}) |
+                @if (item.Fired != null)
+                {
+                    @Html.ActionLink("Reactivate", "Reactivate", new {id = item.EmployeeID}, new {onclick = "return confirm('Are you sure you want to reactivate this account?')"})
+                }
+                else
+                {
+                    @Html.ActionLink("Deactivate", "Deactivate", new {id = item.EmployeeID}, new {onclick = "return confirm('Are you sure you want to deactivate this account?')"})
+                }
+            </td>
         </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Firstname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lastname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Role.Role1)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID })
-                </td>
-            </tr>
-        }
-    </table>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new {page}), new PagedListRenderOptions() {Display = PagedListDisplayMode.IfNeeded})

@@ -198,6 +198,9 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Fired.cs">
+      <DependentUpon>RentAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Inventory.cs">
       <DependentUpon>RentAllModel.tt</DependentUpon>
     </Compile>
