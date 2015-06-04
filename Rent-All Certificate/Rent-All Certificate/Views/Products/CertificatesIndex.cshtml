@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Rent_All_Certificate.Models.Certification>
+﻿@using Helpers
+@model IEnumerable<Rent_All_Certificate.Models.Certification>
 @{
     ViewBag.Title = "CertificatesIndex";
 }
@@ -74,9 +75,9 @@ else
                     @Html.DisplayFor(modelItem => item.Branch.BranchName)
                 </td>
                 <td>
-                    @if (File.Exists(Server.MapPath("~/Content/Uploads/" + item.ProductKey + "-" + item.InventoryID + ".pdf")))
+                    @if (File.Exists(Server.MapPath("~/Content/Uploads/" + string.Format("{0}",(item.CertificateTypeID == CertificationTypes.Hoist)?"Hoist/":"NEN3140/") + item.ProductKey + "-" + item.InventoryID + ".pdf")))
                     {
-                        <a href="~/Content/Uploads/@(item.ProductKey)-@(item.InventoryID).pdf" target="blank">Link</a>
+                        <a href="~/Content/Uploads/@string.Format("{0}", (item.CertificateTypeID == CertificationTypes.Hoist) ? "Hoist/" : "NEN3140/")@(item.ProductKey)-@(item.InventoryID).pdf" target="blank">Link</a>
                     }
                     else
                     {

@@ -7,7 +7,9 @@
 body {
     background-color: #f8f8f8;
 }
-
+.sidebar-search input#id, .sidebar-search input#key {
+    width: 50%;
+}
 .grayLink {
     color: #777;
     cursor: not-allowed;

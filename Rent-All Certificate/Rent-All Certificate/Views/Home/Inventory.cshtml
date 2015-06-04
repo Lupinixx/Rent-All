@@ -1,4 +1,5 @@
-﻿@using PagedList;
+﻿@using Helpers
+@using PagedList;
 @using PagedList.Mvc;
 @model IPagedList<Rent_All_Certificate.Models.Certification>
 @{
@@ -56,8 +57,14 @@
                                 @Html.DisplayFor(modelItem => item.CertificateType.CertificateTypeName)
                             </td>
                             <td>
-                                <a href="/Content/Uploads/@Html.DisplayFor(modelItem => item.ProductKey)-@Html.DisplayFor(modelItem => item.InventoryID)
-.pdf">Link</a>
+                                @if (File.Exists(Server.MapPath("~/Content/Uploads/" + string.Format("{0}", (item.CertificateTypeID == CertificationTypes.Hoist) ? "Hoist/" : "NEN3140/") + item.ProductKey + "-" + item.InventoryID + ".pdf")))
+                                {
+                                    <a href="~/Content/Uploads/@string.Format("{0}", (item.CertificateTypeID == CertificationTypes.Hoist) ? "Hoist/" : "NEN3140/")@(item.ProductKey)-@(item.InventoryID).pdf" target="blank">Link</a>
+                                }
+                                else
+                                {
+                                    <a class="grayLink" href="#">Not found</a>
+                                }
                             </td>
                         </tr>
                     }

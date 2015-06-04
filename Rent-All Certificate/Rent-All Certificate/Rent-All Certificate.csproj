@@ -1150,6 +1150,7 @@
     <Content Include="Views\Products\CertificatesIndex.cshtml" />
     <Content Include="Views\Products\CertificatesHistory.cshtml" />
     <Content Include="Views\Certifications\Hoist.cshtml" />
+    <Content Include="Views\Products\ExpiredHoistCertificates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

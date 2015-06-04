@@ -189,7 +189,7 @@ namespace Rent_All_Certificate.Controllers
         {
             if (key == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View(db.Inventory.OrderBy(i => i.ProductKey).ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
             }
             if (id != null)
             {
@@ -231,7 +231,15 @@ namespace Rent_All_Certificate.Controllers
             DateTime dt = DateTime.UtcNow.AddHours(2);
             var thisYear = new DateTime(dt.Year - 1, dt.Month + 1, dt.Day);
 
-            return View(db.Certification.Where(c => c.Date < thisYear).ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
+            return View(db.Certification.Where(c => c.Date < thisYear).Where(c => c.CertificateTypeID == CertificationTypes.NEN3140).ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
+        }
+
+        public ActionResult ExpiredHoistCertificates(int? page)
+        {
+            DateTime dt = DateTime.UtcNow.AddHours(2);
+            var thisYear = new DateTime(dt.Year - 1, dt.Month + 1, dt.Day);
+
+            return View(db.Certification.Where(c => c.Date < thisYear).Where(c => c.CertificateTypeID == CertificationTypes.Hoist).ToList().ToPagedList(page ?? 1, Pagenumber.MaxResults));
         }
 
 
