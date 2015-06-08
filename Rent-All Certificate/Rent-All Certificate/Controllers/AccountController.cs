@@ -11,7 +11,7 @@ namespace Rent_All_Certificate.Controllers
     [LoginInvalid]
     public class AccountController : Controller
     {
-        private RentAllEntities db = new RentAllEntities();
+        private RentAllCustomerEntities db = new RentAllCustomerEntities();
         public ActionResult Login()
         {
             return View();

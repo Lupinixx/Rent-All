@@ -14,7 +14,7 @@ namespace Rent_All_Certificate.Controllers
     [LoginInvalid]
     public class HomeController : Controller
     {
-        private RentAllEntities db = new RentAllEntities();
+        private RentAllCustomerEntities db = new RentAllCustomerEntities();
 
         public ActionResult Index() {
             return View();

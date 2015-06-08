@@ -24,7 +24,7 @@ using System.Linq;
 public partial class RentAllEntities : DbContext
 {
     public RentAllEntities()
-        : base("name=RentAllEntities")
+        : base("name=RentAllUserEntities")
     {
 
     }

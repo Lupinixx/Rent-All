@@ -182,32 +182,32 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Branch.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CertificateType.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Certification.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CertificationLog.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CertificationLogModel.cs" />
     <Compile Include="Models\Employee.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fired.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Inventory.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Manufacturer.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\CategoryEditModel.cs" />
@@ -220,13 +220,28 @@
     <Compile Include="Models\MetaData.cs" />
     <Compile Include="Controllers\PhasesController.cs" />
     <Compile Include="Models\Phase.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductEditModel.cs" />
     <Compile Include="Models\ProductIndexModel.cs" />
+    <Compile Include="Models\RentAllCustomerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentAllCustomerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RentAllCustomerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RentAllCustomerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentAllCustomerModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\RentAllModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -243,7 +258,7 @@
       <DependentUpon>RentAllModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>RentAllModel.tt</DependentUpon>
+      <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -1080,6 +1095,23 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RentAllModel.edmx</DependentUpon>
       <LastGenOutput>RentAllModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\RentAllCustomerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RentAllCustomerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\RentAllCustomerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RentAllCustomerModel.edmx</DependentUpon>
+      <LastGenOutput>RentAllCustomerModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\RentAllCustomerModel.edmx.diagram">
+      <DependentUpon>RentAllCustomerModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\RentAllCustomerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RentAllCustomerModel.edmx</DependentUpon>
+      <LastGenOutput>RentAllCustomerModel.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

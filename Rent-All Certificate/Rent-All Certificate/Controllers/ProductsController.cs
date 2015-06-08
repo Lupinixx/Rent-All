@@ -220,7 +220,7 @@ namespace Rent_All_Certificate.Controllers
 
             return View(db.CertificationLog.Where(c => c.ProductKey == key)
                                         .Where(c => c.InventoryID == invetory)
-                                        .Where(c => c.CertificateTypeID1 == type)
+                                        .Where(c => c.CertificateTypeID == type)
                                         .OrderBy(c => c.Date)
                                         .ToList()
                                         .ToPagedList(page ?? 1, Pagenumber.MaxResults));
