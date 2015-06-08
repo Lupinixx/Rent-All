@@ -45,9 +45,11 @@ namespace Rent_All_Certificate.Models
         [Display(Name = "Password")]
         public string PasswordHash { get; set; }
 
+        [Required]
         [Display(Name = "First Name")]
         public string Firstname { get; set; }
 
+        [Required]
         [Display(Name = "Last Name")]
         public string Lastname { get; set; }
     }
