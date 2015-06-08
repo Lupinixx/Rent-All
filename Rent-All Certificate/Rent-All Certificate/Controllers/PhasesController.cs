@@ -12,7 +12,7 @@ namespace Rent_All_Certificate.Controllers
     [LoginValidRole(ValidRoleId = new[]{Roles.TechnicalStaff, Roles.TechnicalAdministrator})]
     public class PhasesController : Controller
     {
-        private RentAllEntities db = new RentAllEntities();
+        private RentAllUserEntities db = new RentAllUserEntities();
 
         // GET: Phases
         public ActionResult Index(string search, int? page)

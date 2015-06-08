@@ -9,7 +9,7 @@ namespace Rent_All_Certificate.Controllers
 {
     public class SharedMenuController : Controller
     {
-        private RentAllEntities db = new RentAllEntities();
+        private RentAllUserEntities db = new RentAllUserEntities();
         // GET: SharedMenu
         private List<Category> sortAllCategories()
         {

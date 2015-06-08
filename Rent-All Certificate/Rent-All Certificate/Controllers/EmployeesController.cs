@@ -16,7 +16,7 @@ namespace Rent_All_Certificate.Controllers
     [LoginValidRole(ValidRoleId = new[] {Roles.TechnicalAdministrator})]
     public class EmployeesController : Controller
     {
-        private RentAllEntities db = new RentAllEntities();
+        private RentAllUserEntities db = new RentAllUserEntities();
 
         // GET: Employees
         public ActionResult Index(int? page)

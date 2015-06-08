@@ -15,7 +15,7 @@ namespace Rent_All_Certificate.Controllers
     [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalAdministrator })]
     public class BranchesController : Controller
     {
-        private RentAllEntities db = new RentAllEntities();
+        private RentAllUserEntities db = new RentAllUserEntities();
 
         // GET: Branches
         public ActionResult Index()

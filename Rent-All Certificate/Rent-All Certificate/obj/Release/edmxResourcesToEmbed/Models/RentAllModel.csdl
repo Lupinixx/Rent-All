@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RentAllModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RentAllEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="addHoist">
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="Dimensions" Mode="In" Type="String" />
+      <Parameter Name="Material" Mode="In" Type="String" />
+      <Parameter Name="Heattreatment" Mode="In" Type="String" />
+      <Parameter Name="ProofLoadApplied" Mode="In" Type="String" />
+      <Parameter Name="WorkingLoadLimit" Mode="In" Type="String" />
+      <Parameter Name="SafetyFactor" Mode="In" Type="String" />
+      <Parameter Name="ProductKey" Mode="In" Type="Int32" />
+      <Parameter Name="ProductName" Mode="In" Type="String" />
+      <Parameter Name="ManufacturerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Branch" EntityType="RentAllModel.Branch" />
+    <EntitySet Name="Category" EntityType="RentAllModel.Category" />
+    <EntitySet Name="CertificateType" EntityType="RentAllModel.CertificateType" />
+    <EntitySet Name="Certification" EntityType="RentAllModel.Certification" />
+    <EntitySet Name="CertificationLog" EntityType="RentAllModel.CertificationLog" />
+    <EntitySet Name="Employee" EntityType="RentAllModel.Employee" />
+    <EntitySet Name="Fired" EntityType="RentAllModel.Fired" />
+    <EntitySet Name="Inventory" EntityType="RentAllModel.Inventory" />
+    <EntitySet Name="Manufacturer" EntityType="RentAllModel.Manufacturer" />
+    <EntitySet Name="Phase" EntityType="RentAllModel.Phase" />
+    <EntitySet Name="Product" EntityType="RentAllModel.Product" />
+    <EntitySet Name="Role" EntityType="RentAllModel.Role" />
+    <AssociationSet Name="fk_certific_cetified__branch" Association="RentAllModel.fk_certific_cetified__branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="Certification" EntitySet="Certification" />
+    </AssociationSet>
+    <AssociationSet Name="fk_category_relations_category" Association="RentAllModel.fk_category_relations_category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Category1" EntitySet="Category" />
+    </AssociationSet>
+    <AssociationSet Name="fk_product_relations_category" Association="RentAllModel.fk_product_relations_category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="fk_certific_type_of_certific" Association="RentAllModel.fk_certific_type_of_certific">
+      <End Role="CertificateType" EntitySet="CertificateType" />
+      <End Role="Certification" EntitySet="Certification" />
+    </AssociationSet>
+    <AssociationSet Name="fk_certific_certified_employee" Association="RentAllModel.fk_certific_certified_employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Certification" EntitySet="Certification" />
+    </AssociationSet>
+    <AssociationSet Name="fk_certific_relations_inventor" Association="RentAllModel.fk_certific_relations_inventor">
+      <End Role="Inventory" EntitySet="Inventory" />
+      <End Role="Certification" EntitySet="Certification" />
+    </AssociationSet>
+    <AssociationSet Name="fk_employee_relations_role" Association="RentAllModel.fk_employee_relations_role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fired_referenaces_employee" Association="RentAllModel.fk_fired_referenaces_employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Fired" EntitySet="Fired" />
+    </AssociationSet>
+    <AssociationSet Name="fk_inventor_relations_product" Association="RentAllModel.fk_inventor_relations_product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="fk_product_relations_manufact" Association="RentAllModel.fk_product_relations_manufact">
+      <End Role="Manufacturer" EntitySet="Manufacturer" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="fk_product_relations_phase" Association="RentAllModel.fk_product_relations_phase">
+      <End Role="Phase" EntitySet="Phase" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Certification" Relationship="RentAllModel.fk_certific_cetified__branch" FromRole="Branch" ToRole="Certification" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Category1" Relationship="RentAllModel.fk_category_relations_category" FromRole="Category" ToRole="Category1" />
+    <NavigationProperty Name="Category2" Relationship="RentAllModel.fk_category_relations_category" FromRole="Category1" ToRole="Category" />
+    <NavigationProperty Name="Product" Relationship="RentAllModel.fk_product_relations_category" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="CertificateType">
+    <Key>
+      <PropertyRef Name="CertificateTypeID" />
+    </Key>
+    <Property Name="CertificateTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CertificateTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Certification" Relationship="RentAllModel.fk_certific_type_of_certific" FromRole="CertificateType" ToRole="Certification" />
+  </EntityType>
+  <EntityType Name="Certification">
+    <Key>
+      <PropertyRef Name="CertificateID" />
+      <PropertyRef Name="CertificateTypeID" />
+    </Key>
+    <Property Name="CertificateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CertificateTypeID" Type="Int32" Nullable="false" />
+    <Property Name="InventoryID" Type="Int32" Nullable="false" />
+    <Property Name="ProductKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Branch" Relationship="RentAllModel.fk_certific_cetified__branch" FromRole="Certification" ToRole="Branch" />
+    <NavigationProperty Name="CertificateType" Relationship="RentAllModel.fk_certific_type_of_certific" FromRole="Certification" ToRole="CertificateType" />
+    <NavigationProperty Name="Employee" Relationship="RentAllModel.fk_certific_certified_employee" FromRole="Certification" ToRole="Employee" />
+    <NavigationProperty Name="Inventory" Relationship="RentAllModel.fk_certific_relations_inventor" FromRole="Certification" ToRole="Inventory" />
+  </EntityType>
+  <EntityType Name="CertificationLog">
+    <Key>
+      <PropertyRef Name="CertificateID" />
+      <PropertyRef Name="CertificateTypeID" />
+    </Key>
+    <Property Name="CertificateID" Type="Int32" Nullable="false" />
+    <Property Name="CertificateTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CertificateTypeID" Type="Int32" Nullable="false" />
+    <Property Name="InventoryID" Type="Int32" Nullable="false" />
+    <Property Name="ProductKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BranchName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Certification" Relationship="RentAllModel.fk_certific_certified_employee" FromRole="Employee" ToRole="Certification" />
+    <NavigationProperty Name="Role" Relationship="RentAllModel.fk_employee_relations_role" FromRole="Employee" ToRole="Role" />
+    <NavigationProperty Name="Fired" Relationship="RentAllModel.fk_fired_referenaces_employee" FromRole="Employee" ToRole="Fired" />
+  </EntityType>
+  <EntityType Name="Fired">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="RentAllModel.fk_fired_referenaces_employee" FromRole="Fired" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="InventoryID" />
+      <PropertyRef Name="ProductKey" />
+    </Key>
+    <Property Name="InventoryID" Type="Int32" Nullable="false" />
+    <Property Name="ProductKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Certification" Relationship="RentAllModel.fk_certific_relations_inventor" FromRole="Inventory" ToRole="Certification" />
+    <NavigationProperty Name="Product" Relationship="RentAllModel.fk_inventor_relations_product" FromRole="Inventory" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="ManufacturerID" />
+    </Key>
+    <Property Name="ManufacturerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ManufacturerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Product" Relationship="RentAllModel.fk_product_relations_manufact" FromRole="Manufacturer" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Phase">
+    <Key>
+      <PropertyRef Name="PhaseID" />
+    </Key>
+    <Property Name="PhaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhaseName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Product" Relationship="RentAllModel.fk_product_relations_phase" FromRole="Phase" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductKey" />
+    </Key>
+    <Property Name="ProductKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PhaseID" Type="Int32" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="ManufacturerID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Category" Relationship="RentAllModel.fk_product_relations_category" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Inventory" Relationship="RentAllModel.fk_inventor_relations_product" FromRole="Product" ToRole="Inventory" />
+    <NavigationProperty Name="Manufacturer" Relationship="RentAllModel.fk_product_relations_manufact" FromRole="Product" ToRole="Manufacturer" />
+    <NavigationProperty Name="Phase" Relationship="RentAllModel.fk_product_relations_phase" FromRole="Product" ToRole="Phase" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="Role1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employee" Relationship="RentAllModel.fk_employee_relations_role" FromRole="Role" ToRole="Employee" />
+  </EntityType>
+  <Association Name="fk_certific_cetified__branch">
+    <End Type="RentAllModel.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="RentAllModel.Certification" Role="Certification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Certification">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_category_relations_category">
+    <End Type="RentAllModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="RentAllModel.Category" Role="Category1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_product_relations_category">
+    <End Type="RentAllModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="RentAllModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_certific_type_of_certific">
+    <End Type="RentAllModel.CertificateType" Role="CertificateType" Multiplicity="1" />
+    <End Type="RentAllModel.Certification" Role="Certification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CertificateType">
+        <PropertyRef Name="CertificateTypeID" />
+      </Principal>
+      <Dependent Role="Certification">
+        <PropertyRef Name="CertificateTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_certific_certified_employee">
+    <End Type="RentAllModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="RentAllModel.Certification" Role="Certification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Certification">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_certific_relations_inventor">
+    <End Type="RentAllModel.Inventory" Role="Inventory" Multiplicity="1" />
+    <End Type="RentAllModel.Certification" Role="Certification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventory">
+        <PropertyRef Name="InventoryID" />
+        <PropertyRef Name="ProductKey" />
+      </Principal>
+      <Dependent Role="Certification">
+        <PropertyRef Name="InventoryID" />
+        <PropertyRef Name="ProductKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_employee_relations_role">
+    <End Type="RentAllModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="RentAllModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fired_referenaces_employee">
+    <End Type="RentAllModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="RentAllModel.Fired" Role="Fired" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Fired">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_inventor_relations_product">
+    <End Type="RentAllModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="RentAllModel.Inventory" Role="Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductKey" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="ProductKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_product_relations_manufact">
+    <End Type="RentAllModel.Manufacturer" Role="Manufacturer" Multiplicity="1" />
+    <End Type="RentAllModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="ManufacturerID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ManufacturerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_product_relations_phase">
+    <End Type="RentAllModel.Phase" Role="Phase" Multiplicity="1" />
+    <End Type="RentAllModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phase">
+        <PropertyRef Name="PhaseID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="PhaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -13,7 +13,7 @@ namespace Rent_All_Certificate.Controllers
     [LoginValidRole(ValidRoleId = new[] { Roles.TechnicalStaff, Roles.TechnicalAdministrator })]
     public class CertificationsController : Controller
     {
-        private RentAllEntities db = new RentAllEntities();
+        private RentAllUserEntities db = new RentAllUserEntities();
 
         // GET: Certifications/Create
         public ActionResult NEN3140()

@@ -10,7 +10,7 @@ namespace Rent_All_Certificate.Controllers
 {
     public class Methods : Controller
     {
-        private RentAllEntities db = new RentAllEntities();
+        private RentAllUserEntities db = new RentAllUserEntities();
 
         public List<Category> GetAllSubCategoriesFromParent(int parentId)
         {

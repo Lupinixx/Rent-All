@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RentAllCustomerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Branch">
           <Key>
             <PropertyRef Name="BranchID" />
@@ -245,19 +245,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ModelStoreContainer">
-          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CertificateType" EntityType="Self.CertificateType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CertificationLog" EntityType="Self.CertificationLog" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Fired" EntityType="Self.Fired" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Phase" EntityType="Self.Phase" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="RentAllCustomerModelStoreContainer">
+          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="CertificateType" EntityType="Self.CertificateType" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Certification" EntityType="Self.Certification" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="CertificationLog" EntityType="Self.CertificationLog" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Fired" EntityType="Self.Fired" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Phase" EntityType="Self.Phase" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="admin" store:Type="Tables" />
           <AssociationSet Name="fk_category_relations_category" Association="Self.fk_category_relations_category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Category1" EntitySet="Category" />
@@ -307,7 +307,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="RentAllCustomerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Branch">
           <Key>
             <PropertyRef Name="BranchID" />
@@ -633,9 +633,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="RentAllCustomerEntities">
+        <EntityContainerMapping StorageEntityContainer="RentAllCustomerModelStoreContainer" CdmEntityContainer="RentAllCustomerEntities">
           <EntitySetMapping Name="Branch">
-            <EntityTypeMapping TypeName="Model.Branch">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Branch">
               <MappingFragment StoreEntitySet="Branch">
                 <ScalarProperty Name="BranchID" ColumnName="BranchID" />
                 <ScalarProperty Name="BranchName" ColumnName="BranchName" />
@@ -643,7 +643,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Category">
-            <EntityTypeMapping TypeName="Model.Category">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
@@ -652,7 +652,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CertificateType">
-            <EntityTypeMapping TypeName="Model.CertificateType">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.CertificateType">
               <MappingFragment StoreEntitySet="CertificateType">
                 <ScalarProperty Name="CertificateTypeID" ColumnName="CertificateTypeID" />
                 <ScalarProperty Name="CertificateTypeName" ColumnName="CertificateTypeName" />
@@ -660,7 +660,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Certification">
-            <EntityTypeMapping TypeName="Model.Certification">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Certification">
               <MappingFragment StoreEntitySet="Certification">
                 <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
                 <ScalarProperty Name="CertificateTypeID" ColumnName="CertificateTypeID" />
@@ -673,7 +673,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CertificationLog">
-            <EntityTypeMapping TypeName="Model.CertificationLog">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.CertificationLog">
               <MappingFragment StoreEntitySet="CertificationLog">
                 <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
                 <ScalarProperty Name="CertificateTypeName" ColumnName="CertificateTypeName" />
@@ -687,7 +687,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employee">
-            <EntityTypeMapping TypeName="Model.Employee">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
@@ -700,14 +700,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Fired">
-            <EntityTypeMapping TypeName="Model.Fired">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Fired">
               <MappingFragment StoreEntitySet="Fired">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory">
-            <EntityTypeMapping TypeName="Model.Inventory">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Inventory">
               <MappingFragment StoreEntitySet="Inventory">
                 <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
                 <ScalarProperty Name="ProductKey" ColumnName="ProductKey" />
@@ -715,7 +715,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Manufacturer">
-            <EntityTypeMapping TypeName="Model.Manufacturer">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Manufacturer">
               <MappingFragment StoreEntitySet="Manufacturer">
                 <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
                 <ScalarProperty Name="ManufacturerName" ColumnName="ManufacturerName" />
@@ -723,7 +723,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Phase">
-            <EntityTypeMapping TypeName="Model.Phase">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Phase">
               <MappingFragment StoreEntitySet="Phase">
                 <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
                 <ScalarProperty Name="PhaseName" ColumnName="PhaseName" />
@@ -731,7 +731,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="Model.Product">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="ProductKey" ColumnName="ProductKey" />
                 <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
@@ -742,7 +742,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="Model.Role">
+            <EntityTypeMapping TypeName="RentAllCustomerModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Role1" ColumnName="Role" />
