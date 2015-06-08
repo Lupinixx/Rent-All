@@ -39,10 +39,10 @@ else
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EmployeeID)
+                @Html.DisplayNameFor(model => model.EmployeeName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BranchID)
+                @Html.DisplayNameFor(model => model.BranchName)
             </th>
         </tr>
         @foreach (var item in Model)
@@ -52,10 +52,10 @@ else
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeID)
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BranchID)
+                    @Html.DisplayFor(modelItem => item.BranchName)
                 </td>
             </tr>
         }

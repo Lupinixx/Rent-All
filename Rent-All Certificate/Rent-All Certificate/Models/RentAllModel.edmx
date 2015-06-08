@@ -46,11 +46,12 @@
             <PropertyRef Name="CertificateTypeID" />
           </Key>
           <Property Name="CertificateID" Type="int" Nullable="false" />
+          <Property Name="CertificateTypeName" Type="varchar" MaxLength="50" />
           <Property Name="CertificateTypeID" Type="int" Nullable="false" />
           <Property Name="InventoryID" Type="int" Nullable="false" />
           <Property Name="ProductKey" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="BranchID" Type="int" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="BranchName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
@@ -244,18 +245,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="addHoist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Description" Type="text" Mode="In" />
-          <Parameter Name="Dimensions" Type="text" Mode="In" />
-          <Parameter Name="Material" Type="text" Mode="In" />
-          <Parameter Name="Heattreatment" Type="text" Mode="In" />
-          <Parameter Name="ProofLoadApplied" Type="text" Mode="In" />
-          <Parameter Name="WorkingLoadLimit" Type="text" Mode="In" />
-          <Parameter Name="SafetyFactor" Type="text" Mode="In" />
-          <Parameter Name="ProductKey" Type="int" Mode="In" />
-          <Parameter Name="ProductName" Type="varchar" Mode="In" />
-          <Parameter Name="ManufacturerID" Type="int" Mode="In" />
-        </Function>
         <EntityContainer Name="RentAllModelStoreContainer">
           <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -365,15 +354,16 @@
         <EntityType Name="CertificationLog">
           <Key>
             <PropertyRef Name="CertificateID" />
-            <PropertyRef Name="CertificateTypeID" />
+            <PropertyRef Name="CertificateTypeID1" />
           </Key>
           <Property Name="CertificateID" Type="Int32" Nullable="false" />
-          <Property Name="CertificateTypeID" Type="Int32" Nullable="false" />
           <Property Name="InventoryID" Type="Int32" Nullable="false" />
           <Property Name="ProductKey" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BranchID" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CertificateTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BranchName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CertificateTypeID1" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -696,12 +686,13 @@
           <EntitySetMapping Name="CertificationLog">
             <EntityTypeMapping TypeName="RentAllModel.CertificationLog">
               <MappingFragment StoreEntitySet="CertificationLog">
+                <ScalarProperty Name="CertificateTypeID1" ColumnName="CertificateTypeID" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="CertificateTypeName" ColumnName="CertificateTypeName" />
                 <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
-                <ScalarProperty Name="CertificateTypeID" ColumnName="CertificateTypeID" />
                 <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
                 <ScalarProperty Name="ProductKey" ColumnName="ProductKey" />
-                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -769,7 +760,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="addHoist" FunctionName="RentAllModel.Store.addHoist" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

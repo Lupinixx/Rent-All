@@ -126,7 +126,7 @@ namespace Rent_All_Certificate.Controllers
         }
 
         // POST: Employees/Reactivate/1
-        public ActionResult Reactivate(int id)
+        public ActionResult Reactivate(int? id)
         {
 
             if (id == null)
