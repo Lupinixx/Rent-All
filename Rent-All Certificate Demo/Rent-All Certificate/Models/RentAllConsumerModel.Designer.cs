@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\Models\RentAllCustomerModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate Demo\Rent-All Certificate\Models\RentAllConsumerModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

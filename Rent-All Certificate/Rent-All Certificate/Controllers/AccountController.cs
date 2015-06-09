@@ -19,7 +19,7 @@ namespace Rent_All_Certificate.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Employee model)
+        public ActionResult Login(LoginModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -31,7 +31,7 @@ namespace Rent_All_Certificate.Controllers
                 var employee = db.Employee.SingleOrDefault(emp => emp.Email == model.Email);
                 if (employee != null)
                 {
-                    var passwordHash = HashHelper.Hash(model.PasswordHash.ToCharArray(), employee.PasswordSalt);
+                    var passwordHash = HashHelper.Hash(model.Password.ToCharArray(), employee.PasswordSalt);
 
                     if (passwordHash.Equals(employee.PasswordHash) && employee.Fired == null)
                     {

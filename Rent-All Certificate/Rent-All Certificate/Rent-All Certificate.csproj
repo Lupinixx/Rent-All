@@ -206,6 +206,7 @@
     <Compile Include="Models\Inventory.cs">
       <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Manufacturer.cs">
       <DependentUpon>RentAllCustomerModel.tt</DependentUpon>
     </Compile>
