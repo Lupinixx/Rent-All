@@ -28,7 +28,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @if (ViewBag.FileSuccessCount != null && (int)ViewBag.FileSuccessCount > 0)
             {
-                <p>@string.Format("The {0} remaining file(s) have been uploaden.", (int)ViewBag.FileSuccessCount)</p>
+                <p>@string.Format("The {0} remaining file(s) have been uploaded.", (int)ViewBag.FileSuccessCount)</p>
             }
         </div>
     }
