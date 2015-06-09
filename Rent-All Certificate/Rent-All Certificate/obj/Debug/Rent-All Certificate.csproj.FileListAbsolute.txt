@@ -10,3 +10,15 @@ C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certific
 C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.csprojResolveAssemblyReference.cache
 C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.dll
 C:\Users\LuukMaters\Source\Repos\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.pdb
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Rent-All Certificate.dll.config
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Rent-All Certificate.dll
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Rent-All Certificate.pdb
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Helpers.dll
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\PagedList.dll
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\PagedList.Mvc.dll
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\Helpers.pdb
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\PagedList.xml
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\bin\PagedList.Mvc.xml
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.csprojResolveAssemblyReference.cache
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.dll
+D:\GIT\Rent-All\Rent-All Certificate\Rent-All Certificate\obj\Debug\Rent-All Certificate.pdb

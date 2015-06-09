@@ -19,7 +19,7 @@ namespace Rent_All_Certificate.Controllers
             DashboardModel model = new DashboardModel
             {
                 ProductsCount = db.Product.Select(p => p.ProductKey).Count(),
-                InvertoryCount = db.Inventory.Select(i => i.InventoryID).Count(),
+                InventoryCount = db.Inventory.Select(i => i.InventoryID).Count(),
                 CategoryCount = db.Category.Select(c => c.CategoryID).Count(),
                 ManufactureCount = db.Manufacturer.Select(m => m.ManufacturerID).Count()
             };
