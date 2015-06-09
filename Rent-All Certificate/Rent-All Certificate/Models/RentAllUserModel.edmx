@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RentAllUserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RentAllUserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Branch">
           <Key>
             <PropertyRef Name="BranchID" />
@@ -246,18 +246,18 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RentAllUserModelStoreContainer">
-          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CertificateType" EntityType="Self.CertificateType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CertificationLog" EntityType="Self.CertificationLog" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Fired" EntityType="Self.Fired" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Phase" EntityType="Self.Phase" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="CertificateType" EntityType="Self.CertificateType" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Certification" EntityType="Self.Certification" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="CertificationLog" EntityType="Self.CertificationLog" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Fired" EntityType="Self.Fired" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Phase" EntityType="Self.Phase" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="admin" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="admin" store:Type="Tables" />
           <AssociationSet Name="fk_category_relations_category" Association="Self.fk_category_relations_category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Category1" EntitySet="Category" />
